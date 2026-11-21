@@ -1,37 +1,80 @@
-@import url('https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Host+Grotesk:wght@300;400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
-  --page-ground: #1b2932;
-  --alt-ground: #02444b;
-  --inverse-ground: #efedef;
-  --surface: #213039;
-  --hairline: #32414a;
-  --primary-text: #fefdfe;
-  --secondary-text: #eaeae9;
-  --muted-text: #dbdbda;
-  --inverse-text: #040404;
-  --accent: #67e8f9;
-  --primary-action-fill: #f1f3f4;
-  --primary-action-label: #040404;
+  --page-ground: #dde6f0;
+  --alt-ground: #d5dde7;
+  --inverse-ground: #141314;
+  --surface: #ffffff;
+  --hairline: #bfc7d1;
+  --primary-text: #000000;
+  --secondary-text: #090909;
+  --muted-text: #383838;
+  --inverse-text: #fcfcfd;
+  --accent: #1e3a8a;
+  --primary-action-fill: #1e3a8a;
+  --primary-action-label: #fcfcfd;
 }
 
 body {
-  background-color: #1b2932;
-  color: #fefdfe;
-  font-family: 'IBM Plex Mono', monospace;
+  background-color: #dde6f0;
+  color: #000000;
+  font-family: 'Host Grotesk', system-ui, -apple-system, sans-serif;
   margin: 0;
   padding: 0;
   min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4, h5, h6, .font-display {
-  font-family: 'Host Grotesk', sans-serif;
+h1, h2, h3, h4, h5, h6, .font-serif, .font-display {
+  font-family: 'EB Garamond', Georgia, serif;
   font-weight: 500;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.015em;
 }
 
-/* Sharp geometry per design specification */
-button, input, select, textarea, .card-box {
-  border-radius: 0px !important;
+/* Smooth glossy card */
+.glossy-card {
+  background: rgba(255, 255, 255, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.03);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glossy-card:hover {
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 12px 30px -4px rgba(15, 23, 42, 0.08), 0 4px 10px -2px rgba(15, 23, 42, 0.04);
+}
+
+/* Glossy primary button */
+.glossy-btn-primary {
+  background: linear-gradient(180deg, #2563eb 0%, #1e3a8a 100%);
+  color: #ffffff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 14px rgba(30, 58, 138, 0.25), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glossy-btn-primary:hover {
+  background: linear-gradient(180deg, #1d4ed8 0%, #172554 100%);
+  box-shadow: 0 6px 20px rgba(30, 58, 138, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Glossy secondary glass button */
+.glossy-btn-secondary {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(12px);
+  color: #000000;
+  border: 1px solid #bfc7d1;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.04), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glossy-btn-secondary:hover {
+  background: #ffffff;
+  border-color: #94a3b8;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.07);
 }

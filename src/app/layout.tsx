@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="min-h-screen flex flex-col bg-[#1b2932] text-[#fefdfe]">
+      <body className="min-h-screen flex flex-col bg-[#dde6f0] text-[#000000] antialiased selection:bg-[#1e3a8a] selection:text-white">
         <AuthProvider>
           <Navbar />
           <div className="flex-1 w-full">{children}</div>
@@ -26,13 +26,13 @@ export default function RootLayout({
           <Toaster
             position="top-right"
             richColors
-            theme="dark"
+            theme="light"
             toastOptions={{
               style: {
-                borderRadius: '0px',
-                border: '1px solid #32414a',
-                fontFamily: 'IBM Plex Mono, monospace',
-                fontSize: '12px',
+                borderRadius: '8px',
+                border: '1px solid #bfc7d1',
+                fontFamily: 'Host Grotesk, sans-serif',
+                fontSize: '13px',
               },
             }}
           />
