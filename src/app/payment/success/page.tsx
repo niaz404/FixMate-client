@@ -4,7 +4,7 @@ import React, { useEffect, useState, Suspense } from 'react';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { fetchApi } from '@/lib/api';
-import { CheckCircle2, ShieldCheck, ArrowRight, AlertTriangle } from 'lucide-react';
+import { CheckCircle2, ArrowRight, AlertTriangle } from 'lucide-react';
 
 function PaymentSuccessContent() {
   const searchParams = useSearchParams();
@@ -24,12 +24,15 @@ function PaymentSuccessContent() {
       }
 
       try {
-        const query = new URLSearchParams({ session_id: sessionId });
-        if (bookingId) query.set('bookingId', bookingId);
+        const res = await fetchApi('/payments/checkout-verify', {
+          method: 'POST',
+          body: JSON.stringify({ sessionId, bookingId }),
+        });
 
-        const res = await fetchApi(`/payments/verify?${query.toString()}`);
         if (res.success && res.payment) {
           setPayment(res.payment);
+        } else if (res.success && res.result) {
+          setPayment(res.result);
         } else {
           setError(res.message || 'Payment verification could not be completed.');
         }
@@ -50,13 +53,13 @@ function PaymentSuccessContent() {
           <div className="space-y-4 py-8">
             <div className="w-12 h-12 border-2 border-[#67e8f9] border-t-transparent animate-spin rounded-full mx-auto" />
             <h2 className="text-lg font-display font-semibold">Verifying Stripe Payment...</h2>
-            <p className="text-xs text-[#dbdbda]">Contacting secure payment provider...</p>
+            <p className="text-xs text-[#dbdbda]">Contacting payment gateway...</p>
           </div>
         ) : error ? (
           <div className="space-y-4 py-4">
             <AlertTriangle className="w-12 h-12 text-rose-400 mx-auto" />
             <h2 className="text-xl font-display font-semibold text-rose-300">
-              Payment Verification Failed
+              Payment Verification
             </h2>
             <p className="text-xs text-[#dbdbda] leading-relaxed">{error}</p>
             <Link
@@ -84,24 +87,19 @@ function PaymentSuccessContent() {
               </p>
             </div>
 
-            {/* Receipt Summary Box */}
             <div className="bg-[#1b2932] border border-[#32414a] p-4 text-xs text-left space-y-2">
               <div className="flex justify-between border-b border-[#32414a] pb-2">
-                <span className="text-[#dbdbda]">Service:</span>
-                <span className="text-[#fefdfe] font-semibold">{payment?.serviceTitle}</span>
+                <span className="text-[#dbdbda]">Status:</span>
+                <span className="text-emerald-400 font-bold">PAID</span>
               </div>
               <div className="flex justify-between border-b border-[#32414a] pb-2">
                 <span className="text-[#dbdbda]">Amount Settled:</span>
-                <span className="text-emerald-400 font-bold">${payment?.amount} USD</span>
-              </div>
-              <div className="flex justify-between border-b border-[#32414a] pb-2">
-                <span className="text-[#dbdbda]">Technician:</span>
-                <span className="text-[#fefdfe]">{payment?.technicianName}</span>
+                <span className="text-emerald-400 font-bold">${payment?.amount || 'Verified'} USD</span>
               </div>
               <div className="space-y-1 pt-1">
-                <span className="text-[10px] uppercase text-[#dbdbda] block">Stripe Transaction ID:</span>
+                <span className="text-[10px] uppercase text-[#dbdbda] block">Session Reference:</span>
                 <span className="text-[10px] text-[#67e8f9] select-all break-all block font-mono">
-                  {payment?.transactionId}
+                  {sessionId}
                 </span>
               </div>
             </div>
