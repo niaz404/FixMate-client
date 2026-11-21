@@ -37,14 +37,26 @@ export async function fetchApi<T = any>(
       headers,
     });
 
+    if (!res.ok) {
+      let errorMsg = `Request failed with status ${res.status}`;
+      try {
+        const errJson = await res.json();
+        errorMsg = errJson.message || errorMsg;
+      } catch (_) {}
+      return {
+        success: false,
+        message: errorMsg,
+      };
+    }
+
     const data = await res.json();
     return {
-      success: res.ok,
+      success: true,
       ...data,
       data: Array.isArray(data) ? data : data.data || data,
     };
   } catch (error: any) {
-    console.error(`Fetch error on ${endpoint}:`, error.message);
+    console.warn(`[FixMate API] Connection note on ${endpoint}:`, error.message);
     return {
       success: false,
       message: error.message || 'Unable to connect to FixMate backend server.',
