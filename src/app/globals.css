@@ -1,0 +1,57 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Host+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+:root {
+  --page-ground: #1b2932;
+  --alt-ground: #02444b;
+  --inverse-ground: #efedef;
+  --surface: #213039;
+  --hairline: #32414a;
+  --primary-text: #fefdfe;
+  --secondary-text: #eaeae9;
+  --muted-text: #dbdbda;
+  --inverse-text: #040404;
+  --accent: #67e8f9;
+  --primary-action-fill: #f1f3f4;
+  --primary-action-label: #040404;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--page-ground);
+  color: var(--primary-text);
+  font-family: 'IBM Plex Mono', monospace;
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6, .font-display {
+  font-family: 'Host Grotesk', sans-serif;
+  font-weight: 500;
+  letter-spacing: -0.02em;
+}
+
+/* Sharp geometry per design specification */
+button, input, select, textarea, .card-box {
+  border-radius: 0px !important;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #1b2932;
+}
+::-webkit-scrollbar-thumb {
+  background: #32414a;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #67e8f9;
+}
