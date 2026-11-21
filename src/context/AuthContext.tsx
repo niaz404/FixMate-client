@@ -1,12 +1,13 @@
 'use client';
 
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext } from 'react';
 import { useRouter } from 'next/navigation';
-import { fetchApi, getToken, setToken, removeToken } from '@/lib/api';
+import { authClient, useSession, signOut as betterSignOut } from '@/lib/auth-client';
 import { toast } from 'sonner';
 
 export interface User {
-  _id: string;
+  id: string;
+  _id?: string;
   name: string;
   email: string;
   image?: string;
@@ -28,55 +29,38 @@ interface AuthContextType {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
-  const [user, setUser] = useState<User | null>(null);
-  const [loading, setLoading] = useState(true);
+  const { data: session, isPending } = useSession();
   const router = useRouter();
 
-  // Keep user logged in across page reloads
-  useEffect(() => {
-    async function loadUser() {
-      const token = getToken();
-      if (!token) {
-        setLoading(false);
-        return;
+  const user: User | null = session?.user
+    ? {
+        id: session.user.id,
+        _id: session.user.id,
+        name: session.user.name,
+        email: session.user.email,
+        image: session.user.image || '',
+        role: (session.user as any).role || 'customer',
+        phone: (session.user as any).phone || '',
+        area: (session.user as any).area || '',
+        bio: (session.user as any).bio || '',
       }
-
-      try {
-        const res = await fetchApi('/auth/me');
-        if (res.success && res.user) {
-          setUser(res.user);
-        } else {
-          removeToken();
-          setUser(null);
-        }
-      } catch (err) {
-        console.error('Failed to verify user session on load', err);
-        removeToken();
-        setUser(null);
-      } finally {
-        setLoading(false);
-      }
-    }
-
-    loadUser();
-  }, []);
+    : null;
 
   const login = async (email: string, password: string): Promise<boolean> => {
     try {
-      const res = await fetchApi('/auth/login', {
-        method: 'POST',
-        body: JSON.stringify({ email, password }),
+      const { data, error } = await authClient.signIn.email({
+        email,
+        password,
       });
 
-      if (res.success && res.token && res.user) {
-        setToken(res.token);
-        setUser(res.user);
-        toast.success(`Welcome back, ${res.user.name}!`);
-        return true;
-      } else {
-        toast.error(res.message || 'Login failed. Please check your credentials.');
+      if (error) {
+        toast.error(error.message || 'Login failed. Please check your credentials.');
         return false;
       }
+
+      toast.success(`Welcome back!`);
+      router.refresh();
+      return true;
     } catch (err: any) {
       toast.error('An error occurred during login.');
       return false;
@@ -85,39 +69,41 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const register = async (payload: any): Promise<boolean> => {
     try {
-      const res = await fetchApi('/auth/register', {
-        method: 'POST',
-        body: JSON.stringify(payload),
+      const { data, error } = await authClient.signUp.email({
+        name: payload.name,
+        email: payload.email,
+        password: payload.password,
+        role: payload.role || 'customer',
+        image: payload.image || '',
       });
 
-      if (res.success && res.token && res.user) {
-        setToken(res.token);
-        setUser(res.user);
-        toast.success('Account created successfully! Welcome to FixMate.');
-        return true;
-      } else {
-        toast.error(res.message || 'Registration failed.');
+      if (error) {
+        toast.error(error.message || 'Registration failed.');
         return false;
       }
+
+      toast.success('Account created successfully! Welcome to FixMate.');
+      router.refresh();
+      return true;
     } catch (err: any) {
       toast.error('An error occurred during registration.');
       return false;
     }
   };
 
-  const logout = () => {
-    removeToken();
-    setUser(null);
+  const logout = async () => {
+    await betterSignOut();
     toast.info('You have been signed out.');
     router.push('/sign-in');
+    router.refresh();
   };
 
-  const updateUser = (updatedUser: Partial<User>) => {
-    setUser((prev) => (prev ? { ...prev, ...updatedUser } : null));
+  const updateUser = () => {
+    router.refresh();
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout, updateUser }}>
+    <AuthContext.Provider value={{ user, loading: isPending, login, register, logout, updateUser }}>
       {children}
     </AuthContext.Provider>
   );
