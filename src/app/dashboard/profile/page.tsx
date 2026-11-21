@@ -3,9 +3,8 @@
 import React, { useState, useEffect } from 'react';
 import { DashboardLayout } from '@/components/layout/DashboardLayout';
 import { useAuth } from '@/context/AuthContext';
-import { fetchApi, uploadImageToImgBB } from '@/lib/api';
+import { fetchApi } from '@/lib/api';
 import { toast } from 'sonner';
-import { User, Upload, CheckCircle2, Shield } from 'lucide-react';
 
 export default function UpdateProfilePage() {
   const { user, updateUser } = useAuth();
@@ -14,11 +13,7 @@ export default function UpdateProfilePage() {
   const [phone, setPhone] = useState(user?.phone || '');
   const [area, setArea] = useState(user?.area || '');
   const [bio, setBio] = useState(user?.bio || '');
-
-  // Photo upload states
-  const [imageFile, setImageFile] = useState<File | null>(null);
-  const [imagePreview, setImagePreview] = useState<string>(user?.image || '');
-  const [uploading, setUploading] = useState(false);
+  const [imageUrl, setImageUrl] = useState(user?.image || '');
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
@@ -27,17 +22,9 @@ export default function UpdateProfilePage() {
       setPhone(user.phone || '');
       setArea(user.area || '');
       setBio(user.bio || '');
-      setImagePreview(user.image || '');
+      setImageUrl(user.image || '');
     }
   }, [user]);
-
-  const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      setImageFile(file);
-      setImagePreview(URL.createObjectURL(file));
-    }
-  };
 
   const handleProfileSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -48,15 +35,7 @@ export default function UpdateProfilePage() {
     }
 
     setSaving(true);
-    let finalImageUrl = imagePreview;
-
     try {
-      if (imageFile) {
-        setUploading(true);
-        finalImageUrl = await uploadImageToImgBB(imageFile);
-        setUploading(false);
-      }
-
       const res = await fetchApi('/users/profile', {
         method: 'PATCH',
         body: JSON.stringify({
@@ -64,14 +43,13 @@ export default function UpdateProfilePage() {
           phone: phone.trim(),
           area: area.trim(),
           bio: bio.trim(),
-          image: finalImageUrl,
+          image: imageUrl.trim(),
         }),
       });
 
-      if (res.success && res.user) {
-        // Instantly update navbar and dashboard topbar state without requiring logout!
+      if (res.success || res.user) {
         updateUser(res.user);
-        toast.success('Profile updated successfully! Navbar and dashboard updated.');
+        toast.success('Profile updated successfully!');
       } else {
         toast.error(res.message || 'Failed to update profile.');
       }
@@ -79,7 +57,6 @@ export default function UpdateProfilePage() {
       toast.error('Error saving profile changes.');
     } finally {
       setSaving(false);
-      setUploading(false);
     }
   };
 
@@ -91,7 +68,7 @@ export default function UpdateProfilePage() {
             Update Your Profile
           </h1>
           <p className="text-xs text-[#dbdbda] mt-1">
-            Keep your contact details, service area, and avatar up to date. Changes reflect across the platform immediately.
+            Keep your contact details, service area, and avatar up to date.
           </p>
         </div>
 
@@ -102,31 +79,23 @@ export default function UpdateProfilePage() {
           {/* Avatar Section */}
           <div>
             <label className="block text-[10px] uppercase text-[#dbdbda] mb-2 font-bold">
-              Profile Photo (ImgBB Upload)
+              Profile Photo URL
             </label>
-            <div className="flex items-center space-x-5">
+            <div className="flex items-center space-x-4 mb-2">
               <div className="w-16 h-16 bg-[#02444b] border border-[#32414a] flex items-center justify-center font-display font-bold text-lg text-[#67e8f9] overflow-hidden shrink-0">
-                {imagePreview ? (
-                  <img src={imagePreview} alt="Avatar" className="w-full h-full object-cover" />
+                {imageUrl ? (
+                  <img src={imageUrl} alt="Avatar" className="w-full h-full object-cover" />
                 ) : (
                   user?.name.charAt(0).toUpperCase()
                 )}
               </div>
-              <div>
-                <label className="inline-flex items-center space-x-2 px-3 py-1.5 border border-[#32414a] bg-[#1b2932] text-xs text-[#67e8f9] cursor-pointer hover:bg-[#02444b] transition-colors">
-                  <Upload className="w-3.5 h-3.5" />
-                  <span>Choose Photo File</span>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageSelect}
-                    className="hidden"
-                  />
-                </label>
-                <p className="text-[10px] text-[#dbdbda] mt-1">
-                  Uploads directly via ImgBB (PNG, JPG, or WebP).
-                </p>
-              </div>
+              <input
+                type="url"
+                placeholder="https://images.unsplash.com/..."
+                value={imageUrl}
+                onChange={(e) => setImageUrl(e.target.value)}
+                className="flex-1 bg-[#1b2932] border border-[#32414a] px-3.5 py-2.5 text-[#fefdfe] focus:border-[#67e8f9] focus:outline-hidden"
+              />
             </div>
           </div>
 
@@ -210,11 +179,7 @@ export default function UpdateProfilePage() {
               disabled={saving}
               className="w-full py-3 bg-[#f1f3f4] text-[#040404] font-mono text-xs uppercase tracking-wider font-bold hover:bg-[#67e8f9] transition-colors disabled:opacity-50"
             >
-              {saving
-                ? uploading
-                  ? 'Uploading Image to ImgBB...'
-                  : 'Saving Changes...'
-                : 'Save Profile Changes'}
+              {saving ? 'Saving Changes...' : 'Save Profile Changes'}
             </button>
           </div>
         </form>

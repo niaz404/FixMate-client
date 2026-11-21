@@ -4,9 +4,9 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { DashboardLayout } from '@/components/layout/DashboardLayout';
 import { useAuth } from '@/context/AuthContext';
-import { fetchApi, uploadImageToImgBB } from '@/lib/api';
+import { fetchApi } from '@/lib/api';
 import { toast } from 'sonner';
-import { Upload, Wrench, CheckCircle2 } from 'lucide-react';
+import { Wrench, Image as ImageIcon } from 'lucide-react';
 
 const CATEGORIES = [
   'Smartphone',
@@ -17,6 +17,16 @@ const CATEGORIES = [
   'Washing Machine',
   'Electrical',
 ];
+
+const PRESET_IMAGES: Record<string, string> = {
+  Smartphone: 'https://images.unsplash.com/photo-1585060544812-6b45742d762f?auto=format&fit=crop&w=800&q=80',
+  'Laptop & PC': 'https://images.unsplash.com/photo-1588872657578-7efd1f1555ed?auto=format&fit=crop&w=800&q=80',
+  AC: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?auto=format&fit=crop&w=800&q=80',
+  Refrigerator: 'https://images.unsplash.com/photo-1571175443880-49e1d25b2bc5?auto=format&fit=crop&w=800&q=80',
+  TV: 'https://images.unsplash.com/photo-1593359677879-a4bb92f829d1?auto=format&fit=crop&w=800&q=80',
+  'Washing Machine': 'https://images.unsplash.com/photo-1626806787461-102c1bfaaea1?auto=format&fit=crop&w=800&q=80',
+  Electrical: 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=800&q=80',
+};
 
 export default function AddServicePage() {
   const router = useRouter();
@@ -29,18 +39,13 @@ export default function AddServicePage() {
   const [estimatedDuration, setEstimatedDuration] = useState('2-3 hours');
   const [serviceMode, setServiceMode] = useState<'Home Visit' | 'Shop Drop-off'>('Home Visit');
   const [serviceArea, setServiceArea] = useState(user?.area || 'Dhaka City Wide');
-
-  // Image Upload State
-  const [imageFile, setImageFile] = useState<File | null>(null);
-  const [imagePreview, setImagePreview] = useState<string>('');
-  const [uploadingImage, setUploadingImage] = useState(false);
+  const [imageUrl, setImageUrl] = useState(PRESET_IMAGES[CATEGORIES[0]]);
   const [submitting, setSubmitting] = useState(false);
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      setImageFile(file);
-      setImagePreview(URL.createObjectURL(file));
+  const handleCategoryChange = (newCat: string) => {
+    setCategory(newCat);
+    if (!imageUrl || Object.values(PRESET_IMAGES).includes(imageUrl)) {
+      setImageUrl(PRESET_IMAGES[newCat] || '');
     }
   };
 
@@ -60,28 +65,20 @@ export default function AddServicePage() {
       toast.error('Please enter a valid positive base price.');
       return;
     }
-    if (!imageFile && !imagePreview) {
-      toast.error('Please upload a service banner image via the file selector.');
+    if (!imageUrl.trim()) {
+      toast.error('Please provide a service image URL.');
       return;
     }
 
     setSubmitting(true);
-    let finalImageUrl = imagePreview;
-
     try {
-      if (imageFile) {
-        setUploadingImage(true);
-        finalImageUrl = await uploadImageToImgBB(imageFile);
-        setUploadingImage(false);
-      }
-
       const res = await fetchApi('/services', {
         method: 'POST',
         body: JSON.stringify({
           title: title.trim(),
           category,
           description: description.trim(),
-          image: finalImageUrl,
+          image: imageUrl.trim(),
           basePrice: priceNum,
           estimatedDuration: estimatedDuration.trim(),
           serviceMode,
@@ -89,10 +86,8 @@ export default function AddServicePage() {
         }),
       });
 
-      if (res.success) {
-        toast.success(
-          'Service submitted successfully! It is now waiting for administrator review.'
-        );
+      if (res.success || res.result) {
+        toast.success('Service submitted successfully! It is awaiting administrator review.');
         router.push('/dashboard/technician/my-services');
       } else {
         toast.error(res.message || 'Failed to submit service.');
@@ -101,7 +96,6 @@ export default function AddServicePage() {
       toast.error('An error occurred submitting the service.');
     } finally {
       setSubmitting(false);
-      setUploadingImage(false);
     }
   };
 
@@ -168,7 +162,7 @@ export default function AddServicePage() {
               <label className="block text-[10px] uppercase text-[#dbdbda] mb-1">Category *</label>
               <select
                 value={category}
-                onChange={(e) => setCategory(e.target.value)}
+                onChange={(e) => handleCategoryChange(e.target.value)}
                 className="w-full bg-[#1b2932] border border-[#32414a] px-3 py-2.5 text-[#fefdfe] focus:border-[#67e8f9] focus:outline-hidden"
               >
                 {CATEGORIES.map((c) => (
@@ -255,50 +249,24 @@ export default function AddServicePage() {
             />
           </div>
 
-          {/* ImgBB Service Banner Upload */}
+          {/* Service Banner Image URL */}
           <div>
             <label className="block text-[10px] uppercase text-[#dbdbda] mb-1 font-bold">
-              Service Banner Image (ImgBB File Upload) *
+              Service Banner Image URL *
             </label>
-            <div className="border border-dashed border-[#32414a] bg-[#1b2932] p-4 text-center">
-              {imagePreview ? (
-                <div className="space-y-3">
-                  <div className="relative h-40 max-w-sm mx-auto overflow-hidden border border-[#32414a]">
-                    <img
-                      src={imagePreview}
-                      alt="Banner Preview"
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                  <label className="inline-block px-3 py-1.5 border border-[#32414a] text-xs text-[#67e8f9] cursor-pointer hover:bg-[#213039]">
-                    Change Selected File
-                    <input
-                      type="file"
-                      accept="image/*"
-                      onChange={handleImageChange}
-                      className="hidden"
-                    />
-                  </label>
-                </div>
-              ) : (
-                <label className="flex flex-col items-center justify-center cursor-pointer py-4">
-                  <Upload className="w-8 h-8 text-[#67e8f9] mb-2" />
-                  <span className="text-xs text-[#fefdfe] font-semibold">
-                    Click to select service banner image
-                  </span>
-                  <span className="text-[10px] text-[#dbdbda] mt-1">
-                    Uploads directly via ImgBB API (PNG, JPG, WebP)
-                  </span>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleImageChange}
-                    className="hidden"
-                    required
-                  />
-                </label>
-              )}
-            </div>
+            <input
+              type="url"
+              placeholder="https://images.unsplash.com/..."
+              value={imageUrl}
+              onChange={(e) => setImageUrl(e.target.value)}
+              required
+              className="w-full bg-[#1b2932] border border-[#32414a] px-3.5 py-2.5 text-[#fefdfe] focus:border-[#67e8f9] focus:outline-hidden mb-2"
+            />
+            {imageUrl && (
+              <div className="relative h-36 max-w-sm overflow-hidden border border-[#32414a]">
+                <img src={imageUrl} alt="Preview" className="w-full h-full object-cover" />
+              </div>
+            )}
           </div>
 
           {/* Submission Action */}
@@ -308,11 +276,7 @@ export default function AddServicePage() {
               disabled={submitting}
               className="w-full py-3.5 bg-[#f1f3f4] text-[#040404] font-mono text-xs uppercase tracking-wider font-bold hover:bg-[#67e8f9] transition-colors disabled:opacity-50"
             >
-              {submitting
-                ? uploadingImage
-                  ? 'Uploading Image to ImgBB...'
-                  : 'Submitting Service...'
-                : 'Submit Service for Review'}
+              {submitting ? 'Submitting Service...' : 'Submit Service for Review'}
             </button>
           </div>
         </form>
