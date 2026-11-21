@@ -3,7 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { fetchApi } from '@/lib/api';
-import { ArrowRight, Wrench, MapPin, Tag } from 'lucide-react';
+import { ArrowRight, Wrench, MapPin } from 'lucide-react';
 
 interface Service {
   _id: string;
@@ -105,7 +105,7 @@ export function FeaturedServicesSection() {
           setServices(res.data);
         }
       } catch (err) {
-        // Fallback remains active
+        // Keep fallback
       } finally {
         setLoading(false);
       }
@@ -114,111 +114,90 @@ export function FeaturedServicesSection() {
   }, []);
 
   return (
-    <section className="w-full bg-[#1b2932] text-[#fefdfe] py-16 md:py-20 border-b border-[#32414a]">
-      <div className="max-w-[1440px] mx-auto px-6">
-        <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
-          <div className="max-w-2xl">
-            <span className="text-xs uppercase font-mono tracking-widest text-[#67e8f9] block mb-2">
+    <section className="w-full bg-[#dde6f0] text-[#000000] py-16 md:py-20 border-b border-[#bfc7d1]/50">
+      <div className="max-w-[960px] mx-auto px-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-10">
+          <div className="max-w-xl">
+            <span className="text-xs uppercase tracking-widest text-[#1e3a8a] font-semibold block mb-2">
               Verified Repair Catalog
             </span>
-            <h2 className="text-3xl md:text-4xl font-display font-medium text-[#fefdfe] tracking-tight">
+            <h2 className="text-3xl md:text-4xl font-serif font-medium tracking-tight text-[#000000]">
               Featured repair solutions ready for booking.
             </h2>
           </div>
           <Link
             href="/services"
-            className="mt-4 md:mt-0 inline-flex items-center space-x-2 text-xs font-mono text-[#67e8f9] hover:underline uppercase tracking-wider"
+            className="mt-4 md:mt-0 inline-flex items-center space-x-1.5 text-xs font-semibold text-[#1e3a8a] hover:underline"
           >
             <span>View All Services</span>
-            <ArrowRight className="w-4 h-4" />
+            <ArrowRight className="w-3.5 h-3.5" />
           </Link>
         </div>
 
-        {loading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {[...Array(6)].map((_, i) => (
-              <div
-                key={i}
-                className="bg-[#213039] border border-[#32414a] h-96 animate-pulse"
-              />
-            ))}
-          </div>
-        ) : services.length === 0 ? (
-          <div className="text-center py-16 border border-[#32414a] bg-[#213039] p-8">
-            <Wrench className="w-10 h-10 text-[#67e8f9] mx-auto mb-3" />
-            <h3 className="font-display font-medium text-lg text-[#fefdfe]">
-              No active listings available right now.
-            </h3>
-            <p className="text-xs font-mono text-[#dbdbda] mt-1">
-              Please check back shortly or run the database seeder.
-            </p>
-          </div>
-        ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service) => (
-              <div
-                key={service._id}
-                className="bg-[#213039] border border-[#32414a] hover:border-[#67e8f9] transition-all flex flex-col justify-between h-full group"
-              >
-                <div>
-                  {/* Uniform Image Banner */}
-                  <div className="relative h-48 w-full overflow-hidden bg-[#1b2932]">
-                    <img
-                      src={service.image}
-                      alt={service.title}
-                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                    />
-                    <div className="absolute top-3 left-3 px-2.5 py-1 bg-[#02444b]/90 border border-[#32414a] text-[#67e8f9] text-[10px] font-mono uppercase tracking-wider">
-                      {service.category}
-                    </div>
-                    <div className="absolute top-3 right-3 px-2 py-1 bg-[#1b2932]/90 border border-[#32414a] text-[#fefdfe] text-[10px] font-mono">
-                      {service.serviceMode}
-                    </div>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {services.map((service) => (
+            <div
+              key={service._id}
+              className="rounded-xl border border-white/80 bg-white/85 shadow-sm hover:shadow-md transition-all flex flex-col justify-between overflow-hidden group hover:-translate-y-1"
+            >
+              <div>
+                {/* Image Banner */}
+                <div className="relative h-44 w-full overflow-hidden bg-slate-100">
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute top-3 left-3 px-2.5 py-0.5 rounded-full bg-white/90 backdrop-blur-md text-[#1e3a8a] text-[10px] font-semibold shadow-xs">
+                    {service.category}
                   </div>
-
-                  {/* Card Content */}
-                  <div className="p-5 space-y-3">
-                    <h3 className="font-display font-semibold text-lg text-[#fefdfe] line-clamp-1 group-hover:text-[#67e8f9] transition-colors">
-                      {service.title}
-                    </h3>
-                    <p className="text-xs font-mono text-[#dbdbda] line-clamp-2 leading-relaxed">
-                      {service.description}
-                    </p>
-
-                    <div className="pt-2 flex items-center justify-between text-xs font-mono text-[#eaeae9]/80 border-t border-[#32414a]">
-                      <div className="flex items-center space-x-1.5 truncate">
-                        <Wrench className="w-3.5 h-3.5 text-[#67e8f9] shrink-0" />
-                        <span className="truncate">{service.technicianName}</span>
-                      </div>
-                      <div className="flex items-center space-x-1.5 shrink-0 text-[11px]">
-                        <MapPin className="w-3.5 h-3.5 text-[#67e8f9]" />
-                        <span className="truncate max-w-[120px]">{service.serviceArea}</span>
-                      </div>
-                    </div>
+                  <div className="absolute top-3 right-3 px-2.5 py-0.5 rounded-full bg-[#1e3a8a]/90 backdrop-blur-md text-white text-[10px] font-medium shadow-xs">
+                    {service.serviceMode}
                   </div>
                 </div>
 
-                {/* Card Footer with Price and View Details Action */}
-                <div className="p-5 pt-0 mt-3 flex items-center justify-between border-t border-[#32414a]/50">
-                  <div>
-                    <span className="text-[10px] uppercase font-mono text-[#dbdbda] block">
-                      Starting At
-                    </span>
-                    <span className="text-xl font-display font-bold text-[#fefdfe]">
-                      ${service.basePrice}
-                    </span>
+                {/* Card Content */}
+                <div className="p-4 space-y-2.5">
+                  <h3 className="font-serif font-medium text-base text-[#000000] line-clamp-1 group-hover:text-[#1e3a8a] transition-colors">
+                    {service.title}
+                  </h3>
+                  <p className="text-xs text-[#383838] line-clamp-2 leading-relaxed">
+                    {service.description}
+                  </p>
+
+                  <div className="pt-2 flex items-center justify-between text-xs text-[#383838] border-t border-[#bfc7d1]/30">
+                    <div className="flex items-center space-x-1.5 truncate">
+                      <Wrench className="w-3.5 h-3.5 text-[#1e3a8a] shrink-0" />
+                      <span className="truncate">{service.technicianName}</span>
+                    </div>
+                    <div className="flex items-center space-x-1 shrink-0 text-[11px]">
+                      <MapPin className="w-3.5 h-3.5 text-[#1e3a8a]" />
+                      <span className="truncate max-w-[100px]">{service.serviceArea}</span>
+                    </div>
                   </div>
-                  <Link
-                    href={service._id.startsWith('featured-') ? '/services' : `/services/${service._id}`}
-                    className="px-4 py-2 bg-[#f1f3f4] text-[#040404] font-mono text-xs uppercase tracking-wider font-semibold hover:bg-[#67e8f9] transition-colors"
-                  >
-                    View Details
-                  </Link>
                 </div>
               </div>
-            ))}
-          </div>
-        )}
+
+              {/* Card Footer */}
+              <div className="p-4 pt-0 mt-2 flex items-center justify-between border-t border-[#bfc7d1]/20">
+                <div>
+                  <span className="text-[10px] uppercase text-[#383838] block font-medium">
+                    Starting At
+                  </span>
+                  <span className="text-lg font-serif font-semibold text-[#000000]">
+                    ${service.basePrice}
+                  </span>
+                </div>
+                <Link
+                  href={service._id.startsWith('featured-') ? '/services' : `/services/${service._id}`}
+                  className="glossy-btn-primary px-3.5 py-1.5 rounded-lg text-xs font-semibold"
+                >
+                  View Details
+                </Link>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   );

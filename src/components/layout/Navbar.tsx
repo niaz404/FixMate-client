@@ -12,7 +12,6 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  // Determine dashboard route according to role
   const getDashboardRoute = () => {
     if (!user) return '/sign-in';
     if (user.role === 'admin') return '/dashboard/admin';
@@ -21,44 +20,42 @@ export function Navbar() {
   };
 
   const navLinks = [
-    { label: 'Home', href: '/' },
     { label: 'Services', href: '/services' },
     { label: 'How It Works', href: '/about' },
+    { label: 'Pricing', href: '/#pricing' },
+    { label: 'FAQ', href: '/#faq' },
   ];
 
   const isActive = (href: string) => {
-    if (href === '/') return pathname === '/';
+    if (href.startsWith('/#')) return false;
     return pathname.startsWith(href);
   };
 
   return (
-    <header className="sticky top-0 z-40 w-full bg-[#1b2932]/95 border-b border-[#32414a] backdrop-blur-md">
-      <div className="max-w-[1440px] mx-auto px-6 h-18 flex items-center justify-between">
-        {/* Brand Logo with Wrench Icon */}
-        <Link href="/" className="flex items-center space-x-3 group">
-          <div className="w-10 h-10 bg-[#02444b] border border-[#32414a] flex items-center justify-center text-[#67e8f9] transition-transform group-hover:scale-105">
-            <Wrench className="w-5 h-5" />
+    <header className="sticky top-0 z-40 w-full bg-[#dde6f0]/90 border-b border-[#bfc7d1] backdrop-blur-md">
+      <div className="max-w-[960px] mx-auto px-6 h-18 flex items-center justify-between">
+        {/* Wordmark */}
+        <Link href="/" className="flex items-center space-x-2.5 group">
+          <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#1e3a8a] to-[#2563eb] shadow-sm flex items-center justify-center text-white transition-transform group-hover:scale-105">
+            <Wrench className="w-4 h-4" />
           </div>
           <div>
-            <span className="text-xl font-display font-bold tracking-tight text-[#fefdfe]">
-              Fix<span className="text-[#67e8f9]">Mate</span>
-            </span>
-            <span className="block text-[10px] text-[#dbdbda] uppercase tracking-widest font-mono">
-              Repair Platform
+            <span className="text-2xl font-serif font-medium tracking-tight text-[#000000]">
+              Fix<span className="text-[#1e3a8a] italic font-semibold">Mate</span>
             </span>
           </div>
         </Link>
 
-        {/* Desktop Navigation Links */}
-        <nav className="hidden md:flex items-center space-x-8">
+        {/* 4 Navigation Links */}
+        <nav className="hidden md:flex items-center space-x-7">
           {navLinks.map((link) => (
             <Link
-              key={link.href}
+              key={link.label}
               href={link.href}
-              className={`text-sm font-mono tracking-wide transition-colors ${
+              className={`text-sm tracking-normal transition-colors font-medium ${
                 isActive(link.href)
-                  ? 'text-[#67e8f9] border-b-2 border-[#67e8f9] pb-1'
-                  : 'text-[#eaeae9] hover:text-[#67e8f9]'
+                  ? 'text-[#1e3a8a] font-semibold'
+                  : 'text-[#383838] hover:text-[#1e3a8a]'
               }`}
             >
               {link.label}
@@ -66,64 +63,58 @@ export function Navbar() {
           ))}
         </nav>
 
-        {/* Right Action Controls */}
-        <div className="hidden md:flex items-center space-x-4">
+        {/* Right Actions */}
+        <div className="hidden md:flex items-center space-x-3">
           {user ? (
             <div className="relative">
               <button
                 onClick={() => setDropdownOpen(!dropdownOpen)}
-                className="flex items-center space-x-3 p-1.5 border border-[#32414a] bg-[#213039] hover:border-[#67e8f9] transition-colors"
+                className="flex items-center space-x-2.5 px-3 py-1.5 rounded-lg border border-[#bfc7d1] bg-white/80 hover:bg-white shadow-xs transition-colors"
               >
-                <div className="w-8 h-8 bg-[#02444b] border border-[#32414a] flex items-center justify-center overflow-hidden">
+                <div className="w-7 h-7 rounded-full bg-[#1e3a8a] text-white flex items-center justify-center overflow-hidden text-xs font-semibold">
                   {user.image ? (
                     <img src={user.image} alt={user.name} className="w-full h-full object-cover" />
                   ) : (
-                    <span className="font-display font-semibold text-xs text-[#67e8f9]">
-                      {user.name.charAt(0).toUpperCase()}
-                    </span>
+                    user.name.charAt(0).toUpperCase()
                   )}
                 </div>
-                <div className="text-left font-mono text-xs">
-                  <div className="text-[#fefdfe] font-medium leading-none truncate max-w-[120px]">
+                <div className="text-left text-xs">
+                  <span className="text-[#000000] font-semibold block leading-tight max-w-[100px] truncate">
                     {user.name}
-                  </div>
-                  <span className="text-[10px] uppercase text-[#67e8f9] tracking-wider">
+                  </span>
+                  <span className="text-[10px] text-[#1e3a8a] uppercase tracking-wider block font-medium">
                     {user.role}
                   </span>
                 </div>
-                <ChevronDown className="w-4 h-4 text-[#dbdbda]" />
+                <ChevronDown className="w-3.5 h-3.5 text-[#383838]" />
               </button>
 
-              {/* User Dropdown */}
               {dropdownOpen && (
                 <div
                   onMouseLeave={() => setDropdownOpen(false)}
-                  className="absolute right-0 mt-2 w-56 bg-[#1b2932] border border-[#32414a] shadow-xl py-2 z-50 font-mono text-xs"
+                  className="absolute right-0 mt-2 w-52 rounded-xl bg-white border border-[#bfc7d1] shadow-lg py-2 z-50 text-xs text-[#090909]"
                 >
-                  <div className="px-4 py-2 border-b border-[#32414a]">
-                    <p className="text-[#dbdbda] text-[10px] uppercase tracking-wider">Signed in as</p>
-                    <p className="text-[#fefdfe] font-semibold truncate">{user.email}</p>
-                    <span className="inline-block mt-1 px-2 py-0.5 text-[10px] uppercase tracking-wider bg-[#02444b] text-[#67e8f9] border border-[#32414a]">
-                      {user.role}
-                    </span>
+                  <div className="px-4 py-2 border-b border-[#bfc7d1]/50">
+                    <p className="text-[10px] text-[#383838] uppercase tracking-wider">Signed in as</p>
+                    <p className="font-semibold text-[#000000] truncate">{user.email}</p>
                   </div>
 
                   <Link
                     href={getDashboardRoute()}
                     onClick={() => setDropdownOpen(false)}
-                    className="flex items-center space-x-2 px-4 py-2.5 text-[#eaeae9] hover:bg-[#213039] hover:text-[#67e8f9]"
+                    className="flex items-center space-x-2 px-4 py-2.5 hover:bg-[#dde6f0]/50 transition-colors"
                   >
-                    <LayoutDashboard className="w-4 h-4" />
+                    <LayoutDashboard className="w-4 h-4 text-[#1e3a8a]" />
                     <span>Dashboard</span>
                   </Link>
 
                   <Link
                     href="/dashboard/profile"
                     onClick={() => setDropdownOpen(false)}
-                    className="flex items-center space-x-2 px-4 py-2.5 text-[#eaeae9] hover:bg-[#213039] hover:text-[#67e8f9]"
+                    className="flex items-center space-x-2 px-4 py-2.5 hover:bg-[#dde6f0]/50 transition-colors"
                   >
-                    <UserIcon className="w-4 h-4" />
-                    <span>Update Profile</span>
+                    <UserIcon className="w-4 h-4 text-[#1e3a8a]" />
+                    <span>Edit Profile</span>
                   </Link>
 
                   <button
@@ -131,7 +122,7 @@ export function Navbar() {
                       setDropdownOpen(false);
                       logout();
                     }}
-                    className="w-full flex items-center space-x-2 px-4 py-2.5 text-rose-400 hover:bg-rose-950/40 text-left border-t border-[#32414a] mt-1"
+                    className="w-full flex items-center space-x-2 px-4 py-2.5 text-rose-600 hover:bg-rose-50 text-left border-t border-[#bfc7d1]/50 mt-1"
                   >
                     <LogOut className="w-4 h-4" />
                     <span>Sign Out</span>
@@ -140,98 +131,84 @@ export function Navbar() {
               )}
             </div>
           ) : (
-            <div className="flex items-center space-x-3">
+            <div className="flex items-center space-x-2.5">
               <Link
                 href="/sign-in"
-                className="px-4 py-2 text-xs font-mono tracking-wider text-[#fefdfe] hover:text-[#67e8f9]"
+                className="px-3.5 py-2 text-xs font-medium text-[#090909] hover:text-[#1e3a8a] transition-colors"
               >
                 Sign In
               </Link>
               <Link
-                href="/sign-up"
-                className="px-4 py-2 text-xs font-mono uppercase tracking-wider font-semibold bg-[#f1f3f4] text-[#040404] hover:bg-[#67e8f9] transition-colors"
+                href="/services"
+                className="glossy-btn-primary px-4 py-2 rounded-lg text-xs font-semibold tracking-wide"
               >
-                Sign Up
+                Book a Repair
               </Link>
             </div>
           )}
         </div>
 
-        {/* Mobile Menu Hamburger Toggle */}
-        <div className="md:hidden flex items-center">
+        {/* Mobile Toggle */}
+        <div className="flex md:hidden">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="p-2 border border-[#32414a] text-[#fefdfe]"
-            aria-label="Toggle Navigation Menu"
+            className="p-2 rounded-lg border border-[#bfc7d1] bg-white/70 text-[#000000]"
           >
-            {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Menu Collapsible Panel */}
+      {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#1b2932] border-b border-[#32414a] px-6 py-4 space-y-3 font-mono text-sm">
+        <div className="md:hidden border-t border-[#bfc7d1] bg-[#dde6f0] px-6 py-4 space-y-3">
           {navLinks.map((link) => (
             <Link
-              key={link.href}
+              key={link.label}
               href={link.href}
               onClick={() => setMobileMenuOpen(false)}
-              className={`block py-2 ${
-                isActive(link.href) ? 'text-[#67e8f9] font-semibold' : 'text-[#eaeae9]'
-              }`}
+              className="block text-sm font-medium text-[#090909] hover:text-[#1e3a8a] py-1.5"
             >
               {link.label}
             </Link>
           ))}
-
-          <div className="pt-3 border-t border-[#32414a]">
+          <div className="pt-3 border-t border-[#bfc7d1] flex flex-col space-y-2">
             {user ? (
-              <div className="space-y-2">
-                <div className="text-xs text-[#dbdbda] mb-2">
-                  Logged in as <span className="text-[#fefdfe] font-semibold">{user.name}</span> ({user.role})
-                </div>
+              <>
                 <Link
                   href={getDashboardRoute()}
                   onClick={() => setMobileMenuOpen(false)}
-                  className="block py-1.5 text-[#67e8f9]"
+                  className="w-full text-center py-2.5 rounded-lg bg-white border border-[#bfc7d1] text-xs font-semibold text-[#000000]"
                 >
-                  Open Dashboard
-                </Link>
-                <Link
-                  href="/dashboard/profile"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="block py-1.5 text-[#eaeae9]"
-                >
-                  Update Profile
+                  Dashboard ({user.role})
                 </Link>
                 <button
                   onClick={() => {
                     setMobileMenuOpen(false);
                     logout();
                   }}
-                  className="block w-full text-left py-1.5 text-rose-400"
+                  className="w-full text-center py-2 text-xs text-rose-600 font-semibold"
                 >
                   Sign Out
                 </button>
-              </div>
+              </>
             ) : (
-              <div className="flex flex-col space-y-2">
+              <>
                 <Link
                   href="/sign-in"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full text-center py-2 border border-[#32414a] text-[#fefdfe]"
+                  className="w-full text-center py-2 rounded-lg border border-[#bfc7d1] bg-white text-xs font-semibold text-[#000000]"
                 >
                   Sign In
                 </Link>
                 <Link
-                  href="/sign-up"
+                  href="/services"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full text-center py-2 bg-[#f1f3f4] text-[#040404] font-semibold"
+                  className="w-full text-center py-2.5 rounded-lg glossy-btn-primary text-xs font-semibold"
                 >
-                  Sign Up
+                  Book a Repair
                 </Link>
-              </div>
+              </>
             )}
           </div>
         </div>

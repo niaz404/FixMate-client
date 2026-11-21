@@ -42,39 +42,42 @@ export function FaqSection() {
   ];
 
   return (
-    <section className="w-full bg-[#02444b] text-[#fefdfe] py-16 md:py-20 border-b border-[#32414a]">
-      <div className="max-w-[1440px] mx-auto px-6">
-        <div className="max-w-2xl mb-12">
-          <span className="text-xs uppercase font-mono tracking-widest text-[#67e8f9] block mb-2">
+    <section id="faq" className="w-full bg-[#d5dde7] text-[#000000] py-16 md:py-20 border-b border-[#bfc7d1]/50">
+      <div className="max-w-[960px] mx-auto px-6">
+        <div className="max-w-xl mb-12">
+          <span className="text-xs uppercase tracking-widest text-[#1e3a8a] font-semibold block mb-2">
             Frequently Asked Questions
           </span>
-          <h2 className="text-3xl md:text-4xl font-display font-medium text-[#fefdfe] tracking-tight">
-            Everything you need to know about the FixMate repair guarantee.
+          <h2 className="text-3xl md:text-4xl font-serif font-medium tracking-tight text-[#000000]">
+            Everything you need to know about the FixMate guarantee.
           </h2>
         </div>
 
-        <div className="max-w-3xl space-y-4">
+        <div className="space-y-3.5">
           {faqs.map((faq, idx) => {
             const isOpen = openItems.includes(idx);
             return (
               <div
                 key={idx}
-                className="border border-[#32414a] bg-[#1b2932] overflow-hidden transition-colors"
+                className="rounded-xl border border-white/80 bg-white/80 overflow-hidden shadow-xs transition-all"
               >
                 <button
                   onClick={() => toggleItem(idx)}
-                  className="w-full p-5 text-left flex items-center justify-between hover:bg-[#213039] transition-colors"
+                  className="w-full p-5 text-left flex items-center justify-between hover:bg-white transition-colors"
                 >
-                  <span className="font-display font-medium text-base text-[#fefdfe] pr-4">
+                  <span className="font-serif font-semibold text-base text-[#000000] pr-4">
                     {faq.q}
                   </span>
-                  <div className="p-1 border border-[#32414a] text-[#67e8f9] shrink-0">
-                    {isOpen ? <Minus className="w-4 h-4" /> : <Plus className="w-4 h-4" />}
+                  <div className="w-7 h-7 rounded-lg bg-[#dde6f0] flex items-center justify-center shrink-0">
+                    {isOpen ? (
+                      <Minus className="w-4 h-4 text-[#1e3a8a]" />
+                    ) : (
+                      <Plus className="w-4 h-4 text-[#1e3a8a]" />
+                    )}
                   </div>
                 </button>
-
                 {isOpen && (
-                  <div className="px-5 pb-5 pt-1 text-xs font-mono text-[#dbdbda] leading-relaxed border-t border-[#32414a]/60">
+                  <div className="px-5 pb-5 pt-1 text-xs text-[#383838] leading-relaxed border-t border-[#bfc7d1]/30">
                     {faq.a}
                   </div>
                 )}

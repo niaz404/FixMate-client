@@ -4,137 +4,142 @@ import { ShieldCheck, ArrowRight, CheckCircle2, Clock, Wrench } from 'lucide-rea
 
 export function HeroSection() {
   return (
-    <section className="w-full bg-[#02444b] text-[#fefdfe] border-b border-[#32414a] pt-16 pb-12 md:pt-20 md:pb-16">
-      <div className="max-w-[1440px] mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left Column: Heading, Actions, Trust Caption, Key Stats */}
+    <section className="w-full bg-[#d5dde7] text-[#000000] pt-16 pb-14 md:pt-20 md:pb-16 relative overflow-hidden">
+      <div className="max-w-[960px] mx-auto px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
+          {/* Left Column: Heading, Actions, Trust Caption, Key Numbers */}
           <div className="lg:col-span-7 space-y-6">
             {/* Trust Caption Pill */}
-            <div className="inline-flex items-center space-x-2 px-3 py-1 bg-[#1b2932] border border-[#32414a] text-xs font-mono text-[#67e8f9]">
-              <ShieldCheck className="w-4 h-4 text-[#67e8f9]" />
+            <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white/85 border border-white text-xs font-medium text-[#1e3a8a] shadow-xs">
+              <ShieldCheck className="w-4 h-4 text-[#1e3a8a]" />
               <span>100% Pay-After-Service Guarantee &bull; Verified Pros</span>
             </div>
 
-            {/* Display Headline */}
-            <h1 className="text-4xl md:text-5xl lg:text-[60px] font-display font-medium tracking-tight leading-[1.08] text-[#fefdfe]">
-              Broken device? Get it fixed by verified technicians.
+            {/* Display Headline in EB Garamond */}
+            <h1 className="text-4xl md:text-5xl lg:text-[52px] font-serif font-medium tracking-tight leading-[1.12] text-[#000000]">
+              Broken device? Restored to perfection by certified masters.
             </h1>
 
             {/* Subtitle */}
-            <p className="text-base text-[#dbdbda] font-mono leading-relaxed max-w-xl">
-              From smartphone screen repairs to home appliances, book trusted local specialists. Monitor your repair pipeline step-by-step and pay securely only after the job is done.
+            <p className="text-base text-[#383838] leading-relaxed max-w-xl">
+              From precision iPhone logic boards to inverter cooling systems, book verified local specialists. Follow your repair pipeline live and pay only once satisfied.
             </p>
 
             {/* Dual Actions */}
-            <div className="flex flex-wrap items-center gap-4 pt-2">
+            <div className="flex flex-wrap items-center gap-3.5 pt-1">
               <Link
                 href="/services"
-                className="inline-flex items-center space-x-2 px-6 py-3.5 bg-[#f1f3f4] text-[#040404] font-mono text-xs uppercase tracking-wider font-semibold hover:bg-[#67e8f9] transition-colors"
+                className="glossy-btn-primary px-6 py-3 rounded-lg text-xs md:text-sm font-semibold tracking-wide inline-flex items-center space-x-2"
               >
                 <span>Browse Repair Services</span>
                 <ArrowRight className="w-4 h-4" />
               </Link>
               <Link
                 href="/about"
-                className="inline-flex items-center space-x-2 px-6 py-3.5 border border-[#32414a] bg-[#1b2932] text-[#fefdfe] font-mono text-xs uppercase tracking-wider hover:bg-[#213039] transition-colors"
+                className="glossy-btn-secondary px-5 py-3 rounded-lg text-xs md:text-sm font-medium tracking-wide inline-flex items-center space-x-2"
               >
                 <span>How FixMate Works</span>
               </Link>
             </div>
 
-            {/* Key Numbers Grid */}
-            <div className="grid grid-cols-3 gap-4 pt-8 border-t border-[#32414a]">
+            {/* Key Numbers Grid below text */}
+            <div className="grid grid-cols-3 gap-4 pt-6 border-t border-[#bfc7d1]/80">
               <div>
-                <div className="text-2xl md:text-3xl font-display font-semibold text-[#67e8f9]">
+                <div className="text-2xl md:text-3xl font-serif font-semibold text-[#1e3a8a]">
                   15,400+
                 </div>
-                <div className="text-xs text-[#dbdbda] font-mono mt-1">Repairs Completed</div>
+                <div className="text-xs text-[#383838] font-medium mt-0.5">Completed Repairs</div>
               </div>
               <div>
-                <div className="text-2xl md:text-3xl font-display font-semibold text-[#fefdfe]">
+                <div className="text-2xl md:text-3xl font-serif font-semibold text-[#000000]">
                   99.4%
                 </div>
-                <div className="text-xs text-[#dbdbda] font-mono mt-1">Customer Satisfaction</div>
+                <div className="text-xs text-[#383838] font-medium mt-0.5">Customer Trust</div>
               </div>
               <div>
-                <div className="text-2xl md:text-3xl font-display font-semibold text-[#67e8f9]">
+                <div className="text-2xl md:text-3xl font-serif font-semibold text-[#1e3a8a]">
                   30-Day
                 </div>
-                <div className="text-xs text-[#dbdbda] font-mono mt-1">Service Warranty</div>
+                <div className="text-xs text-[#383838] font-medium mt-0.5">Parts Warranty</div>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Browser Framed UI Mockup of the Platform */}
+          {/* Right Column: Browser Framed UI Mockup */}
           <div className="lg:col-span-5">
-            <div className="border border-[#32414a] bg-[#1b2932] shadow-2xl overflow-hidden">
+            <div className="rounded-xl border border-white/80 bg-white/90 shadow-[0_12px_40px_rgba(30,58,138,0.08)] overflow-hidden">
               {/* Browser Header Bar */}
-              <div className="px-4 py-2.5 bg-[#213039] border-b border-[#32414a] flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <span className="w-2.5 h-2.5 bg-rose-500/80 rounded-full" />
-                  <span className="w-2.5 h-2.5 bg-amber-500/80 rounded-full" />
-                  <span className="w-2.5 h-2.5 bg-emerald-500/80 rounded-full" />
+              <div className="px-4 py-2.5 bg-[#d5dde7]/60 border-b border-[#bfc7d1]/50 flex items-center justify-between">
+                <div className="flex items-center space-x-1.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-rose-400" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-amber-400" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
                 </div>
-                <div className="text-[11px] font-mono text-[#dbdbda]/70 truncate max-w-[200px]">
-                  fixmate.com/tracking/FX-8941
+                <div className="text-[11px] text-[#383838] font-mono truncate max-w-[170px] bg-white/70 px-2 py-0.5 rounded-md border border-[#bfc7d1]/40">
+                  fixmate.com/track/BK-8941
                 </div>
                 <div className="w-3" />
               </div>
 
               {/* Browser Body / Live Product Interface */}
-              <div className="p-5 space-y-4 font-mono text-xs">
-                {/* Job Tracking Header */}
-                <div className="flex items-center justify-between pb-3 border-b border-[#32414a]">
+              <div className="p-5 space-y-4 text-xs">
+                {/* Live Tracking Header */}
+                <div className="flex items-center justify-between pb-3 border-b border-[#bfc7d1]/40">
                   <div>
-                    <span className="text-[10px] uppercase text-[#67e8f9] tracking-wider block">
-                      Live Job Status
+                    <span className="text-[10px] uppercase font-semibold text-[#1e3a8a] tracking-wider block">
+                      Live Service Pipeline
                     </span>
-                    <h3 className="font-display text-sm font-semibold text-[#fefdfe]">
+                    <h3 className="font-serif text-sm font-semibold text-[#000000]">
                       iPhone 14 Pro Screen Replacement
                     </h3>
                   </div>
-                  <span className="px-2 py-0.5 bg-amber-950/70 border border-amber-800 text-amber-300 text-[10px] uppercase">
+                  <span className="px-2.5 py-1 rounded-full bg-amber-50 border border-amber-200 text-amber-800 text-[10px] font-semibold">
                     In Progress
                   </span>
                 </div>
 
-                {/* Progress Steps Simulation */}
-                <div className="space-y-2 py-1">
-                  <div className="flex items-center space-x-2 text-emerald-400">
-                    <CheckCircle2 className="w-4 h-4 shrink-0" />
-                    <span>Request Accepted by Rashed (Tech)</span>
-                  </div>
-                  <div className="flex items-center space-x-2 text-[#67e8f9]">
-                    <Clock className="w-4 h-4 shrink-0 animate-spin" />
-                    <span>Micro-soldering & OLED calibration in progress</span>
-                  </div>
-                  <div className="flex items-center space-x-2 text-[#dbdbda]/50">
-                    <Wrench className="w-4 h-4 shrink-0" />
-                    <span>Quality check & completion confirmation</span>
-                  </div>
-                </div>
-
                 {/* Technician Card Inset */}
-                <div className="p-3 bg-[#213039] border border-[#32414a] flex items-center justify-between">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-9 h-9 bg-[#02444b] border border-[#32414a] flex items-center justify-center font-display font-semibold text-xs text-[#67e8f9]">
-                      RA
-                    </div>
-                    <div>
-                      <div className="text-[#fefdfe] font-semibold">Rashed Al-Mamun</div>
-                      <div className="text-[10px] text-[#dbdbda]">Apple Certified Hardware Tech</div>
-                    </div>
+                <div className="p-3 rounded-lg bg-[#dde6f0]/50 border border-[#bfc7d1]/40 flex items-center space-x-3">
+                  <div className="w-9 h-9 rounded-full bg-[#1e3a8a] text-white flex items-center justify-center font-serif font-bold text-xs">
+                    RM
                   </div>
-                  <div className="text-right">
-                    <div className="text-[10px] text-[#dbdbda] uppercase">Est. Amount</div>
-                    <div className="text-sm font-bold text-[#fefdfe]">$65.00</div>
+                  <div className="flex-1 min-w-0">
+                    <div className="text-xs font-semibold text-[#000000] truncate">
+                      Rashed Al-Mamun
+                    </div>
+                    <div className="text-[11px] text-[#383838] truncate">
+                      Apple Certified Technician &bull; Dhanmondi
+                    </div>
                   </div>
                 </div>
 
-                {/* Payment Security Banner */}
-                <div className="p-2.5 bg-[#02444b]/60 border border-[#32414a] text-[11px] text-[#eaeae9] flex items-center justify-between">
-                  <span>Pay Now unlocks when job is verified complete.</span>
-                  <span className="text-[#67e8f9] font-bold">Stripe</span>
+                {/* Progress Steps */}
+                <div className="space-y-2 pt-1">
+                  <div className="flex items-center justify-between text-[11px]">
+                    <span className="text-[#383838]">Repair Progress</span>
+                    <span className="font-semibold text-[#1e3a8a]">Step 3 of 4 (75%)</span>
+                  </div>
+                  <div className="w-full h-2 bg-[#d5dde7] rounded-full overflow-hidden">
+                    <div className="h-full bg-gradient-to-r from-[#2563eb] to-[#1e3a8a] rounded-full w-3/4" />
+                  </div>
+                </div>
+
+                {/* Verified Specs Checklist */}
+                <div className="pt-2 border-t border-[#bfc7d1]/40 space-y-1.5 text-[11px] text-[#383838]">
+                  <div className="flex items-center space-x-2">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                    <span>Original OLED Display calibrated</span>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <Clock className="w-3.5 h-3.5 text-[#1e3a8a] shrink-0" />
+                    <span>Estimated completion: 35 minutes</span>
+                  </div>
+                </div>
+
+                {/* Guarantee Footnote */}
+                <div className="pt-2 flex items-center justify-between text-[10px] text-[#383838]">
+                  <span>Payment Status: <strong className="text-[#000000]">Unpaid (Pay on completion)</strong></span>
+                  <span className="font-semibold text-[#1e3a8a]">$65.00</span>
                 </div>
               </div>
             </div>

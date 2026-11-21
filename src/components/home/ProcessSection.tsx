@@ -6,59 +6,61 @@ export function ProcessSection() {
     {
       number: '01',
       title: 'Find & Request Service',
-      description: 'Search vetted repair listings by device category or problem. Submit your preferred date, address, and a 20+ character description of the fault.',
-      icon: <Search className="w-6 h-6 text-[#67e8f9]" />,
+      description: 'Search verified repair services by device category or symptom. Submit your date, address, and a short description of the fault.',
+      icon: <Search className="w-5 h-5 text-[#1e3a8a]" />,
     },
     {
       number: '02',
       title: 'Technician Fixes It',
-      description: 'The technician accepts your job, moves it into "In Progress", runs diagnostics, replaces faulty components, and marks the job "Completed" with the final price.',
-      icon: <PenTool className="w-6 h-6 text-[#67e8f9]" />,
+      description: 'A verified specialist accepts your job, updates the live pipeline to "In Progress", runs diagnostics, and installs genuine parts.',
+      icon: <PenTool className="w-5 h-5 text-[#1e3a8a]" />,
     },
     {
       number: '03',
       title: 'Verify & Pay With Stripe',
-      description: 'Inspect your fully working device. Click "Pay Now" in your dashboard to securely settle the invoice via Stripe Checkout. Payment receipt is automatically issued.',
-      icon: <CheckCircle className="w-6 h-6 text-[#67e8f9]" />,
+      description: 'Inspect your fully restored device in person. Pay securely through encrypted Stripe Checkout only after complete satisfaction.',
+      icon: <CheckCircle className="w-5 h-5 text-[#1e3a8a]" />,
     },
   ];
 
   return (
-    <section className="w-full bg-[#02444b] text-[#fefdfe] py-16 md:py-20 border-b border-[#32414a]">
-      <div className="max-w-[1440px] mx-auto px-6">
-        <div className="max-w-2xl mb-12">
-          <span className="text-xs uppercase font-mono tracking-widest text-[#67e8f9] block mb-2">
+    <section className="w-full bg-[#dde6f0] text-[#000000] py-16 md:py-20 border-b border-[#bfc7d1]/50">
+      <div className="max-w-[960px] mx-auto px-6">
+        <div className="max-w-xl mb-12">
+          <span className="text-xs uppercase tracking-widest text-[#1e3a8a] font-semibold block mb-2">
             The FixMate Protocol
           </span>
-          <h2 className="text-3xl md:text-4xl font-display font-medium text-[#fefdfe] tracking-tight">
+          <h2 className="text-3xl md:text-4xl font-serif font-medium tracking-tight text-[#000000]">
             How repair booking works from request to final sign-off.
           </h2>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 relative">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
           {steps.map((step, idx) => (
             <div
               key={step.number}
-              className="bg-[#1b2932] border border-[#32414a] p-8 flex flex-col justify-between relative group hover:border-[#67e8f9] transition-colors"
+              className="rounded-xl border border-white/80 bg-white/85 p-6 shadow-sm hover:shadow-md transition-all flex flex-col justify-between group hover:-translate-y-1"
             >
               <div>
-                <div className="flex items-center justify-between mb-6">
-                  <div className="text-3xl font-display font-bold text-[#67e8f9]/70 group-hover:text-[#67e8f9]">
+                <div className="flex items-center justify-between mb-5">
+                  <span className="text-3xl font-serif font-semibold text-[#1e3a8a]/70 group-hover:text-[#1e3a8a] transition-colors">
                     {step.number}
+                  </span>
+                  <div className="w-10 h-10 rounded-xl bg-[#dde6f0] flex items-center justify-center shadow-xs">
+                    {step.icon}
                   </div>
-                  <div className="p-3 bg-[#02444b] border border-[#32414a]">{step.icon}</div>
                 </div>
-                <h3 className="text-xl font-display font-semibold text-[#fefdfe] mb-3">
+                <h3 className="text-lg font-serif font-semibold text-[#000000] mb-2">
                   {step.title}
                 </h3>
-                <p className="text-xs font-mono text-[#dbdbda] leading-relaxed">
+                <p className="text-xs text-[#383838] leading-relaxed">
                   {step.description}
                 </p>
               </div>
 
-              <div className="mt-8 pt-4 border-t border-[#32414a] flex items-center justify-between text-[11px] font-mono text-[#dbdbda]">
+              <div className="mt-6 pt-3 border-t border-[#bfc7d1]/40 flex items-center justify-between text-[11px] text-[#383838]">
                 <span>Stage {idx + 1} of 3</span>
-                <span className="text-[#67e8f9]">Guaranteed Service</span>
+                <span className="text-[#1e3a8a] font-medium">Guaranteed Service</span>
               </div>
             </div>
           ))}
