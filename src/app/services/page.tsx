@@ -4,7 +4,7 @@ import React, { useEffect, useState, Suspense } from 'react';
 import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { fetchApi } from '@/lib/api';
-import { Search, Filter, ArrowUpDown, Wrench, MapPin, Tag } from 'lucide-react';
+import { Search, Filter, ArrowUpDown, Wrench, MapPin } from 'lucide-react';
 
 interface Service {
   _id: string;
@@ -59,13 +59,6 @@ function ServicesContent() {
 
   // Sync state with URL params
   useEffect(() => {
-    const params = new URLSearchParams();
-    if (search.trim()) params.set('search', search.trim());
-    if (selectedCategory && selectedCategory !== 'All') params.set('category', selectedCategory);
-    if (selectedMode && selectedMode !== 'All') params.set('mode', selectedMode);
-    if (selectedSort && selectedSort !== 'newest') params.set('sort', selectedSort);
-
-    router.replace(`/services?${params.toString()}`);
     fetchFilteredServices();
   }, [search, selectedCategory, selectedMode, selectedSort]);
 
@@ -84,7 +77,7 @@ function ServicesContent() {
         setTotalCount(res.totalCount || res.data.length);
       }
     } catch (err) {
-      console.error('Error fetching services:', err);
+      console.warn('Error fetching services:', err);
     } finally {
       setLoading(false);
     }
@@ -98,33 +91,33 @@ function ServicesContent() {
   };
 
   return (
-    <div className="w-full bg-[#1b2932] text-[#fefdfe] py-12 md:py-16">
-      <div className="max-w-[1440px] mx-auto px-6">
+    <div className="w-full bg-[#dde6f0] text-[#000000] py-12 md:py-16">
+      <div className="max-w-[960px] mx-auto px-6">
         {/* Header */}
-        <div className="max-w-2xl mb-10">
-          <span className="text-xs uppercase font-mono tracking-widest text-[#67e8f9] block mb-2">
+        <div className="max-w-xl mb-10">
+          <span className="text-xs uppercase tracking-widest text-[#1e3a8a] font-semibold block mb-2">
             Explore FixMate Services
           </span>
-          <h1 className="text-3xl md:text-5xl font-display font-medium text-[#fefdfe] tracking-tight">
+          <h1 className="text-3xl md:text-5xl font-serif font-medium text-[#000000] tracking-tight">
             Browse verified repair solutions.
           </h1>
-          <p className="text-sm font-mono text-[#dbdbda] mt-2">
+          <p className="text-sm text-[#383838] mt-2">
             Filter by equipment category, service mode, or search specific hardware issues.
           </p>
         </div>
 
         {/* Filter Controls Bar */}
-        <div className="bg-[#213039] border border-[#32414a] p-5 mb-10 space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
+        <div className="rounded-2xl border border-white/80 bg-white/85 p-5 mb-8 shadow-xs space-y-4">
+          <div className="grid grid-cols-1 md:grid-cols-12 gap-3.5 items-center">
             {/* Search Input */}
-            <div className="md:col-span-5 relative">
-              <Search className="w-4 h-4 text-[#dbdbda] absolute left-3 top-1/2 -translate-y-1/2" />
+            <div className="md:col-span-6 relative">
+              <Search className="w-4 h-4 text-[#383838] absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
                 placeholder="Search services (e.g. iPhone, OLED, AC, Motor)..."
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
-                className="w-full bg-[#1b2932] border border-[#32414a] pl-9 pr-4 py-2.5 text-xs font-mono text-[#fefdfe] placeholder-[#dbdbda]/60 focus:border-[#67e8f9] focus:outline-hidden"
+                className="w-full bg-white border border-[#bfc7d1] rounded-lg pl-9 pr-4 py-2.5 text-xs text-[#000000] placeholder-[#383838]/60 focus:border-[#1e3a8a] focus:outline-hidden"
               />
             </div>
 
@@ -133,7 +126,7 @@ function ServicesContent() {
               <select
                 value={selectedMode}
                 onChange={(e) => setSelectedMode(e.target.value)}
-                className="w-full bg-[#1b2932] border border-[#32414a] px-3 py-2.5 text-xs font-mono text-[#fefdfe] focus:border-[#67e8f9] focus:outline-hidden"
+                className="w-full bg-white border border-[#bfc7d1] rounded-lg px-3 py-2.5 text-xs text-[#000000] focus:border-[#1e3a8a] focus:outline-hidden"
               >
                 <option value="All">All Service Modes</option>
                 <option value="Home Visit">Home Visit</option>
@@ -142,11 +135,11 @@ function ServicesContent() {
             </div>
 
             {/* Sort Dropdown */}
-            <div className="md:col-span-4">
+            <div className="md:col-span-3">
               <select
                 value={selectedSort}
                 onChange={(e) => setSelectedSort(e.target.value)}
-                className="w-full bg-[#1b2932] border border-[#32414a] px-3 py-2.5 text-xs font-mono text-[#fefdfe] focus:border-[#67e8f9] focus:outline-hidden"
+                className="w-full bg-white border border-[#bfc7d1] rounded-lg px-3 py-2.5 text-xs text-[#000000] focus:border-[#1e3a8a] focus:outline-hidden"
               >
                 {SORTS.map((s) => (
                   <option key={s.value} value={s.value}>
@@ -158,16 +151,16 @@ function ServicesContent() {
           </div>
 
           {/* Category Chips Bar */}
-          <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-[#32414a]/60">
-            <span className="text-[11px] font-mono uppercase text-[#dbdbda] mr-2">Category:</span>
+          <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-[#bfc7d1]/30">
+            <span className="text-[11px] uppercase font-semibold text-[#383838] mr-2">Category:</span>
             {CATEGORIES.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-3 py-1 text-xs font-mono transition-colors ${
+                className={`px-3 py-1 rounded-full text-xs transition-all ${
                   selectedCategory === cat
-                    ? 'bg-[#67e8f9] text-[#040404] font-semibold'
-                    : 'bg-[#1b2932] text-[#dbdbda] border border-[#32414a] hover:text-[#fefdfe] hover:border-[#67e8f9]'
+                    ? 'bg-[#1e3a8a] text-white font-medium shadow-xs'
+                    : 'bg-white/80 text-[#383838] border border-[#bfc7d1]/60 hover:bg-white hover:text-[#000000]'
                 }`}
               >
                 {cat}
@@ -177,15 +170,15 @@ function ServicesContent() {
         </div>
 
         {/* Results Metadata */}
-        <div className="flex items-center justify-between text-xs font-mono text-[#dbdbda] mb-6">
+        <div className="flex items-center justify-between text-xs text-[#383838] mb-6">
           <span>
-            Showing <strong className="text-[#fefdfe]">{services.length}</strong> of{' '}
-            <strong className="text-[#67e8f9]">{totalCount}</strong> verified services
+            Showing <strong className="text-[#000000]">{services.length}</strong> of{' '}
+            <strong className="text-[#1e3a8a]">{totalCount}</strong> verified services
           </span>
           {(search || selectedCategory !== 'All' || selectedMode !== 'All' || selectedSort !== 'newest') && (
             <button
               onClick={handleResetFilters}
-              className="text-[#67e8f9] hover:underline"
+              className="text-[#1e3a8a] font-medium hover:underline"
             >
               Reset Filters
             </button>
@@ -194,83 +187,83 @@ function ServicesContent() {
 
         {/* Services Grid */}
         {loading ? (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {[...Array(8)].map((_, i) => (
-              <div key={i} className="bg-[#213039] border border-[#32414a] h-96 animate-pulse" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[...Array(6)].map((_, i) => (
+              <div key={i} className="bg-white/60 border border-[#bfc7d1]/40 rounded-xl h-80 animate-pulse" />
             ))}
           </div>
         ) : services.length === 0 ? (
           /* Empty State */
-          <div className="text-center py-20 border border-[#32414a] bg-[#213039] p-8 max-w-xl mx-auto space-y-4">
-            <Wrench className="w-12 h-12 text-[#67e8f9] mx-auto" />
-            <h3 className="font-display font-medium text-xl text-[#fefdfe]">
+          <div className="text-center py-16 rounded-2xl border border-white/80 bg-white/80 p-8 max-w-lg mx-auto space-y-4 shadow-xs">
+            <Wrench className="w-10 h-10 text-[#1e3a8a] mx-auto" />
+            <h3 className="font-serif font-medium text-xl text-[#000000]">
               No matching repair services found.
             </h3>
-            <p className="text-xs font-mono text-[#dbdbda] leading-relaxed">
-              We couldn&apos;t find any approved services matching your active filters. Try searching for a different keyword or resetting your filter criteria.
+            <p className="text-xs text-[#383838] leading-relaxed">
+              We couldn&apos;t find any approved services matching your active filters. Try searching for a different term or clearing your criteria.
             </p>
             <button
               onClick={handleResetFilters}
-              className="px-5 py-2.5 bg-[#f1f3f4] text-[#040404] font-mono text-xs uppercase tracking-wider font-semibold hover:bg-[#67e8f9] transition-colors"
+              className="glossy-btn-secondary px-5 py-2.5 rounded-lg text-xs font-semibold"
             >
               Clear All Filters
             </button>
           </div>
         ) : (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service) => (
               <div
                 key={service._id}
-                className="bg-[#213039] border border-[#32414a] hover:border-[#67e8f9] transition-all flex flex-col justify-between h-full group"
+                className="rounded-xl border border-white/80 bg-white/85 shadow-sm hover:shadow-md transition-all flex flex-col justify-between overflow-hidden group hover:-translate-y-1"
               >
                 <div>
-                  <div className="relative h-44 w-full overflow-hidden bg-[#1b2932]">
+                  <div className="relative h-44 w-full overflow-hidden bg-slate-100">
                     <img
                       src={service.image}
                       alt={service.title}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
-                    <div className="absolute top-2.5 left-2.5 px-2 py-0.5 bg-[#02444b]/95 border border-[#32414a] text-[#67e8f9] text-[9px] font-mono uppercase tracking-wider">
+                    <div className="absolute top-2.5 left-2.5 px-2.5 py-0.5 rounded-full bg-white/90 backdrop-blur-md text-[#1e3a8a] text-[10px] font-semibold shadow-xs">
                       {service.category}
                     </div>
-                    <div className="absolute top-2.5 right-2.5 px-2 py-0.5 bg-[#1b2932]/95 border border-[#32414a] text-[#fefdfe] text-[9px] font-mono">
+                    <div className="absolute top-2.5 right-2.5 px-2.5 py-0.5 rounded-full bg-[#1e3a8a]/90 backdrop-blur-md text-white text-[10px] font-medium shadow-xs">
                       {service.serviceMode}
                     </div>
                   </div>
 
-                  <div className="p-4 space-y-2.5">
-                    <h3 className="font-display font-semibold text-base text-[#fefdfe] line-clamp-1 group-hover:text-[#67e8f9] transition-colors">
+                  <div className="p-4 space-y-2">
+                    <h3 className="font-serif font-medium text-base text-[#000000] line-clamp-1 group-hover:text-[#1e3a8a] transition-colors">
                       {service.title}
                     </h3>
-                    <p className="text-xs font-mono text-[#dbdbda] line-clamp-2 leading-relaxed">
+                    <p className="text-xs text-[#383838] line-clamp-2 leading-relaxed">
                       {service.description}
                     </p>
 
-                    <div className="pt-2 flex items-center justify-between text-xs font-mono text-[#eaeae9]/80 border-t border-[#32414a]">
+                    <div className="pt-2 flex items-center justify-between text-xs text-[#383838] border-t border-[#bfc7d1]/30">
                       <div className="flex items-center space-x-1.5 truncate">
-                        <Wrench className="w-3.5 h-3.5 text-[#67e8f9] shrink-0" />
+                        <Wrench className="w-3.5 h-3.5 text-[#1e3a8a] shrink-0" />
                         <span className="truncate">{service.technicianName}</span>
                       </div>
-                      <div className="flex items-center space-x-1.5 shrink-0 text-[11px]">
-                        <MapPin className="w-3.5 h-3.5 text-[#67e8f9]" />
+                      <div className="flex items-center space-x-1 shrink-0 text-[11px]">
+                        <MapPin className="w-3.5 h-3.5 text-[#1e3a8a]" />
                         <span className="truncate max-w-[100px]">{service.serviceArea}</span>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="p-4 pt-0 mt-3 flex items-center justify-between border-t border-[#32414a]/50">
+                <div className="p-4 pt-0 mt-2 flex items-center justify-between border-t border-[#bfc7d1]/20">
                   <div>
-                    <span className="text-[9px] uppercase font-mono text-[#dbdbda] block">
+                    <span className="text-[10px] uppercase text-[#383838] block font-medium">
                       From
                     </span>
-                    <span className="text-lg font-display font-bold text-[#fefdfe]">
+                    <span className="text-lg font-serif font-semibold text-[#000000]">
                       ${service.basePrice}
                     </span>
                   </div>
                   <Link
                     href={`/services/${service._id}`}
-                    className="px-3.5 py-1.5 bg-[#f1f3f4] text-[#040404] font-mono text-xs uppercase tracking-wider font-semibold hover:bg-[#67e8f9] transition-colors"
+                    className="glossy-btn-primary px-3.5 py-1.5 rounded-lg text-xs font-semibold"
                   >
                     View Details
                   </Link>
@@ -286,7 +279,7 @@ function ServicesContent() {
 
 export default function ServicesPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen bg-[#1b2932] p-12 text-[#fefdfe] font-mono">Loading services catalog...</div>}>
+    <Suspense fallback={<div className="min-h-screen bg-[#dde6f0] p-12 text-[#000000]">Loading services catalog...</div>}>
       <ServicesContent />
     </Suspense>
   );

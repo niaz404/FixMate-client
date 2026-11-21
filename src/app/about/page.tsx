@@ -1,130 +1,130 @@
 import React from 'react';
 import Link from 'next/link';
-import { ShieldCheck, Wrench, Clock, CheckCircle2, Award, Users, ArrowRight } from 'lucide-react';
+import { ShieldCheck, Wrench, Clock, Award, Users, ArrowRight } from 'lucide-react';
 
 export function AboutPage() {
   return (
-    <div className="w-full bg-[#1b2932] text-[#fefdfe] py-16 md:py-24">
-      <div className="max-w-[1440px] mx-auto px-6 space-y-16">
+    <div className="w-full bg-[#dde6f0] text-[#000000] py-14 md:py-20">
+      <div className="max-w-[960px] mx-auto px-6 space-y-14">
         {/* Page Hero */}
-        <div className="max-w-3xl">
-          <span className="text-xs uppercase font-mono tracking-widest text-[#67e8f9] block mb-2">
+        <div className="max-w-2xl">
+          <span className="text-xs uppercase tracking-widest text-[#1e3a8a] font-semibold block mb-2">
             The FixMate Standard
           </span>
-          <h1 className="text-4xl md:text-5xl font-display font-medium text-[#fefdfe] tracking-tight leading-tight">
-            Fixing the broken appliance repair industry with honesty, accountability, and code.
+          <h1 className="text-4xl md:text-5xl font-serif font-medium text-[#000000] tracking-tight leading-tight">
+            Fixing device & appliance repair with accountability and code.
           </h1>
-          <p className="text-sm font-mono text-[#dbdbda] mt-4 leading-relaxed">
-            In Bangladesh and across the world, getting an appliance or personal gadget repaired is filled with uncertainty. You hand over expensive devices, have no idea what happens next, and are often asked to pay upfront before verifying the repair. FixMate was created to solve both sides of this problem.
+          <p className="text-sm text-[#383838] mt-3 leading-relaxed">
+            Getting a personal device or home appliance repaired is too often filled with friction and risk. You hand over expensive hardware, have little transparency, and are pressured to pay before verifying results. FixMate eliminates that risk through verified technicians, milestone tracking, and a strict pay-after-service model.
           </p>
         </div>
 
         {/* 4 Pillars of Operation */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          <div className="bg-[#213039] border border-[#32414a] p-6 space-y-3">
-            <div className="p-3 bg-[#02444b] border border-[#32414a] w-fit text-[#67e8f9]">
-              <ShieldCheck className="w-6 h-6" />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="rounded-xl border border-white/80 bg-white/85 p-5 space-y-2.5 shadow-xs">
+            <div className="w-9 h-9 rounded-lg bg-[#dde6f0] flex items-center justify-center text-[#1e3a8a]">
+              <ShieldCheck className="w-5 h-5" />
             </div>
-            <h3 className="font-display font-semibold text-lg text-[#fefdfe]">
+            <h3 className="font-serif font-semibold text-base text-[#000000]">
               Admin-Vetted Pros
             </h3>
-            <p className="text-xs font-mono text-[#dbdbda] leading-relaxed">
-              Every technician profile and service listing is personally reviewed by our operations staff before going live.
+            <p className="text-xs text-[#383838] leading-relaxed">
+              Every technician profile and service listing is personally verified before publishing.
             </p>
           </div>
 
-          <div className="bg-[#213039] border border-[#32414a] p-6 space-y-3">
-            <div className="p-3 bg-[#02444b] border border-[#32414a] w-fit text-[#67e8f9]">
-              <Clock className="w-6 h-6" />
+          <div className="rounded-xl border border-white/80 bg-white/85 p-5 space-y-2.5 shadow-xs">
+            <div className="w-9 h-9 rounded-lg bg-[#dde6f0] flex items-center justify-center text-[#1e3a8a]">
+              <Clock className="w-5 h-5" />
             </div>
-            <h3 className="font-display font-semibold text-lg text-[#fefdfe]">
+            <h3 className="font-serif font-semibold text-base text-[#000000]">
               Status Transparency
             </h3>
-            <p className="text-xs font-mono text-[#dbdbda] leading-relaxed">
+            <p className="text-xs text-[#383838] leading-relaxed">
               Follow every stage in real time: Requested &rarr; Accepted &rarr; In Progress &rarr; Completed.
             </p>
           </div>
 
-          <div className="bg-[#213039] border border-[#32414a] p-6 space-y-3">
-            <div className="p-3 bg-[#02444b] border border-[#32414a] w-fit text-[#67e8f9]">
-              <Award className="w-6 h-6" />
+          <div className="rounded-xl border border-white/80 bg-white/85 p-5 space-y-2.5 shadow-xs">
+            <div className="w-9 h-9 rounded-lg bg-[#dde6f0] flex items-center justify-center text-[#1e3a8a]">
+              <Award className="w-5 h-5" />
             </div>
-            <h3 className="font-display font-semibold text-lg text-[#fefdfe]">
+            <h3 className="font-serif font-semibold text-base text-[#000000]">
               Zero Upfront Fee
             </h3>
-            <p className="text-xs font-mono text-[#dbdbda] leading-relaxed">
-              Pay strictly after you inspect the device. If the issue is unresolved, you do not pay for completion.
+            <p className="text-xs text-[#383838] leading-relaxed">
+              Pay strictly after you inspect the device. If the issue is unresolved, you do not pay.
             </p>
           </div>
 
-          <div className="bg-[#213039] border border-[#32414a] p-6 space-y-3">
-            <div className="p-3 bg-[#02444b] border border-[#32414a] w-fit text-[#67e8f9]">
-              <Users className="w-6 h-6" />
+          <div className="rounded-xl border border-white/80 bg-white/85 p-5 space-y-2.5 shadow-xs">
+            <div className="w-9 h-9 rounded-lg bg-[#dde6f0] flex items-center justify-center text-[#1e3a8a]">
+              <Users className="w-5 h-5" />
             </div>
-            <h3 className="font-display font-semibold text-lg text-[#fefdfe]">
-              Technician Empowerment
+            <h3 className="font-serif font-semibold text-base text-[#000000]">
+              Pro Empowerment
             </h3>
-            <p className="text-xs font-mono text-[#dbdbda] leading-relaxed">
-              Skilled electrical and hardware technicians gain a structured platform to grow their business and income.
+            <p className="text-xs text-[#383838] leading-relaxed">
+              Skilled electrical and hardware technicians gain a structured platform to build verified reputations.
             </p>
           </div>
         </div>
 
         {/* Deep Dive: How the Protocol Works */}
-        <div className="border border-[#32414a] bg-[#02444b] p-8 md:p-12 space-y-8">
-          <div className="max-w-2xl">
-            <span className="text-xs uppercase font-mono tracking-widest text-[#67e8f9] block mb-2">
-              Step by Step
+        <div className="rounded-2xl border border-white/90 bg-[#d5dde7] p-8 md:p-10 space-y-6 shadow-sm">
+          <div className="max-w-xl">
+            <span className="text-xs uppercase tracking-widest text-[#1e3a8a] font-semibold block mb-2">
+              Protocol Pipeline
             </span>
-            <h2 className="text-3xl font-display font-semibold text-[#fefdfe]">
+            <h2 className="text-2xl md:text-3xl font-serif font-medium text-[#000000]">
               How the FixMate booking pipeline operates.
             </h2>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 font-mono text-xs">
-            <div className="p-6 bg-[#1b2932] border border-[#32414a] space-y-2">
-              <span className="text-[#67e8f9] font-bold">1. Service Discovery</span>
-              <p className="text-[#dbdbda] leading-relaxed">
-                Customers filter repair listings by category (Smartphone, Laptop & PC, AC, Refrigerator, TV, Washing Machine, Electrical) or search by fault keywords.
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-xs">
+            <div className="p-5 rounded-xl bg-white/80 border border-white/90 space-y-1.5 shadow-xs">
+              <span className="text-[#1e3a8a] font-semibold block text-sm">1. Service Discovery</span>
+              <p className="text-[#383838] leading-relaxed">
+                Filter repair listings by equipment category or search by fault keywords and read verified customer experiences.
               </p>
             </div>
 
-            <div className="p-6 bg-[#1b2932] border border-[#32414a] space-y-2">
-              <span className="text-[#67e8f9] font-bold">2. Booking Request</span>
-              <p className="text-[#dbdbda] leading-relaxed">
-                The customer submits phone, address, preferred date, and a 20+ character description of the problem. A booking record is created in MongoDB with status &lsquo;requested&rsquo;.
+            <div className="p-5 rounded-xl bg-white/80 border border-white/90 space-y-1.5 shadow-xs">
+              <span className="text-[#1e3a8a] font-semibold block text-sm">2. Booking Request</span>
+              <p className="text-[#383838] leading-relaxed">
+                Submit phone, address, preferred visit date, and a description of the issue. A booking is saved with status &lsquo;requested&rsquo;.
               </p>
             </div>
 
-            <div className="p-6 bg-[#1b2932] border border-[#32414a] space-y-2">
-              <span className="text-[#67e8f9] font-bold">3. Pipeline Progression</span>
-              <p className="text-[#dbdbda] leading-relaxed">
-                The technician reviews and accepts the job, starts work, and upon successful repair marks it &lsquo;completed&rsquo; with the final price.
+            <div className="p-5 rounded-xl bg-white/80 border border-white/90 space-y-1.5 shadow-xs">
+              <span className="text-[#1e3a8a] font-semibold block text-sm">3. Pipeline Progression</span>
+              <p className="text-[#383838] leading-relaxed">
+                The technician reviews, accepts the job, completes diagnostics and repairs, then marks the job &lsquo;completed&rsquo; with the final price.
               </p>
             </div>
 
-            <div className="p-6 bg-[#1b2932] border border-[#32414a] space-y-2">
-              <span className="text-[#67e8f9] font-bold">4. Stripe Verification</span>
-              <p className="text-[#dbdbda] leading-relaxed">
-                The customer verifies the working device and pays through Stripe Checkout. A payment document is saved and the booking updates to &lsquo;paid&rsquo;.
+            <div className="p-5 rounded-xl bg-white/80 border border-white/90 space-y-1.5 shadow-xs">
+              <span className="text-[#1e3a8a] font-semibold block text-sm">4. Stripe Verification</span>
+              <p className="text-[#383838] leading-relaxed">
+                Inspect your functioning device in person, then settle the invoice securely via Stripe Checkout.
               </p>
             </div>
           </div>
         </div>
 
         {/* CTA Card */}
-        <div className="p-8 md:p-12 bg-[#213039] border border-[#32414a] flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="space-y-2 text-center md:text-left">
-            <h3 className="text-2xl font-display font-semibold text-[#fefdfe]">
+        <div className="p-8 md:p-10 rounded-2xl bg-white/90 border border-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
+          <div className="space-y-1.5 text-center md:text-left">
+            <h3 className="text-2xl font-serif font-medium text-[#000000]">
               Need a fast, reliable repair today?
             </h3>
-            <p className="text-xs font-mono text-[#dbdbda]">
+            <p className="text-xs text-[#383838]">
               Explore our vetted catalog and schedule an expert technician in under 2 minutes.
             </p>
           </div>
           <Link
             href="/services"
-            className="px-6 py-3 bg-[#f1f3f4] text-[#040404] font-mono text-xs uppercase tracking-wider font-bold hover:bg-[#67e8f9] transition-colors"
+            className="glossy-btn-primary px-6 py-2.5 rounded-lg text-xs font-semibold tracking-wide shrink-0"
           >
             Browse Services
           </Link>

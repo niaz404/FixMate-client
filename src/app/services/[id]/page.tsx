@@ -10,14 +10,9 @@ import {
   Wrench,
   Clock,
   MapPin,
-  Tag,
-  Calendar,
   ShieldCheck,
-  User,
-  Phone,
   AlertCircle,
   X,
-  CheckCircle2,
   ArrowLeft,
 } from 'lucide-react';
 
@@ -63,7 +58,7 @@ export default function ServiceDetailPage() {
           setService(null);
         }
       } catch (err) {
-        console.error('Failed to load service', err);
+        console.warn('Failed to load service', err);
       } finally {
         setLoading(false);
       }
@@ -103,11 +98,11 @@ export default function ServiceDetailPage() {
       return;
     }
     if (!preferredDate) {
-      toast.error('Please select a preferred service date.');
+      toast.error('Please select your preferred repair visit date.');
       return;
     }
     if (problemDescription.trim().length < 20) {
-      toast.error('Problem description must be at least 20 characters long.');
+      toast.error('Please describe the problem in at least 20 characters.');
       return;
     }
 
@@ -117,15 +112,15 @@ export default function ServiceDetailPage() {
         method: 'POST',
         body: JSON.stringify({
           serviceId: service?._id,
-          customerPhone: phone,
-          address,
+          customerPhone: phone.trim(),
+          address: address.trim(),
           preferredDate,
-          problemDescription,
+          problemDescription: problemDescription.trim(),
         }),
       });
 
       if (res.success) {
-        toast.success(res.message || 'Repair request submitted successfully!');
+        toast.success('Repair request submitted successfully!');
         setModalOpen(false);
         router.push('/dashboard/customer/bookings');
       } else {
@@ -140,27 +135,27 @@ export default function ServiceDetailPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#1b2932] py-20 text-center text-[#fefdfe] font-mono">
-        <Wrench className="w-8 h-8 text-[#67e8f9] animate-spin mx-auto mb-3" />
-        <p>Loading service specifications...</p>
+      <div className="min-h-screen bg-[#dde6f0] py-20 text-center text-[#000000]">
+        <Wrench className="w-8 h-8 text-[#1e3a8a] animate-spin mx-auto mb-3" />
+        <p className="text-xs text-[#383838]">Loading service specifications...</p>
       </div>
     );
   }
 
   if (!service || service.approvalStatus !== 'approved' || !service.isAvailable) {
     return (
-      <div className="min-h-[70vh] bg-[#1b2932] py-20 flex items-center justify-center text-center px-6">
-        <div className="max-w-md p-8 border border-[#32414a] bg-[#213039] space-y-4 font-mono">
-          <AlertCircle className="w-12 h-12 text-rose-400 mx-auto" />
-          <h2 className="text-xl font-display font-semibold text-[#fefdfe]">
+      <div className="min-h-[70vh] bg-[#dde6f0] py-20 flex items-center justify-center text-center px-6">
+        <div className="max-w-md p-8 rounded-2xl border border-white/80 bg-white/90 space-y-4 shadow-sm">
+          <AlertCircle className="w-10 h-10 text-rose-500 mx-auto" />
+          <h2 className="text-xl font-serif font-medium text-[#000000]">
             Service Unavailable
           </h2>
-          <p className="text-xs text-[#dbdbda] leading-relaxed">
+          <p className="text-xs text-[#383838] leading-relaxed">
             This repair service is either unapproved, paused by the technician, or does not exist.
           </p>
           <Link
             href="/services"
-            className="inline-block px-4 py-2 bg-[#f1f3f4] text-[#040404] text-xs uppercase tracking-wider font-semibold hover:bg-[#67e8f9]"
+            className="glossy-btn-secondary inline-block px-4 py-2 rounded-lg text-xs font-semibold"
           >
             Back to All Services
           </Link>
@@ -170,128 +165,128 @@ export default function ServiceDetailPage() {
   }
 
   return (
-    <div className="w-full bg-[#1b2932] text-[#fefdfe] py-12 md:py-16">
-      <div className="max-w-[1440px] mx-auto px-6">
+    <div className="w-full bg-[#dde6f0] text-[#000000] py-12 md:py-16">
+      <div className="max-w-[960px] mx-auto px-6">
         {/* Back Link */}
         <Link
           href="/services"
-          className="inline-flex items-center space-x-2 text-xs font-mono text-[#67e8f9] hover:underline mb-8"
+          className="inline-flex items-center space-x-1.5 text-xs font-medium text-[#1e3a8a] hover:underline mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Back to Browse Services</span>
         </Link>
 
         {/* Main Details Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
-          {/* Left Column: Image & In-Depth Details */}
-          <div className="lg:col-span-7 space-y-8">
-            <div className="border border-[#32414a] bg-[#213039] overflow-hidden">
-              <div className="relative h-72 md:h-96 w-full bg-[#1b2932]">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          {/* Left Column: Image & Details */}
+          <div className="lg:col-span-7 space-y-6">
+            <div className="rounded-2xl border border-white/80 bg-white/90 shadow-sm overflow-hidden">
+              <div className="relative h-64 md:h-80 w-full bg-slate-100">
                 <img
                   src={service.image}
                   alt={service.title}
                   className="w-full h-full object-cover"
                 />
-                <div className="absolute top-4 left-4 px-3 py-1 bg-[#02444b]/95 border border-[#32414a] text-[#67e8f9] text-xs font-mono uppercase tracking-wider font-semibold">
+                <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-white/90 backdrop-blur-md text-[#1e3a8a] text-xs font-semibold shadow-xs">
                   {service.category}
                 </div>
               </div>
 
-              <div className="p-6 md:p-8 space-y-6">
+              <div className="p-6 md:p-8 space-y-5">
                 <div>
-                  <h1 className="text-3xl md:text-4xl font-display font-semibold text-[#fefdfe] tracking-tight">
+                  <h1 className="text-2xl md:text-3xl font-serif font-medium text-[#000000] tracking-tight">
                     {service.title}
                   </h1>
-                  <div className="flex flex-wrap items-center gap-4 mt-3 text-xs font-mono text-[#dbdbda]">
+                  <div className="flex flex-wrap items-center gap-3 mt-2.5 text-xs text-[#383838]">
                     <span className="flex items-center space-x-1">
-                      <Clock className="w-4 h-4 text-[#67e8f9]" />
-                      <span>Est. Duration: {service.estimatedDuration}</span>
+                      <Clock className="w-3.5 h-3.5 text-[#1e3a8a]" />
+                      <span>Duration: {service.estimatedDuration}</span>
                     </span>
                     <span>&bull;</span>
                     <span className="flex items-center space-x-1">
-                      <Wrench className="w-4 h-4 text-[#67e8f9]" />
+                      <Wrench className="w-3.5 h-3.5 text-[#1e3a8a]" />
                       <span>Mode: {service.serviceMode}</span>
                     </span>
                     <span>&bull;</span>
                     <span className="flex items-center space-x-1">
-                      <MapPin className="w-4 h-4 text-[#67e8f9]" />
-                      <span>Coverage: {service.serviceArea}</span>
+                      <MapPin className="w-3.5 h-3.5 text-[#1e3a8a]" />
+                      <span>Area: {service.serviceArea}</span>
                     </span>
                   </div>
                 </div>
 
-                <div className="border-t border-[#32414a] pt-6 space-y-3 font-mono text-xs leading-relaxed text-[#eaeae9]">
-                  <h3 className="font-display text-sm uppercase tracking-wider text-[#67e8f9] font-bold">
+                <div className="border-t border-[#bfc7d1]/40 pt-5 space-y-2 text-xs leading-relaxed text-[#090909]">
+                  <h3 className="font-serif text-sm font-semibold text-[#000000]">
                     Scope of Service & What&apos;s Included
                   </h3>
                   <p>{service.description}</p>
                 </div>
 
-                <div className="p-4 bg-[#02444b]/50 border border-[#32414a] space-y-2 text-xs font-mono text-[#dbdbda]">
-                  <div className="flex items-center space-x-2 text-[#67e8f9] font-semibold uppercase tracking-wider">
+                <div className="p-4 rounded-xl bg-blue-50/70 border border-blue-200/60 space-y-1.5 text-xs text-[#383838]">
+                  <div className="flex items-center space-x-1.5 text-[#1e3a8a] font-semibold">
                     <ShieldCheck className="w-4 h-4" />
                     <span>FixMate Quality Protection Guarantee</span>
                   </div>
-                  <p>
-                    Every booking is tracked live through our status pipeline. You only pay the final verified amount via Stripe Checkout after confirming the repair has solved the problem.
+                  <p className="text-[11px] leading-relaxed">
+                    Every repair is tracked step-by-step. You only pay the verified amount via Stripe Checkout after physically confirming the hardware works.
                   </p>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right Column: Pricing & Booking Action Card */}
+          {/* Right Column: Pricing & Booking Action */}
           <div className="lg:col-span-5 space-y-6">
-            <div className="border border-[#32414a] bg-[#213039] p-6 md:p-8 space-y-6">
-              <div className="pb-6 border-b border-[#32414a] flex items-end justify-between">
+            <div className="rounded-2xl border border-white/80 bg-white/90 p-6 md:p-7 space-y-5 shadow-sm">
+              <div className="pb-5 border-b border-[#bfc7d1]/40 flex items-end justify-between">
                 <div>
-                  <span className="text-[10px] uppercase font-mono text-[#dbdbda] block">
+                  <span className="text-[10px] uppercase text-[#383838] block font-medium">
                     Starting Base Price
                   </span>
-                  <div className="text-4xl font-display font-bold text-[#fefdfe]">
+                  <div className="text-3xl font-serif font-bold text-[#000000]">
                     ${service.basePrice}
                   </div>
                 </div>
-                <span className="px-2.5 py-1 bg-emerald-950/70 border border-emerald-700 text-emerald-300 font-mono text-[10px] uppercase">
+                <span className="px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[10px] font-semibold">
                   Pay After Service
                 </span>
               </div>
 
-              {/* Technician Info Snapshot */}
-              <div className="space-y-3">
-                <span className="text-[10px] uppercase font-mono text-[#dbdbda] block">
+              {/* Technician Info */}
+              <div className="space-y-2">
+                <span className="text-[10px] uppercase text-[#383838] block font-semibold">
                   Assigned Specialist
                 </span>
-                <div className="p-4 bg-[#1b2932] border border-[#32414a] flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-[#02444b] border border-[#32414a] flex items-center justify-center font-display font-bold text-sm text-[#67e8f9]">
+                <div className="p-3.5 rounded-xl bg-[#dde6f0]/50 border border-[#bfc7d1]/40 flex items-center space-x-3">
+                  <div className="w-10 h-10 rounded-full bg-[#1e3a8a] text-white flex items-center justify-center font-serif font-bold text-sm shadow-xs">
                     {service.technicianName.charAt(0)}
                   </div>
-                  <div className="font-mono text-xs">
-                    <div className="font-display font-semibold text-sm text-[#fefdfe]">
+                  <div className="text-xs">
+                    <div className="font-serif font-semibold text-sm text-[#000000]">
                       {service.technicianName}
                     </div>
-                    <div className="text-[#dbdbda]">{service.serviceArea}</div>
-                    <div className="text-[10px] text-[#67e8f9] mt-0.5">Verified Technician</div>
+                    <div className="text-[#383838]">{service.serviceArea}</div>
+                    <div className="text-[10px] text-[#1e3a8a] font-medium mt-0.5">Verified Technician</div>
                   </div>
                 </div>
               </div>
 
-              {/* Request Action Button with Role Enforcement Notice */}
+              {/* Request Action */}
               <div className="pt-2">
                 {user && (user.role === 'technician' || user.role === 'admin') ? (
-                  <div className="p-3 bg-amber-950/40 border border-amber-800 text-amber-300 font-mono text-xs">
-                    Only customer accounts can request a repair. (You are signed in as {user.role}).
+                  <div className="p-3 rounded-lg bg-amber-50 border border-amber-200 text-amber-800 text-xs">
+                    Only customer accounts can request a repair. (Signed in as {user.role}).
                   </div>
                 ) : (
                   <button
                     onClick={handleRequestClick}
-                    className="w-full py-3.5 bg-[#f1f3f4] text-[#040404] font-mono text-xs uppercase tracking-wider font-bold hover:bg-[#67e8f9] transition-colors"
+                    className="w-full py-3 rounded-lg glossy-btn-primary text-xs font-semibold tracking-wide"
                   >
                     Request This Repair
                   </button>
                 )}
-                <p className="text-[11px] font-mono text-[#dbdbda]/70 text-center mt-3">
-                  No payment required now &bull; Settle via Stripe after completion
+                <p className="text-[11px] text-[#383838] text-center mt-2.5">
+                  No payment required now &bull; Settle via Stripe on completion
                 </p>
               </div>
             </div>
@@ -301,58 +296,56 @@ export default function ServiceDetailPage() {
 
       {/* Repair Request Modal */}
       {modalOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-xs">
-          <div className="bg-[#1b2932] border border-[#32414a] max-w-lg w-full p-6 md:p-8 text-[#fefdfe] shadow-2xl relative">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-xs">
+          <div className="rounded-2xl border border-white bg-white max-w-lg w-full p-6 md:p-8 text-[#000000] shadow-2xl relative">
             <button
               onClick={() => setModalOpen(false)}
-              className="absolute top-4 right-4 text-[#dbdbda] hover:text-[#fefdfe]"
+              className="absolute top-4 right-4 text-[#383838] hover:text-[#000000]"
               aria-label="Close"
             >
               <X className="w-5 h-5" />
             </button>
 
-            <div className="mb-6">
-              <span className="text-[10px] font-mono uppercase text-[#67e8f9] tracking-wider block">
+            <div className="mb-5">
+              <span className="text-[10px] uppercase font-semibold text-[#1e3a8a] tracking-wider block">
                 Repair Request Booking
               </span>
-              <h3 className="text-xl font-display font-semibold text-[#fefdfe] mt-1">
+              <h3 className="text-xl font-serif font-medium text-[#000000] mt-1">
                 {service.title}
               </h3>
-              <p className="text-xs font-mono text-[#dbdbda] mt-1">
-                Base price: <strong className="text-[#fefdfe]">${service.basePrice}</strong> &bull; Technician: {service.technicianName}
+              <p className="text-xs text-[#383838] mt-1">
+                Base price: <strong className="text-[#000000]">${service.basePrice}</strong> &bull; Technician: {service.technicianName}
               </p>
             </div>
 
-            <form onSubmit={handleSubmitRequest} className="space-y-4 font-mono text-xs">
-              {/* Customer Name & Email (Read-only) */}
+            <form onSubmit={handleSubmitRequest} className="space-y-3.5 text-xs">
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-[10px] uppercase text-[#dbdbda] mb-1">
+                  <label className="block text-[10px] uppercase font-semibold text-[#383838] mb-1">
                     Your Name
                   </label>
                   <input
                     type="text"
                     value={user?.name || ''}
                     disabled
-                    className="w-full bg-[#213039] border border-[#32414a] px-3 py-2 text-[#dbdbda] cursor-not-allowed"
+                    className="w-full bg-[#dde6f0]/40 border border-[#bfc7d1] rounded-lg px-3 py-2 text-[#383838] cursor-not-allowed text-xs"
                   />
                 </div>
                 <div>
-                  <label className="block text-[10px] uppercase text-[#dbdbda] mb-1">
+                  <label className="block text-[10px] uppercase font-semibold text-[#383838] mb-1">
                     Your Email
                   </label>
                   <input
                     type="email"
                     value={user?.email || ''}
                     disabled
-                    className="w-full bg-[#213039] border border-[#32414a] px-3 py-2 text-[#dbdbda] cursor-not-allowed truncate"
+                    className="w-full bg-[#dde6f0]/40 border border-[#bfc7d1] rounded-lg px-3 py-2 text-[#383838] cursor-not-allowed truncate text-xs"
                   />
                 </div>
               </div>
 
-              {/* Contact Phone Number */}
               <div>
-                <label className="block text-[10px] uppercase text-[#dbdbda] mb-1">
+                <label className="block text-[10px] uppercase font-semibold text-[#383838] mb-1">
                   Contact Phone Number *
                 </label>
                 <input
@@ -361,13 +354,12 @@ export default function ServiceDetailPage() {
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
                   required
-                  className="w-full bg-[#213039] border border-[#32414a] px-3 py-2 text-[#fefdfe] focus:border-[#67e8f9] focus:outline-hidden"
+                  className="w-full bg-white border border-[#bfc7d1] rounded-lg px-3 py-2 text-[#000000] focus:border-[#1e3a8a] focus:outline-hidden"
                 />
               </div>
 
-              {/* Service Address */}
               <div>
-                <label className="block text-[10px] uppercase text-[#dbdbda] mb-1">
+                <label className="block text-[10px] uppercase font-semibold text-[#383838] mb-1">
                   Service / Pickup Address *
                 </label>
                 <input
@@ -376,14 +368,13 @@ export default function ServiceDetailPage() {
                   value={address}
                   onChange={(e) => setAddress(e.target.value)}
                   required
-                  className="w-full bg-[#213039] border border-[#32414a] px-3 py-2 text-[#fefdfe] focus:border-[#67e8f9] focus:outline-hidden"
+                  className="w-full bg-white border border-[#bfc7d1] rounded-lg px-3 py-2 text-[#000000] focus:border-[#1e3a8a] focus:outline-hidden"
                 />
               </div>
 
-              {/* Preferred Date */}
               <div>
-                <label className="block text-[10px] uppercase text-[#dbdbda] mb-1">
-                  Preferred Date (Today or Future) *
+                <label className="block text-[10px] uppercase font-semibold text-[#383838] mb-1">
+                  Preferred Date *
                 </label>
                 <input
                   type="date"
@@ -391,19 +382,18 @@ export default function ServiceDetailPage() {
                   value={preferredDate}
                   onChange={(e) => setPreferredDate(e.target.value)}
                   required
-                  className="w-full bg-[#213039] border border-[#32414a] px-3 py-2 text-[#fefdfe] focus:border-[#67e8f9] focus:outline-hidden"
+                  className="w-full bg-white border border-[#bfc7d1] rounded-lg px-3 py-2 text-[#000000] focus:border-[#1e3a8a] focus:outline-hidden"
                 />
               </div>
 
-              {/* Problem Description (Min 20 Chars) */}
               <div>
                 <div className="flex items-center justify-between mb-1">
-                  <label className="text-[10px] uppercase text-[#dbdbda]">
+                  <label className="text-[10px] uppercase font-semibold text-[#383838]">
                     Problem Description *
                   </label>
                   <span
                     className={`text-[10px] ${
-                      problemDescription.length < 20 ? 'text-amber-400' : 'text-emerald-400'
+                      problemDescription.length < 20 ? 'text-amber-600' : 'text-emerald-600'
                     }`}
                   >
                     {problemDescription.length}/20 min chars
@@ -415,24 +405,24 @@ export default function ServiceDetailPage() {
                   value={problemDescription}
                   onChange={(e) => setProblemDescription(e.target.value)}
                   required
-                  className="w-full bg-[#213039] border border-[#32414a] p-3 text-[#fefdfe] focus:border-[#67e8f9] focus:outline-hidden"
+                  className="w-full bg-white border border-[#bfc7d1] rounded-lg p-3 text-[#000000] focus:border-[#1e3a8a] focus:outline-hidden text-xs"
                 />
               </div>
 
-              <div className="pt-2 flex justify-end space-x-3">
+              <div className="pt-2 flex justify-end space-x-2.5">
                 <button
                   type="button"
                   onClick={() => setModalOpen(false)}
-                  className="px-4 py-2 border border-[#32414a] text-[#dbdbda] hover:bg-[#213039]"
+                  className="glossy-btn-secondary px-4 py-2 rounded-lg text-xs font-semibold"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="px-5 py-2 bg-[#f1f3f4] text-[#040404] font-semibold hover:bg-[#67e8f9] disabled:opacity-50"
+                  className="glossy-btn-primary px-5 py-2 rounded-lg text-xs font-semibold disabled:opacity-50"
                 >
-                  {submitting ? 'Submitting Request...' : 'Confirm Request'}
+                  {submitting ? 'Submitting...' : 'Confirm Request'}
                 </button>
               </div>
             </form>
