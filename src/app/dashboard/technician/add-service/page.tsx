@@ -6,7 +6,6 @@ import { DashboardLayout } from '@/components/layout/DashboardLayout';
 import { useAuth } from '@/context/AuthContext';
 import { fetchApi } from '@/lib/api';
 import { toast } from 'sonner';
-import { Wrench, Image as ImageIcon } from 'lucide-react';
 
 const CATEGORIES = [
   'Smartphone',
@@ -101,49 +100,52 @@ export default function AddServicePage() {
 
   return (
     <DashboardLayout allowedRoles={['technician']}>
-      <div className="max-w-3xl space-y-6 font-mono text-xs">
+      <div className="max-w-2xl mx-auto space-y-6 text-xs">
         <div>
-          <h1 className="text-2xl font-display font-semibold text-[#fefdfe]">
+          <span className="text-xs uppercase tracking-widest text-[#1e3a8a] font-semibold block mb-1">
+            New Listing
+          </span>
+          <h1 className="text-2xl md:text-3xl font-serif font-medium text-[#000000]">
             List a New Repair Service
           </h1>
-          <p className="text-xs text-[#dbdbda] mt-1">
+          <p className="text-xs text-[#383838] mt-1">
             New listings are submitted with &lsquo;pending&rsquo; status and appear publicly once verified by an admin.
           </p>
         </div>
 
         <form
           onSubmit={handleSubmit}
-          className="bg-[#213039] border border-[#32414a] p-6 md:p-8 space-y-5"
+          className="rounded-2xl border border-white/80 bg-white/90 p-6 md:p-8 space-y-5 shadow-sm"
         >
           {/* Read-Only Technician Info */}
-          <div className="grid grid-cols-2 gap-4 pb-4 border-b border-[#32414a]">
+          <div className="grid grid-cols-2 gap-4 pb-4 border-b border-[#bfc7d1]/40">
             <div>
-              <label className="block text-[10px] uppercase text-[#dbdbda] mb-1">
-                Technician Name (From Session)
+              <label className="block text-[10px] uppercase font-semibold text-[#383838] mb-1">
+                Technician Name
               </label>
               <input
                 type="text"
                 value={user?.name || ''}
                 disabled
-                className="w-full bg-[#1b2932] border border-[#32414a] px-3 py-2 text-[#dbdbda] cursor-not-allowed"
+                className="w-full bg-[#dde6f0]/40 border border-[#bfc7d1] rounded-lg px-3 py-2 text-[#383838] cursor-not-allowed text-xs"
               />
             </div>
             <div>
-              <label className="block text-[10px] uppercase text-[#dbdbda] mb-1">
-                Technician Email (Owner)
+              <label className="block text-[10px] uppercase font-semibold text-[#383838] mb-1">
+                Technician Email
               </label>
               <input
                 type="text"
                 value={user?.email || ''}
                 disabled
-                className="w-full bg-[#1b2932] border border-[#32414a] px-3 py-2 text-[#dbdbda] cursor-not-allowed truncate"
+                className="w-full bg-[#dde6f0]/40 border border-[#bfc7d1] rounded-lg px-3 py-2 text-[#383838] cursor-not-allowed truncate text-xs"
               />
             </div>
           </div>
 
           {/* Service Title */}
           <div>
-            <label className="block text-[10px] uppercase text-[#dbdbda] mb-1">
+            <label className="block text-[11px] uppercase font-semibold text-[#383838] mb-1.5">
               Service Title *
             </label>
             <input
@@ -152,18 +154,18 @@ export default function AddServicePage() {
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               required
-              className="w-full bg-[#1b2932] border border-[#32414a] px-3.5 py-2.5 text-[#fefdfe] focus:border-[#67e8f9] focus:outline-hidden"
+              className="w-full bg-white border border-[#bfc7d1] rounded-lg px-3.5 py-2.5 text-[#000000] focus:border-[#1e3a8a] focus:outline-hidden"
             />
           </div>
 
           {/* Category & Mode Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
-              <label className="block text-[10px] uppercase text-[#dbdbda] mb-1">Category *</label>
+              <label className="block text-[11px] uppercase font-semibold text-[#383838] mb-1.5">Category *</label>
               <select
                 value={category}
                 onChange={(e) => handleCategoryChange(e.target.value)}
-                className="w-full bg-[#1b2932] border border-[#32414a] px-3 py-2.5 text-[#fefdfe] focus:border-[#67e8f9] focus:outline-hidden"
+                className="w-full bg-white border border-[#bfc7d1] rounded-lg px-3 py-2.5 text-[#000000] focus:border-[#1e3a8a] focus:outline-hidden"
               >
                 {CATEGORIES.map((c) => (
                   <option key={c} value={c}>
@@ -174,13 +176,13 @@ export default function AddServicePage() {
             </div>
 
             <div>
-              <label className="block text-[10px] uppercase text-[#dbdbda] mb-1">
+              <label className="block text-[11px] uppercase font-semibold text-[#383838] mb-1.5">
                 Service Mode *
               </label>
               <select
                 value={serviceMode}
                 onChange={(e) => setServiceMode(e.target.value as any)}
-                className="w-full bg-[#1b2932] border border-[#32414a] px-3 py-2.5 text-[#fefdfe] focus:border-[#67e8f9] focus:outline-hidden"
+                className="w-full bg-white border border-[#bfc7d1] rounded-lg px-3 py-2.5 text-[#000000] focus:border-[#1e3a8a] focus:outline-hidden"
               >
                 <option value="Home Visit">Home Visit</option>
                 <option value="Shop Drop-off">Shop Drop-off</option>
@@ -191,7 +193,7 @@ export default function AddServicePage() {
           {/* Price, Duration, Area */}
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <label className="block text-[10px] uppercase text-[#dbdbda] mb-1">
+              <label className="block text-[11px] uppercase font-semibold text-[#383838] mb-1.5">
                 Base Price ($ USD) *
               </label>
               <input
@@ -202,12 +204,12 @@ export default function AddServicePage() {
                 value={basePrice}
                 onChange={(e) => setBasePrice(e.target.value)}
                 required
-                className="w-full bg-[#1b2932] border border-[#32414a] px-3 py-2.5 text-[#fefdfe] focus:border-[#67e8f9] focus:outline-hidden"
+                className="w-full bg-white border border-[#bfc7d1] rounded-lg px-3.5 py-2.5 text-[#000000] focus:border-[#1e3a8a] focus:outline-hidden"
               />
             </div>
 
             <div>
-              <label className="block text-[10px] uppercase text-[#dbdbda] mb-1">
+              <label className="block text-[11px] uppercase font-semibold text-[#383838] mb-1.5">
                 Est. Duration
               </label>
               <input
@@ -215,12 +217,12 @@ export default function AddServicePage() {
                 placeholder="e.g. 2-3 hours"
                 value={estimatedDuration}
                 onChange={(e) => setEstimatedDuration(e.target.value)}
-                className="w-full bg-[#1b2932] border border-[#32414a] px-3 py-2.5 text-[#fefdfe] focus:border-[#67e8f9] focus:outline-hidden"
+                className="w-full bg-white border border-[#bfc7d1] rounded-lg px-3.5 py-2.5 text-[#000000] focus:border-[#1e3a8a] focus:outline-hidden"
               />
             </div>
 
             <div>
-              <label className="block text-[10px] uppercase text-[#dbdbda] mb-1">
+              <label className="block text-[11px] uppercase font-semibold text-[#383838] mb-1.5">
                 Service Area *
               </label>
               <input
@@ -229,15 +231,15 @@ export default function AddServicePage() {
                 value={serviceArea}
                 onChange={(e) => setServiceArea(e.target.value)}
                 required
-                className="w-full bg-[#1b2932] border border-[#32414a] px-3 py-2.5 text-[#fefdfe] focus:border-[#67e8f9] focus:outline-hidden"
+                className="w-full bg-white border border-[#bfc7d1] rounded-lg px-3.5 py-2.5 text-[#000000] focus:border-[#1e3a8a] focus:outline-hidden"
               />
             </div>
           </div>
 
           {/* Detailed Description */}
           <div>
-            <label className="block text-[10px] uppercase text-[#dbdbda] mb-1">
-              Detailed Service Scope & Inclusions *
+            <label className="block text-[11px] uppercase font-semibold text-[#383838] mb-1.5">
+              Detailed Scope & Inclusions *
             </label>
             <textarea
               rows={4}
@@ -245,13 +247,13 @@ export default function AddServicePage() {
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               required
-              className="w-full bg-[#1b2932] border border-[#32414a] p-3 text-[#fefdfe] focus:border-[#67e8f9] focus:outline-hidden"
+              className="w-full bg-white border border-[#bfc7d1] rounded-lg p-3 text-[#000000] focus:border-[#1e3a8a] focus:outline-hidden"
             />
           </div>
 
           {/* Service Banner Image URL */}
           <div>
-            <label className="block text-[10px] uppercase text-[#dbdbda] mb-1 font-bold">
+            <label className="block text-[11px] uppercase font-semibold text-[#383838] mb-1.5">
               Service Banner Image URL *
             </label>
             <input
@@ -260,10 +262,10 @@ export default function AddServicePage() {
               value={imageUrl}
               onChange={(e) => setImageUrl(e.target.value)}
               required
-              className="w-full bg-[#1b2932] border border-[#32414a] px-3.5 py-2.5 text-[#fefdfe] focus:border-[#67e8f9] focus:outline-hidden mb-2"
+              className="w-full bg-white border border-[#bfc7d1] rounded-lg px-3.5 py-2.5 text-[#000000] focus:border-[#1e3a8a] focus:outline-hidden mb-2"
             />
             {imageUrl && (
-              <div className="relative h-36 max-w-sm overflow-hidden border border-[#32414a]">
+              <div className="relative h-36 max-w-sm rounded-xl overflow-hidden border border-[#bfc7d1]/50 shadow-xs">
                 <img src={imageUrl} alt="Preview" className="w-full h-full object-cover" />
               </div>
             )}
@@ -274,7 +276,7 @@ export default function AddServicePage() {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full py-3.5 bg-[#f1f3f4] text-[#040404] font-mono text-xs uppercase tracking-wider font-bold hover:bg-[#67e8f9] transition-colors disabled:opacity-50"
+              className="w-full py-2.5 rounded-lg glossy-btn-primary text-xs font-semibold tracking-wide disabled:opacity-50"
             >
               {submitting ? 'Submitting Service...' : 'Submit Service for Review'}
             </button>

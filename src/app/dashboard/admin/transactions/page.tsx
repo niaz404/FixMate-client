@@ -45,89 +45,91 @@ export default function AdminTransactionsPage() {
 
   return (
     <DashboardLayout allowedRoles={['admin']}>
-      <div className="space-y-6 font-mono text-xs">
+      <div className="space-y-6">
         <div>
-          <h1 className="text-2xl font-display font-semibold text-[#fefdfe]">
+          <h1 className="font-serif text-3xl font-medium text-[#000000]">
             Financial Transactions & Stripe Logs
           </h1>
-          <p className="text-xs text-[#dbdbda] mt-1">
+          <p className="text-sm text-slate-600 mt-1">
             Global ledger of paid repair bookings settled via Stripe Checkout.
           </p>
         </div>
 
         {/* Total Revenue Summary Banner */}
-        <div className="p-6 bg-[#02444b] border border-[#32414a] flex flex-col sm:flex-row items-center justify-between gap-4">
-          <div className="flex items-center space-x-3">
-            <div className="w-12 h-12 bg-[#1b2932] border border-[#32414a] flex items-center justify-center text-[#67e8f9]">
+        <div className="p-6 glossy-card rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex items-center space-x-4">
+            <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-[#1e3a8a] shadow-xs">
               <DollarSign className="w-6 h-6" />
             </div>
             <div>
-              <span className="text-[10px] uppercase tracking-widest text-[#dbdbda] block font-bold">
+              <span className="text-[11px] uppercase tracking-wider text-slate-500 block font-semibold">
                 Platform Gross Volume
               </span>
-              <div className="text-3xl font-display font-bold text-[#fefdfe]">
+              <div className="text-3xl font-serif font-bold text-[#000000]">
                 ${totalRevenue.toLocaleString()} USD
               </div>
             </div>
           </div>
-          <span className="text-[10px] text-[#dbdbda] bg-[#1b2932] px-3 py-1.5 border border-[#32414a]">
+          <span className="text-xs text-slate-700 bg-white px-3.5 py-1.5 rounded-lg border border-slate-200 shadow-xs font-medium">
             {transactions.length} Verified Payments
           </span>
         </div>
 
         {loading ? (
-          <div className="h-64 bg-[#213039] border border-[#32414a] animate-pulse" />
+          <div className="h-64 glossy-card rounded-2xl animate-pulse" />
         ) : transactions.length === 0 ? (
-          <div className="p-12 border border-[#32414a] bg-[#213039] text-center space-y-2">
-            <p className="text-xs text-[#dbdbda]">No transaction records found on the ledger.</p>
+          <div className="p-12 glossy-card rounded-2xl text-center space-y-2">
+            <p className="text-sm text-slate-600">No transaction records found on the ledger.</p>
           </div>
         ) : (
-          <div className="border border-[#32414a] bg-[#213039] overflow-x-auto">
-            <table className="w-full text-left">
-              <thead className="bg-[#1b2932] border-b border-[#32414a] text-[10px] uppercase text-[#dbdbda] tracking-wider">
-                <tr>
-                  <th className="p-4">Customer</th>
-                  <th className="p-4">Technician</th>
-                  <th className="p-4">Service</th>
-                  <th className="p-4">Amount</th>
-                  <th className="p-4">Stripe Txn ID</th>
-                  <th className="p-4">Date</th>
-                  <th className="p-4 text-right">Verification</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[#32414a] text-[#eaeae9]">
-                {transactions.map((tx) => (
-                  <tr key={tx._id} className="hover:bg-[#1b2932]/50 transition-colors">
-                    <td className="p-4">
-                      <div className="font-display font-semibold text-sm text-[#fefdfe]">
-                        {tx.customerName}
-                      </div>
-                      <div className="text-[10px] text-[#dbdbda]">{tx.customerEmail}</div>
-                    </td>
-                    <td className="p-4">
-                      <div className="text-[#fefdfe] font-semibold">{tx.technicianName}</div>
-                      <div className="text-[10px] text-[#dbdbda]">{tx.technicianEmail}</div>
-                    </td>
-                    <td className="p-4 text-[#dbdbda]">{tx.serviceTitle}</td>
-                    <td className="p-4 font-display font-bold text-[#fefdfe]">
-                      ${tx.amount} {tx.currency?.toUpperCase()}
-                    </td>
-                    <td className="p-4 font-mono text-[11px] text-[#67e8f9] select-all">
-                      {tx.transactionId}
-                    </td>
-                    <td className="p-4 text-[#dbdbda]">
-                      {new Date(tx.paidAt).toLocaleDateString()}
-                    </td>
-                    <td className="p-4 text-right">
-                      <span className="inline-flex items-center space-x-1 px-2 py-0.5 bg-emerald-950/80 border border-emerald-700 text-emerald-300 text-[10px] font-semibold uppercase">
-                        <CheckCircle2 className="w-3 h-3" />
-                        <span>Captured</span>
-                      </span>
-                    </td>
+          <div className="glossy-card rounded-2xl overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs">
+                <thead className="bg-slate-100/70 border-b border-slate-200/80 text-[11px] uppercase text-slate-600 tracking-wider">
+                  <tr>
+                    <th className="p-4 font-semibold">Customer</th>
+                    <th className="p-4 font-semibold">Technician</th>
+                    <th className="p-4 font-semibold">Service</th>
+                    <th className="p-4 font-semibold">Amount</th>
+                    <th className="p-4 font-semibold">Stripe Txn ID</th>
+                    <th className="p-4 font-semibold">Date</th>
+                    <th className="p-4 font-semibold text-right">Verification</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+                <tbody className="divide-y divide-slate-100 text-slate-700">
+                  {transactions.map((tx) => (
+                    <tr key={tx._id} className="hover:bg-slate-50/60 transition-colors">
+                      <td className="p-4">
+                        <div className="font-medium text-[#000000] text-sm">
+                          {tx.customerName}
+                        </div>
+                        <div className="text-[11px] text-slate-500">{tx.customerEmail}</div>
+                      </td>
+                      <td className="p-4">
+                        <div className="font-medium text-[#000000]">{tx.technicianName}</div>
+                        <div className="text-[11px] text-slate-500">{tx.technicianEmail}</div>
+                      </td>
+                      <td className="p-4 text-slate-600">{tx.serviceTitle}</td>
+                      <td className="p-4 font-serif font-bold text-[#000000] text-sm">
+                        ${tx.amount} {tx.currency?.toUpperCase()}
+                      </td>
+                      <td className="p-4 font-mono text-[11px] text-[#1e3a8a] select-all">
+                        {tx.transactionId}
+                      </td>
+                      <td className="p-4 text-slate-600">
+                        {new Date(tx.paidAt).toLocaleDateString()}
+                      </td>
+                      <td className="p-4 text-right">
+                        <span className="inline-flex items-center space-x-1 px-2.5 py-0.5 bg-emerald-50 border border-emerald-200 text-emerald-800 rounded-md text-[11px] font-semibold uppercase">
+                          <CheckCircle2 className="w-3 h-3" />
+                          <span>Captured</span>
+                        </span>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         )}
       </div>

@@ -56,10 +56,10 @@ export async function fetchApi<T = any>(
       data: Array.isArray(data) ? data : data.data || data,
     };
   } catch (error: any) {
-    console.warn(`[FixMate API] Connection note on ${endpoint}:`, error.message);
+    console.warn(`[Fixura API] Connection note on ${endpoint}:`, error.message);
     return {
       success: false,
-      message: error.message || 'Unable to connect to FixMate backend server.',
+      message: error.message || 'Unable to connect to Fixura backend server.',
     };
   }
 }

@@ -23,7 +23,7 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<boolean>;
   register: (payload: any) => Promise<boolean>;
   logout: () => void;
-  updateUser: (updatedUser: Partial<User>) => void;
+  updateUser: (updatedUser?: Partial<User>) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -82,7 +82,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return false;
       }
 
-      toast.success('Account created successfully! Welcome to FixMate.');
+      toast.success('Account created successfully! Welcome to Fixura.');
       router.refresh();
       return true;
     } catch (err: any) {

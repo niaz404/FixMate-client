@@ -25,11 +25,11 @@ export function ConfirmationModal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 p-4 backdrop-blur-xs">
-      <div className="bg-[#1b2932] border border-[#32414a] max-w-md w-full p-6 text-[#fefdfe] shadow-2xl relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-xs">
+      <div className="rounded-2xl border border-white bg-white max-w-md w-full p-6 text-[#000000] shadow-2xl relative">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-[#dbdbda] hover:text-[#fefdfe]"
+          className="absolute top-4 right-4 text-[#383838] hover:text-[#000000]"
           aria-label="Close"
         >
           <X className="w-5 h-5" />
@@ -37,34 +37,36 @@ export function ConfirmationModal({
 
         <div className="flex items-start space-x-3 mb-4">
           <div
-            className={`p-2 ${
-              isDestructive ? 'bg-rose-950/60 text-rose-400' : 'bg-amber-950/60 text-amber-400'
+            className={`p-2.5 rounded-xl ${
+              isDestructive ? 'bg-rose-50 text-rose-600' : 'bg-amber-50 text-amber-600'
             }`}
           >
-            <AlertTriangle className="w-6 h-6" />
+            <AlertTriangle className="w-5 h-5" />
           </div>
           <div>
-            <h3 className="text-lg font-display font-semibold text-[#fefdfe]">{title}</h3>
-            <p className="text-sm text-[#eaeae9]/80 mt-1 font-mono leading-relaxed">{message}</p>
+            <h3 className="text-lg font-serif font-semibold text-[#000000]">{title}</h3>
+            <p className="text-xs text-[#383838] mt-1 leading-relaxed">{message}</p>
           </div>
         </div>
 
-        <div className="flex justify-end space-x-3 mt-6">
+        <div className="pt-3 border-t border-[#bfc7d1]/30 flex justify-end space-x-2.5">
           <button
+            type="button"
             onClick={onClose}
-            className="px-4 py-2 text-xs font-mono uppercase tracking-wider border border-[#32414a] text-[#dbdbda] hover:bg-[#213039]"
+            className="glossy-btn-secondary px-4 py-2 rounded-lg text-xs font-semibold"
           >
             {cancelLabel}
           </button>
           <button
+            type="button"
             onClick={() => {
               onConfirm();
               onClose();
             }}
-            className={`px-4 py-2 text-xs font-mono uppercase tracking-wider font-semibold ${
+            className={`px-4 py-2 rounded-lg text-xs font-semibold text-white shadow-xs transition-all ${
               isDestructive
-                ? 'bg-rose-600 text-white hover:bg-rose-500'
-                : 'bg-[#f1f3f4] text-[#040404] hover:bg-white'
+                ? 'bg-rose-600 hover:bg-rose-700'
+                : 'bg-[#1e3a8a] hover:bg-blue-900'
             }`}
           >
             {confirmLabel}

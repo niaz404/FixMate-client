@@ -21,6 +21,7 @@ import {
   Home,
   AlertTriangle,
 } from 'lucide-react';
+import { FixuraLogo } from '@/components/ui/FixuraLogo';
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -41,8 +42,8 @@ export function DashboardLayout({ children, allowedRoles }: DashboardLayoutProps
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-[#1b2932] flex items-center justify-center text-[#fefdfe] font-mono text-xs">
-        <Wrench className="w-8 h-8 text-[#67e8f9] animate-spin mr-3" />
+      <div className="min-h-screen bg-[#dde6f0] flex items-center justify-center text-[#000000] text-xs">
+        <Wrench className="w-8 h-8 text-[#1e3a8a] animate-spin mr-3" />
         <span>Verifying dashboard permissions...</span>
       </div>
     );
@@ -55,19 +56,19 @@ export function DashboardLayout({ children, allowedRoles }: DashboardLayoutProps
   // Role validation check
   if (allowedRoles && !allowedRoles.includes(user.role)) {
     return (
-      <div className="min-h-[80vh] bg-[#1b2932] flex items-center justify-center p-6 text-center font-mono">
-        <div className="max-w-md p-8 border border-[#32414a] bg-[#213039] space-y-4">
-          <AlertTriangle className="w-12 h-12 text-rose-400 mx-auto" />
-          <h2 className="text-xl font-display font-semibold text-[#fefdfe]">
+      <div className="min-h-[80vh] bg-[#dde6f0] flex items-center justify-center p-6 text-center">
+        <div className="max-w-md p-8 rounded-2xl border border-white/80 bg-white/90 space-y-4 shadow-sm">
+          <AlertTriangle className="w-10 h-10 text-rose-500 mx-auto" />
+          <h2 className="text-xl font-serif font-medium text-[#000000]">
             403 - Forbidden Access
           </h2>
-          <p className="text-xs text-[#dbdbda] leading-relaxed">
-            Your account ({user.role}) is not authorized to access this dashboard section.
+          <p className="text-xs text-[#383838] leading-relaxed">
+            Your account role ({user.role}) is not authorized to access this section.
           </p>
           <div className="pt-2 flex justify-center space-x-3">
             <Link
               href="/"
-              className="px-4 py-2 border border-[#32414a] text-xs uppercase tracking-wider text-[#dbdbda] hover:bg-[#1b2932]"
+              className="glossy-btn-secondary px-4 py-2 rounded-lg text-xs font-semibold"
             >
               Back to Home
             </Link>
@@ -79,7 +80,7 @@ export function DashboardLayout({ children, allowedRoles }: DashboardLayoutProps
                   ? '/dashboard/technician'
                   : '/dashboard/customer'
               }
-              className="px-4 py-2 bg-[#f1f3f4] text-[#040404] text-xs uppercase tracking-wider font-semibold hover:bg-[#67e8f9]"
+              className="glossy-btn-primary px-4 py-2 rounded-lg text-xs font-semibold"
             >
               My Dashboard
             </Link>
@@ -121,27 +122,22 @@ export function DashboardLayout({ children, allowedRoles }: DashboardLayoutProps
   const isActive = (href: string) => pathname === href;
 
   return (
-    <div className="min-h-screen bg-[#1b2932] flex flex-col md:flex-row">
-      {/* Sidebar (Desktop & Collapsible Mobile) */}
+    <div className="min-h-screen bg-[#dde6f0] flex flex-col md:flex-row text-[#000000]">
+      {/* Sidebar */}
       <aside
-        className={`fixed md:sticky top-0 z-40 h-screen w-64 bg-[#213039] border-r border-[#32414a] flex flex-col justify-between transition-transform duration-200 md:translate-x-0 ${
+        className={`fixed md:sticky top-0 z-40 h-screen w-64 bg-white/85 border-r border-[#bfc7d1]/80 backdrop-blur-md flex flex-col justify-between transition-transform duration-200 md:translate-x-0 ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         <div>
-          {/* Sidebar Header Brand */}
-          <div className="p-6 border-b border-[#32414a] flex items-center justify-between">
-            <Link href="/" className="flex items-center space-x-2.5">
-              <div className="w-8 h-8 bg-[#02444b] border border-[#32414a] flex items-center justify-center text-[#67e8f9]">
-                <Wrench className="w-4 h-4" />
-              </div>
-              <span className="font-display font-bold text-base text-[#fefdfe]">
-                Fix<span className="text-[#67e8f9]">Mate</span>
-              </span>
+          {/* Brand Header */}
+          <div className="p-5 border-b border-[#bfc7d1]/50 flex items-center justify-between">
+            <Link href="/" className="inline-block">
+              <FixuraLogo size="sm" showTagline />
             </Link>
             <button
               onClick={() => setSidebarOpen(false)}
-              className="md:hidden text-[#dbdbda]"
+              className="md:hidden text-[#383838]"
               aria-label="Close Sidebar"
             >
               <X className="w-5 h-5" />
@@ -149,8 +145,8 @@ export function DashboardLayout({ children, allowedRoles }: DashboardLayoutProps
           </div>
 
           {/* Navigation Links */}
-          <nav className="p-4 space-y-1 font-mono text-xs">
-            <div className="px-3 py-2 text-[10px] uppercase tracking-widest text-[#dbdbda]/70 font-bold">
+          <nav className="p-3.5 space-y-1 text-xs">
+            <div className="px-3 py-2 text-[10px] uppercase tracking-wider text-[#383838] font-semibold">
               {user.role} Navigation
             </div>
             {currentRoleLinks.map((link) => (
@@ -158,10 +154,10 @@ export function DashboardLayout({ children, allowedRoles }: DashboardLayoutProps
                 key={link.href}
                 href={link.href}
                 onClick={() => setSidebarOpen(false)}
-                className={`flex items-center space-x-3 px-3.5 py-2.5 transition-colors ${
+                className={`flex items-center space-x-3 px-3 py-2 rounded-lg transition-all ${
                   isActive(link.href)
-                    ? 'bg-[#02444b] text-[#67e8f9] border border-[#67e8f9]/60 font-semibold'
-                    : 'text-[#eaeae9] hover:bg-[#1b2932] hover:text-[#fefdfe]'
+                    ? 'bg-[#1e3a8a] text-white font-medium shadow-xs'
+                    : 'text-[#383838] hover:bg-[#dde6f0]/50 hover:text-[#000000]'
                 }`}
               >
                 {link.icon}
@@ -169,16 +165,16 @@ export function DashboardLayout({ children, allowedRoles }: DashboardLayoutProps
               </Link>
             ))}
 
-            <div className="pt-4 px-3 py-2 text-[10px] uppercase tracking-widest text-[#dbdbda]/70 font-bold">
+            <div className="pt-3 px-3 py-2 text-[10px] uppercase tracking-wider text-[#383838] font-semibold">
               Account
             </div>
             <Link
               href="/dashboard/profile"
               onClick={() => setSidebarOpen(false)}
-              className={`flex items-center space-x-3 px-3.5 py-2.5 transition-colors ${
+              className={`flex items-center space-x-3 px-3 py-2 rounded-lg transition-all ${
                 isActive('/dashboard/profile')
-                  ? 'bg-[#02444b] text-[#67e8f9] border border-[#67e8f9]/60 font-semibold'
-                  : 'text-[#eaeae9] hover:bg-[#1b2932] hover:text-[#fefdfe]'
+                  ? 'bg-[#1e3a8a] text-white font-medium shadow-xs'
+                  : 'text-[#383838] hover:bg-[#dde6f0]/50 hover:text-[#000000]'
               }`}
             >
               <UserIcon className="w-4 h-4" />
@@ -188,17 +184,17 @@ export function DashboardLayout({ children, allowedRoles }: DashboardLayoutProps
         </div>
 
         {/* Sidebar Footer Controls */}
-        <div className="p-4 border-t border-[#32414a] space-y-2 font-mono text-xs">
+        <div className="p-4 border-t border-[#bfc7d1]/50 space-y-1 text-xs">
           <Link
             href="/"
-            className="flex items-center space-x-2 px-3 py-2 text-[#dbdbda] hover:text-[#67e8f9] transition-colors"
+            className="flex items-center space-x-2 px-3 py-2 rounded-lg text-[#383838] hover:bg-[#dde6f0]/50 hover:text-[#000000] transition-colors"
           >
             <Home className="w-4 h-4" />
             <span>Return to Site</span>
           </Link>
           <button
             onClick={logout}
-            className="w-full flex items-center space-x-2 px-3 py-2 text-rose-400 hover:bg-rose-950/40 text-left transition-colors"
+            className="w-full flex items-center space-x-2 px-3 py-2 rounded-lg text-rose-600 hover:bg-rose-50 text-left transition-colors font-medium"
           >
             <LogOut className="w-4 h-4" />
             <span>Sign Out</span>
@@ -209,42 +205,42 @@ export function DashboardLayout({ children, allowedRoles }: DashboardLayoutProps
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Top Bar */}
-        <header className="sticky top-0 z-30 h-16 bg-[#1b2932]/95 border-b border-[#32414a] px-6 flex items-center justify-between backdrop-blur-md">
-          <div className="flex items-center space-x-4">
+        <header className="sticky top-0 z-30 h-16 bg-[#dde6f0]/90 border-b border-[#bfc7d1]/70 px-6 flex items-center justify-between backdrop-blur-md">
+          <div className="flex items-center space-x-3">
             <button
               onClick={() => setSidebarOpen(true)}
-              className="md:hidden p-2 border border-[#32414a] text-[#fefdfe]"
+              className="md:hidden p-2 rounded-lg border border-[#bfc7d1] bg-white/70 text-[#000000]"
               aria-label="Open Sidebar Menu"
             >
               <Menu className="w-5 h-5" />
             </button>
-            <h2 className="font-display font-semibold text-lg text-[#fefdfe] capitalize">
+            <h2 className="font-serif font-medium text-lg text-[#000000] capitalize">
               {user.role} Dashboard
             </h2>
           </div>
 
-          <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-3">
             <Link
               href="/"
-              className="hidden sm:inline-flex items-center space-x-1.5 text-xs font-mono text-[#dbdbda] hover:text-[#67e8f9]"
+              className="hidden sm:inline-flex items-center space-x-1.5 text-xs text-[#383838] hover:text-[#1e3a8a]"
             >
               <Home className="w-3.5 h-3.5" />
-              <span>FixMate Home</span>
+              <span>Fixura Home</span>
             </Link>
 
-            <div className="flex items-center space-x-3 pl-4 border-l border-[#32414a]">
-              <div className="w-8 h-8 bg-[#02444b] border border-[#32414a] flex items-center justify-center font-display font-semibold text-xs text-[#67e8f9] overflow-hidden">
+            <div className="flex items-center space-x-2.5 pl-3 border-l border-[#bfc7d1]/60">
+              <div className="w-7 h-7 rounded-full bg-[#1e3a8a] text-white flex items-center justify-center font-semibold text-xs overflow-hidden shadow-xs">
                 {user.image ? (
                   <img src={user.image} alt={user.name} className="w-full h-full object-cover" />
                 ) : (
                   user.name.charAt(0)
                 )}
               </div>
-              <div className="hidden sm:block text-left font-mono text-xs">
-                <div className="font-medium text-[#fefdfe] leading-none truncate max-w-[140px]">
+              <div className="hidden sm:block text-left text-xs">
+                <div className="font-semibold text-[#000000] leading-none truncate max-w-[120px]">
                   {user.name}
                 </div>
-                <span className="text-[10px] uppercase text-[#67e8f9] tracking-wider">
+                <span className="text-[10px] text-[#1e3a8a] uppercase font-medium">
                   {user.role}
                 </span>
               </div>
@@ -253,7 +249,7 @@ export function DashboardLayout({ children, allowedRoles }: DashboardLayoutProps
         </header>
 
         {/* Dynamic Route Body */}
-        <main className="flex-1 p-6 md:p-8 max-w-[1440px] w-full">{children}</main>
+        <main className="flex-1 p-6 md:p-8 max-w-[960px] w-full mx-auto">{children}</main>
       </div>
     </div>
   );

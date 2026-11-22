@@ -7,125 +7,124 @@ import { StatsCard } from '@/components/ui/StatsCard';
 import { fetchApi } from '@/lib/api';
 import { Wrench, CheckCircle2, Clock, PlusCircle, ArrowRight } from 'lucide-react';
 
-export default function TechnicianOverviewPage() {
+export function TechnicianDashboardPage() {
   const [stats, setStats] = useState({
-    totalServices: 0,
+    myServices: 0,
     approvedServices: 0,
     pendingRequests: 0,
   });
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    async function loadTechnicianData() {
+    async function loadTechnicianOverview() {
       try {
-        const [servicesRes, requestsRes] = await Promise.all([
+        const [servicesRes, bookingsRes] = await Promise.all([
           fetchApi('/services/technician/my'),
           fetchApi('/bookings/technician'),
         ]);
 
-        let totalServices = 0;
-        let approvedServices = 0;
-        let pendingRequests = 0;
+        const services = Array.isArray(servicesRes.data) ? servicesRes.data : [];
+        const bookings = Array.isArray(bookingsRes.data) ? bookingsRes.data : [];
 
-        if (servicesRes.success && Array.isArray(servicesRes.data)) {
-          totalServices = servicesRes.data.length;
-          approvedServices = servicesRes.data.filter((s) => s.approvalStatus === 'approved').length;
-        }
+        const approved = services.filter((s) => s.approvalStatus === 'approved').length;
+        const pending = bookings.filter((b) => b.status === 'requested').length;
 
-        if (requestsRes.success && Array.isArray(requestsRes.data)) {
-          pendingRequests = requestsRes.data.filter((r) => r.status === 'requested').length;
-        }
-
-        setStats({ totalServices, approvedServices, pendingRequests });
+        setStats({
+          myServices: services.length,
+          approvedServices: approved,
+          pendingRequests: pending,
+        });
       } catch (err) {
-        console.error('Error loading technician metrics', err);
+        console.warn('Failed to load technician overview', err);
       } finally {
         setLoading(false);
       }
     }
-
-    loadTechnicianData();
+    loadTechnicianOverview();
   }, []);
 
   return (
     <DashboardLayout allowedRoles={['technician']}>
-      <div className="space-y-8 font-mono">
+      <div className="space-y-8">
         <div>
-          <h1 className="text-2xl font-display font-semibold text-[#fefdfe]">
-            Technician Command Center
+          <span className="text-xs uppercase tracking-widest text-[#1e3a8a] font-semibold block mb-1">
+            Technician Studio
+          </span>
+          <h1 className="text-2xl md:text-3xl font-serif font-medium text-[#000000]">
+            Technician Dashboard & Job Pipeline
           </h1>
-          <p className="text-xs text-[#dbdbda] mt-1">
-            Manage your listed repair services, respond to incoming customer jobs, and track pipeline completions.
+          <p className="text-xs text-[#383838] mt-1">
+            Manage your repair service catalog, accept client bookings, and progress job milestones.
           </p>
         </div>
 
-        {/* Stats Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        {/* 3 Metrics Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <StatsCard
-            title="Total Services"
-            value={loading ? '...' : stats.totalServices}
-            subtitle="All offerings created by you"
-            icon={<Wrench className="w-5 h-5 text-[#67e8f9]" />}
+            title="Total Catalog Services"
+            value={loading ? '...' : stats.myServices}
+            subtitle="Listed by your profile"
+            icon={<Wrench className="w-5 h-5 text-[#1e3a8a]" />}
           />
           <StatsCard
             title="Approved Services"
             value={loading ? '...' : stats.approvedServices}
             subtitle="Live & visible in public catalog"
-            icon={<CheckCircle2 className="w-5 h-5 text-emerald-400" />}
+            icon={<CheckCircle2 className="w-5 h-5 text-emerald-600" />}
           />
           <StatsCard
             title="Pending Requests"
             value={loading ? '...' : stats.pendingRequests}
             subtitle="Awaiting your acceptance"
-            icon={<Clock className="w-5 h-5 text-amber-400" />}
+            icon={<Clock className="w-5 h-5 text-amber-600" />}
           />
         </div>
 
         {/* Quick Action Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="bg-[#213039] border border-[#32414a] p-6 space-y-4">
-            <div className="flex items-center space-x-3">
-              <div className="p-3 bg-[#02444b] border border-[#32414a] text-[#67e8f9]">
-                <PlusCircle className="w-6 h-6" />
+          <div className="rounded-2xl border border-white/80 bg-white/90 p-6 space-y-4 shadow-sm">
+            <div className="flex items-center space-x-3.5">
+              <div className="w-10 h-10 rounded-xl bg-blue-50 text-[#1e3a8a] flex items-center justify-center">
+                <PlusCircle className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-display font-semibold text-base text-[#fefdfe]">
+                <h3 className="font-serif font-semibold text-base text-[#000000]">
                   List a New Repair Service
                 </h3>
-                <p className="text-xs text-[#dbdbda]">
+                <p className="text-xs text-[#383838]">
                   Expand your catalog with high-quality photos, duration, and transparent pricing.
                 </p>
               </div>
             </div>
             <Link
               href="/dashboard/technician/add-service"
-              className="inline-flex items-center space-x-2 px-4 py-2.5 bg-[#f1f3f4] text-[#040404] text-xs uppercase tracking-wider font-semibold hover:bg-[#67e8f9] transition-colors"
+              className="glossy-btn-primary inline-flex items-center space-x-2 px-4 py-2 rounded-lg text-xs font-semibold"
             >
               <span>Add Service Now</span>
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           </div>
 
-          <div className="bg-[#213039] border border-[#32414a] p-6 space-y-4">
-            <div className="flex items-center space-x-3">
-              <div className="p-3 bg-[#02444b] border border-[#32414a] text-[#67e8f9]">
-                <Clock className="w-6 h-6" />
+          <div className="rounded-2xl border border-white/80 bg-white/90 p-6 space-y-4 shadow-sm">
+            <div className="flex items-center space-x-3.5">
+              <div className="w-10 h-10 rounded-xl bg-amber-50 text-amber-700 flex items-center justify-center">
+                <Clock className="w-5 h-5" />
               </div>
               <div>
-                <h3 className="font-display font-semibold text-base text-[#fefdfe]">
+                <h3 className="font-serif font-semibold text-base text-[#000000]">
                   Incoming Customer Requests
                 </h3>
-                <p className="text-xs text-[#dbdbda]">
+                <p className="text-xs text-[#383838]">
                   Review client problem descriptions, accept incoming bookings, and start repair tasks.
                 </p>
               </div>
             </div>
             <Link
               href="/dashboard/technician/requests"
-              className="inline-flex items-center space-x-2 px-4 py-2.5 border border-[#32414a] bg-[#1b2932] text-[#fefdfe] text-xs uppercase tracking-wider font-semibold hover:bg-[#02444b] transition-colors"
+              className="glossy-btn-secondary inline-flex items-center space-x-2 px-4 py-2 rounded-lg text-xs font-semibold"
             >
               <span>Manage Requests ({stats.pendingRequests} New)</span>
-              <ArrowRight className="w-4 h-4 text-[#67e8f9]" />
+              <ArrowRight className="w-3.5 h-3.5 text-[#1e3a8a]" />
             </Link>
           </div>
         </div>
@@ -133,3 +132,5 @@ export default function TechnicianOverviewPage() {
     </DashboardLayout>
   );
 }
+
+export default TechnicianDashboardPage;

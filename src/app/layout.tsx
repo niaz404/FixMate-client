@@ -6,7 +6,7 @@ import { Footer } from '@/components/layout/Footer';
 import { Toaster } from 'sonner';
 
 export const metadata: Metadata = {
-  title: 'FixMate | Smart Device & Home Appliance Repair Service Platform',
+  title: 'Fixura | Smart Device & Home Appliance Restoration Platform',
   description:
     'On-demand device and home appliance repair booking platform. Verified technicians, transparent status tracking, and 100% pay-after-service guarantee.',
 };

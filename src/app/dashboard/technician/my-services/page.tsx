@@ -93,7 +93,7 @@ export default function MyServicesPage() {
       });
 
       if (res.success) {
-        toast.success('Service updated and reset to pending for admin re-approval.');
+        toast.success('Service updated and submitted for re-approval.');
         setEditModalOpen(false);
         loadServices();
       } else {
@@ -128,19 +128,20 @@ export default function MyServicesPage() {
 
   return (
     <DashboardLayout allowedRoles={['technician']}>
-      <div className="space-y-6 font-mono text-xs">
+      <div className="space-y-6">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-display font-semibold text-[#fefdfe]">
+            <h1 className="font-serif text-3xl font-medium text-[#000000]">
               My Service Catalog
             </h1>
-            <p className="text-xs text-[#dbdbda] mt-1">
+            <p className="text-sm text-slate-600 mt-1">
               Full CRUD management: edit details, toggle public visibility, or remove listings.
             </p>
           </div>
+
           <Link
             href="/dashboard/technician/add-service"
-            className="inline-flex items-center space-x-2 px-4 py-2.5 bg-[#f1f3f4] text-[#040404] text-xs uppercase tracking-wider font-semibold hover:bg-[#67e8f9] transition-colors"
+            className="inline-flex items-center space-x-2 px-4 py-2.5 glossy-btn-primary rounded-xl text-xs uppercase tracking-wider font-semibold shadow-xs"
           >
             <Plus className="w-4 h-4" />
             <span>Add New Service</span>
@@ -150,118 +151,128 @@ export default function MyServicesPage() {
         {loading ? (
           <div className="space-y-3">
             {[...Array(3)].map((_, i) => (
-              <div key={i} className="h-24 bg-[#213039] border border-[#32414a] animate-pulse" />
+              <div key={i} className="h-24 glossy-card rounded-2xl animate-pulse" />
             ))}
           </div>
         ) : services.length === 0 ? (
-          <div className="p-12 border border-[#32414a] bg-[#213039] text-center space-y-4">
-            <Wrench className="w-10 h-10 text-[#67e8f9] mx-auto" />
-            <h3 className="font-display font-semibold text-lg text-[#fefdfe]">
-              You haven&apos;t listed any services yet.
+          <div className="p-12 glossy-card rounded-2xl text-center space-y-4">
+            <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-200 text-[#1e3a8a] flex items-center justify-center mx-auto">
+              <Wrench className="w-6 h-6" />
+            </div>
+            <h3 className="font-serif text-xl font-medium text-[#000000]">
+              You haven&apos;t listed any services yet
             </h3>
-            <p className="text-xs text-[#dbdbda] max-w-sm mx-auto">
+            <p className="text-sm text-slate-600 max-w-sm mx-auto">
               Add your smartphone, AC, TV, or home appliance repair offerings to begin receiving requests.
             </p>
             <Link
               href="/dashboard/technician/add-service"
-              className="inline-block px-5 py-2.5 bg-[#f1f3f4] text-[#040404] text-xs uppercase tracking-wider font-semibold hover:bg-[#67e8f9]"
+              className="inline-block px-5 py-2.5 glossy-btn-primary rounded-xl text-xs uppercase tracking-wider font-semibold"
             >
               Add First Service
             </Link>
           </div>
         ) : (
-          <div className="border border-[#32414a] bg-[#213039] overflow-x-auto">
-            <table className="w-full text-left">
-              <thead className="bg-[#1b2932] border-b border-[#32414a] text-[10px] uppercase text-[#dbdbda] tracking-wider">
-                <tr>
-                  <th className="p-4">Service</th>
-                  <th className="p-4">Category</th>
-                  <th className="p-4">Base Price</th>
-                  <th className="p-4">Approval Status</th>
-                  <th className="p-4">Visibility</th>
-                  <th className="p-4 text-right">Actions</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[#32414a] text-[#eaeae9]">
-                {services.map((service) => (
-                  <tr key={service._id} className="hover:bg-[#1b2932]/50 transition-colors">
-                    <td className="p-4">
-                      <div className="flex items-center space-x-3">
-                        <img
-                          src={service.image}
-                          alt={service.title}
-                          className="w-12 h-12 object-cover border border-[#32414a] shrink-0"
-                        />
-                        <div>
-                          <div className="font-display font-semibold text-sm text-[#fefdfe]">
-                            {service.title}
-                          </div>
-                          <div className="text-[10px] text-[#dbdbda]">
-                            {service.serviceMode} &bull; {service.serviceArea}
+          <div className="glossy-card rounded-2xl overflow-hidden">
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs">
+                <thead className="bg-slate-100/70 border-b border-slate-200/80 text-[11px] uppercase text-slate-600 tracking-wider">
+                  <tr>
+                    <th className="p-4 font-semibold">Service</th>
+                    <th className="p-4 font-semibold">Category</th>
+                    <th className="p-4 font-semibold">Base Price</th>
+                    <th className="p-4 font-semibold">Approval Status</th>
+                    <th className="p-4 font-semibold">Visibility</th>
+                    <th className="p-4 font-semibold text-right">Actions</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100 text-slate-700">
+                  {services.map((service) => (
+                    <tr key={service._id} className="hover:bg-slate-50/60 transition-colors">
+                      <td className="p-4">
+                        <div className="flex items-center space-x-3">
+                          <img
+                            src={service.image}
+                            alt={service.title}
+                            className="w-12 h-12 rounded-lg object-cover border border-slate-200 shrink-0 shadow-xs"
+                          />
+                          <div>
+                            <div className="font-medium text-[#000000] text-sm">
+                              {service.title}
+                            </div>
+                            <div className="text-[11px] text-slate-500">
+                              {service.serviceMode} &bull; {service.serviceArea}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </td>
-                    <td className="p-4 text-[#dbdbda]">{service.category}</td>
-                    <td className="p-4 font-bold text-[#fefdfe]">${service.basePrice}</td>
-                    <td className="p-4">
-                      <StatusBadge status={service.approvalStatus} type="approval" />
-                    </td>
-                    <td className="p-4">
-                      <button
-                        onClick={() => handleToggleAvailability(service._id)}
-                        className={`inline-flex items-center space-x-1.5 px-2.5 py-1 text-[10px] uppercase tracking-wider border ${
-                          service.isAvailable
-                            ? 'bg-emerald-950/60 border-emerald-700 text-emerald-300'
-                            : 'bg-neutral-800 border-neutral-700 text-neutral-400'
-                        }`}
-                      >
-                        <Power className="w-3 h-3" />
-                        <span>{service.isAvailable ? 'Available' : 'Paused'}</span>
-                      </button>
-                    </td>
-                    <td className="p-4 text-right space-x-2">
-                      <button
-                        onClick={() => handleOpenEdit(service)}
-                        className="p-1.5 border border-[#32414a] text-[#67e8f9] hover:bg-[#02444b]"
-                        aria-label="Edit Service"
-                      >
-                        <Edit2 className="w-4 h-4" />
-                      </button>
-                      <button
-                        onClick={() => handleOpenDelete(service._id)}
-                        className="p-1.5 border border-[#32414a] text-rose-400 hover:bg-rose-950/40"
-                        aria-label="Delete Service"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+                      </td>
+                      <td className="p-4 text-slate-600">{service.category}</td>
+                      <td className="p-4 font-serif font-bold text-[#000000] text-sm">
+                        ${service.basePrice}
+                      </td>
+                      <td className="p-4">
+                        <StatusBadge status={service.approvalStatus} type="approval" />
+                      </td>
+                      <td className="p-4">
+                        <button
+                          onClick={() => handleToggleAvailability(service._id)}
+                          className={`inline-flex items-center space-x-1.5 px-3 py-1 rounded-md text-[11px] uppercase tracking-wider font-medium border transition-colors ${
+                            service.isAvailable
+                              ? 'bg-emerald-50 border-emerald-200 text-emerald-800'
+                              : 'bg-slate-100 border-slate-200 text-slate-500'
+                          }`}
+                        >
+                          <Power className="w-3 h-3" />
+                          <span>{service.isAvailable ? 'Available' : 'Paused'}</span>
+                        </button>
+                      </td>
+                      <td className="p-4 text-right space-x-2">
+                        <button
+                          onClick={() => handleOpenEdit(service)}
+                          className="p-2 rounded-lg border border-slate-200 text-slate-700 hover:bg-slate-100 transition-colors"
+                          aria-label="Edit Service"
+                        >
+                          <Edit2 className="w-4 h-4" />
+                        </button>
+                        <button
+                          onClick={() => handleOpenDelete(service._id)}
+                          className="p-2 rounded-lg border border-rose-200 text-rose-600 hover:bg-rose-50 transition-colors"
+                          aria-label="Delete Service"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
           </div>
         )}
 
         {/* Edit Pre-filled Modal */}
         {editModalOpen && editingService && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-xs">
-            <div className="bg-[#1b2932] border border-[#32414a] max-w-lg w-full p-6 text-[#fefdfe] shadow-2xl relative">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4 backdrop-blur-xs">
+            <div className="glossy-card max-w-lg w-full p-6 text-slate-800 rounded-2xl shadow-2xl relative">
               <button
                 onClick={() => setEditModalOpen(false)}
-                className="absolute top-4 right-4 text-[#dbdbda] hover:text-[#fefdfe]"
+                className="absolute top-4 right-4 text-slate-400 hover:text-slate-700"
               >
                 <X className="w-5 h-5" />
               </button>
 
-              <h3 className="text-lg font-display font-semibold mb-1">Edit Service</h3>
-              <p className="text-[11px] text-amber-300 mb-4">
+              <h3 className="text-xl font-serif font-medium text-[#000000] mb-1">
+                Edit Service
+              </h3>
+              <p className="text-xs text-amber-700 mb-4 bg-amber-50 p-2.5 rounded-lg border border-amber-200">
                 Note: Updating details will revert approvalStatus back to &lsquo;pending&rsquo; for admin verification.
               </p>
 
-              <form onSubmit={handleSaveEdit} className="space-y-4 font-mono text-xs">
+              <form onSubmit={handleSaveEdit} className="space-y-4 text-xs">
                 <div>
-                  <label className="block text-[10px] uppercase text-[#dbdbda] mb-1">Title</label>
+                  <label className="block text-[11px] uppercase tracking-wider font-semibold text-slate-600 mb-1">
+                    Title
+                  </label>
                   <input
                     type="text"
                     value={editingService.title}
@@ -269,13 +280,13 @@ export default function MyServicesPage() {
                       setEditingService({ ...editingService, title: e.target.value })
                     }
                     required
-                    className="w-full bg-[#213039] border border-[#32414a] p-2 text-[#fefdfe]"
+                    className="w-full bg-white border border-slate-200 rounded-xl p-2.5 text-slate-800 text-sm focus:outline-hidden focus:ring-2 focus:ring-[#1e3a8a]/20"
                   />
                 </div>
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
-                    <label className="block text-[10px] uppercase text-[#dbdbda] mb-1">
+                    <label className="block text-[11px] uppercase tracking-wider font-semibold text-slate-600 mb-1">
                       Base Price ($)
                     </label>
                     <input
@@ -289,11 +300,11 @@ export default function MyServicesPage() {
                         })
                       }
                       required
-                      className="w-full bg-[#213039] border border-[#32414a] p-2 text-[#fefdfe]"
+                      className="w-full bg-white border border-slate-200 rounded-xl p-2.5 text-slate-800 text-sm focus:outline-hidden focus:ring-2 focus:ring-[#1e3a8a]/20"
                     />
                   </div>
                   <div>
-                    <label className="block text-[10px] uppercase text-[#dbdbda] mb-1">
+                    <label className="block text-[11px] uppercase tracking-wider font-semibold text-slate-600 mb-1">
                       Duration
                     </label>
                     <input
@@ -305,13 +316,13 @@ export default function MyServicesPage() {
                           estimatedDuration: e.target.value,
                         })
                       }
-                      className="w-full bg-[#213039] border border-[#32414a] p-2 text-[#fefdfe]"
+                      className="w-full bg-white border border-slate-200 rounded-xl p-2.5 text-slate-800 text-sm focus:outline-hidden focus:ring-2 focus:ring-[#1e3a8a]/20"
                     />
                   </div>
                 </div>
 
                 <div>
-                  <label className="block text-[10px] uppercase text-[#dbdbda] mb-1">
+                  <label className="block text-[11px] uppercase tracking-wider font-semibold text-slate-600 mb-1">
                     Service Area
                   </label>
                   <input
@@ -321,12 +332,12 @@ export default function MyServicesPage() {
                       setEditingService({ ...editingService, serviceArea: e.target.value })
                     }
                     required
-                    className="w-full bg-[#213039] border border-[#32414a] p-2 text-[#fefdfe]"
+                    className="w-full bg-white border border-slate-200 rounded-xl p-2.5 text-slate-800 text-sm focus:outline-hidden focus:ring-2 focus:ring-[#1e3a8a]/20"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-[10px] uppercase text-[#dbdbda] mb-1">
+                  <label className="block text-[11px] uppercase tracking-wider font-semibold text-slate-600 mb-1">
                     Description
                   </label>
                   <textarea
@@ -336,7 +347,7 @@ export default function MyServicesPage() {
                       setEditingService({ ...editingService, description: e.target.value })
                     }
                     required
-                    className="w-full bg-[#213039] border border-[#32414a] p-2 text-[#fefdfe]"
+                    className="w-full bg-white border border-slate-200 rounded-xl p-2.5 text-slate-800 text-sm focus:outline-hidden focus:ring-2 focus:ring-[#1e3a8a]/20"
                   />
                 </div>
 
@@ -344,13 +355,13 @@ export default function MyServicesPage() {
                   <button
                     type="button"
                     onClick={() => setEditModalOpen(false)}
-                    className="px-4 py-2 border border-[#32414a] text-[#dbdbda]"
+                    className="px-4 py-2 border border-slate-200 rounded-xl text-slate-600 hover:bg-slate-100 font-medium"
                   >
                     Cancel
                   </button>
                   <button
                     type="submit"
-                    className="px-5 py-2 bg-[#f1f3f4] text-[#040404] font-semibold hover:bg-[#67e8f9]"
+                    className="px-5 py-2 glossy-btn-primary rounded-xl font-semibold"
                   >
                     Save & Re-submit
                   </button>
