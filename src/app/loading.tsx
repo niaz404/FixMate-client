@@ -1,15 +1,20 @@
 import React from 'react';
-import { Wrench } from 'lucide-react';
+import { FixuraShieldIcon } from '@/components/ui/FixuraLogo';
 
 export default function Loading() {
   return (
-    <div className="min-h-[70vh] bg-[#1b2932] text-[#fefdfe] flex flex-col items-center justify-center p-6 text-center font-mono space-y-4">
-      <div className="w-12 h-12 bg-[#02444b] border border-[#32414a] text-[#67e8f9] flex items-center justify-center animate-spin">
-        <Wrench className="w-6 h-6" />
+    <div className="min-h-[70vh] flex flex-col items-center justify-center p-6 text-center space-y-4">
+      <div className="w-14 h-14 rounded-2xl bg-white/90 border border-white/80 shadow-md flex items-center justify-center animate-pulse">
+        <FixuraShieldIcon className="w-8 h-8 text-[#1e3a8a] animate-spin" />
       </div>
-      <p className="text-xs uppercase tracking-widest text-[#dbdbda]">
-        Loading FixMate Interface...
-      </p>
+      <div className="space-y-1">
+        <p className="font-serif text-lg font-medium text-[#000000]">
+          Loading Fixura
+        </p>
+        <p className="text-xs text-slate-500">
+          Preparing your repair workspace...
+        </p>
+      </div>
     </div>
   );
 }

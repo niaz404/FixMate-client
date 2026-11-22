@@ -16,17 +16,17 @@ export default function GlobalError({
   }, [error]);
 
   return (
-    <div className="min-h-[75vh] bg-[#1b2932] text-[#fefdfe] flex items-center justify-center p-6 text-center font-mono">
-      <div className="max-w-md w-full p-8 border border-[#32414a] bg-[#213039] space-y-6 shadow-2xl">
-        <div className="w-16 h-16 bg-rose-950/60 border border-rose-800 text-rose-400 flex items-center justify-center mx-auto">
-          <AlertCircle className="w-8 h-8" />
+    <div className="min-h-[75vh] flex items-center justify-center p-6 text-center">
+      <div className="max-w-md w-full p-8 rounded-2xl glossy-card space-y-6">
+        <div className="w-14 h-14 rounded-xl bg-rose-50 border border-rose-200 text-rose-600 flex items-center justify-center mx-auto shadow-xs">
+          <AlertCircle className="w-7 h-7" />
         </div>
 
         <div className="space-y-2">
-          <h2 className="text-2xl font-display font-semibold text-[#fefdfe]">
+          <h2 className="font-serif text-2xl font-medium text-[#000000]">
             Application Error
           </h2>
-          <p className="text-xs text-[#dbdbda] leading-relaxed">
+          <p className="text-sm text-slate-600 leading-relaxed">
             An unexpected error occurred while rendering this view. Our engineering logs have captured the diagnostic trace.
           </p>
         </div>
@@ -34,14 +34,14 @@ export default function GlobalError({
         <div className="pt-2 flex flex-col sm:flex-row gap-3">
           <button
             onClick={() => reset()}
-            className="flex-1 inline-flex items-center justify-center space-x-2 py-2.5 bg-[#f1f3f4] text-[#040404] text-xs uppercase tracking-wider font-bold hover:bg-[#67e8f9] transition-colors"
+            className="flex-1 inline-flex items-center justify-center space-x-2 py-3 glossy-btn-primary rounded-xl text-xs font-semibold uppercase tracking-wider"
           >
             <RotateCcw className="w-4 h-4" />
             <span>Try Again</span>
           </button>
           <Link
             href="/"
-            className="flex-1 inline-flex items-center justify-center space-x-2 py-2.5 border border-[#32414a] bg-[#1b2932] text-[#fefdfe] text-xs uppercase tracking-wider hover:bg-[#213039] transition-colors"
+            className="flex-1 inline-flex items-center justify-center space-x-2 py-3 glossy-btn-secondary rounded-xl text-xs font-semibold uppercase tracking-wider"
           >
             <Home className="w-4 h-4" />
             <span>Home</span>
