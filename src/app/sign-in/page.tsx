@@ -31,11 +31,7 @@ function SignInContent() {
     setSubmitting(false);
 
     if (success) {
-      if (callbackUrl) {
-        router.push(callbackUrl);
-      } else {
-        router.push('/');
-      }
+      window.location.href = callbackUrl || '/';
     }
   };
 

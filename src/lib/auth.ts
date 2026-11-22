@@ -7,6 +7,17 @@ const client = new MongoClient(uri);
 const db = client.db("fixmate");
 
 export const auth = betterAuth({
+  baseURL:
+    process.env.BETTER_AUTH_URL ||
+    process.env.NEXT_PUBLIC_APP_URL ||
+    (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined),
+  trustedOrigins: [
+    "http://localhost:3000",
+    "https://fix-mate-client-three.vercel.app",
+    process.env.NEXT_PUBLIC_APP_URL,
+    process.env.BETTER_AUTH_URL,
+    process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : undefined,
+  ].filter(Boolean) as string[],
   emailAndPassword: {
     enabled: true,
   },
