@@ -121,19 +121,19 @@ function SignInContent() {
             </button>
             <button
               type="button"
-              onClick={() => handleQuickFill('rashed@fixura.com', 'Tech123!')}
+              onClick={() => handleQuickFill('tech@fixura.com', 'Tech123!')}
               className="p-2 rounded-lg border border-[#bfc7d1] bg-white/70 hover:bg-white text-center transition-all"
             >
               <div className="font-semibold text-[#000000]">Technician</div>
-              <div className="text-[8px] text-[#383838]">rashed@</div>
+              <div className="text-[8px] text-[#383838]">tech@</div>
             </button>
             <button
               type="button"
-              onClick={() => handleQuickFill('tanvir@gmail.com', 'Cust123!')}
+              onClick={() => handleQuickFill('customer@fixura.com', 'Cust123!')}
               className="p-2 rounded-lg border border-[#bfc7d1] bg-white/70 hover:bg-white text-center transition-all"
             >
               <div className="font-semibold text-[#000000]">Customer</div>
-              <div className="text-[8px] text-[#383838]">tanvir@</div>
+              <div className="text-[8px] text-[#383838]">customer@</div>
             </button>
           </div>
         </div>
