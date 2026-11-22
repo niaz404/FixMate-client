@@ -58,7 +58,7 @@ export function TechnicianDashboardPage() {
           </p>
         </div>
 
-        {/* 3 Metrics Cards */}
+        
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <StatsCard
             title="Total Catalog Services"
@@ -80,7 +80,7 @@ export function TechnicianDashboardPage() {
           />
         </div>
 
-        {/* Quick Action Cards */}
+        
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="rounded-2xl border border-white/80 bg-white/90 p-6 space-y-4 shadow-sm">
             <div className="flex items-center space-x-3.5">

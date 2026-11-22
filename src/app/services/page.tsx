@@ -42,7 +42,6 @@ function ServicesContent() {
   const router = useRouter();
   const searchParams = useSearchParams();
 
-  // URL state initialization
   const initialSearch = searchParams.get('search') || '';
   const initialCategory = searchParams.get('category') || 'All';
   const initialMode = searchParams.get('mode') || 'All';
@@ -57,7 +56,6 @@ function ServicesContent() {
   const [totalCount, setTotalCount] = useState(0);
   const [loading, setLoading] = useState(true);
 
-  // Sync state with URL params
   useEffect(() => {
     fetchFilteredServices();
   }, [search, selectedCategory, selectedMode, selectedSort]);
@@ -93,7 +91,7 @@ function ServicesContent() {
   return (
     <div className="w-full bg-[#dde6f0] text-[#000000] py-12 md:py-16">
       <div className="max-w-[960px] mx-auto px-6">
-        {/* Header */}
+        
         <div className="max-w-xl mb-10">
           <span className="text-xs uppercase tracking-widest text-[#1e3a8a] font-semibold block mb-2">
             Explore Fixura Services
@@ -106,10 +104,10 @@ function ServicesContent() {
           </p>
         </div>
 
-        {/* Filter Controls Bar */}
+        
         <div className="rounded-2xl border border-white/80 bg-white/85 p-5 mb-8 shadow-xs space-y-4">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-3.5 items-center">
-            {/* Search Input */}
+            
             <div className="md:col-span-6 relative">
               <Search className="w-4 h-4 text-[#383838] absolute left-3.5 top-1/2 -translate-y-1/2" />
               <input
@@ -121,7 +119,7 @@ function ServicesContent() {
               />
             </div>
 
-            {/* Service Mode Filter */}
+            
             <div className="md:col-span-3">
               <select
                 value={selectedMode}
@@ -134,7 +132,7 @@ function ServicesContent() {
               </select>
             </div>
 
-            {/* Sort Dropdown */}
+            
             <div className="md:col-span-3">
               <select
                 value={selectedSort}
@@ -150,7 +148,7 @@ function ServicesContent() {
             </div>
           </div>
 
-          {/* Category Chips Bar */}
+          
           <div className="flex flex-wrap items-center gap-2 pt-2 border-t border-[#bfc7d1]/30">
             <span className="text-[11px] uppercase font-semibold text-[#383838] mr-2">Category:</span>
             {CATEGORIES.map((cat) => (
@@ -169,7 +167,7 @@ function ServicesContent() {
           </div>
         </div>
 
-        {/* Results Metadata */}
+        
         <div className="flex items-center justify-between text-xs text-[#383838] mb-6">
           <span>
             Showing <strong className="text-[#000000]">{services.length}</strong> of{' '}
@@ -185,7 +183,7 @@ function ServicesContent() {
           )}
         </div>
 
-        {/* Services Grid */}
+        
         {loading ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {[...Array(6)].map((_, i) => (
@@ -193,7 +191,7 @@ function ServicesContent() {
             ))}
           </div>
         ) : services.length === 0 ? (
-          /* Empty State */
+          
           <div className="text-center py-16 rounded-2xl border border-white/80 bg-white/80 p-8 max-w-lg mx-auto space-y-4 shadow-xs">
             <Wrench className="w-10 h-10 text-[#1e3a8a] mx-auto" />
             <h3 className="font-serif font-medium text-xl text-[#000000]">

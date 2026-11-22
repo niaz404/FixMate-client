@@ -7,7 +7,7 @@ export function ClosingBannerSection() {
     <section className="w-full bg-[#141314] text-[#fcfcfd] py-16 md:py-20 relative overflow-hidden">
       <div className="max-w-[960px] mx-auto px-6">
         <div className="p-8 md:p-12 rounded-2xl bg-gradient-to-br from-[#1a1c23] to-[#141314] border border-white/10 flex flex-col md:flex-row items-center justify-between gap-8 shadow-2xl relative">
-          {/* Subtle blue ambient glow */}
+          
           <div className="absolute top-0 right-0 w-80 h-80 bg-[#1e3a8a]/20 rounded-full blur-3xl pointer-events-none" />
 
           <div className="space-y-2.5 max-w-xl text-center md:text-left relative z-10">

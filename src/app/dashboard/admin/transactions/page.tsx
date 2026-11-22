@@ -55,7 +55,7 @@ export default function AdminTransactionsPage() {
           </p>
         </div>
 
-        {/* Total Revenue Summary Banner */}
+        
         <div className="p-6 glossy-card rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex items-center space-x-4">
             <div className="w-12 h-12 rounded-xl bg-blue-50 border border-blue-200 flex items-center justify-center text-[#1e3a8a] shadow-xs">

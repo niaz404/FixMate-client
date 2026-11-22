@@ -28,7 +28,6 @@ export async function POST(req: Request) {
       if (formData.get('amount')) amount = Number(formData.get('amount'));
     }
 
-    // Lookup booking details from MongoDB if bookingId was provided
     if (bookingId && ObjectId.isValid(bookingId)) {
       try {
         const uri = process.env.MONGODB_URI;
@@ -52,7 +51,6 @@ export async function POST(req: Request) {
 
     const unitAmountCents = Math.max(100, Math.round(amount * 100));
 
-    // Create Checkout Sessions from body params per Stripe Next.js Quickstart
     const session = await stripe.checkout.sessions.create({
       line_items: [
         {

@@ -10,7 +10,6 @@ export function StatusBadge({ status, type = 'job' }: StatusBadgeProps) {
 
   let colorClasses = 'bg-slate-100 text-slate-700 border-slate-200';
 
-  // Job Statuses
   if (normalized === 'requested') {
     colorClasses = 'bg-blue-50 text-blue-700 border-blue-200';
   } else if (normalized === 'accepted') {
@@ -25,14 +24,12 @@ export function StatusBadge({ status, type = 'job' }: StatusBadgeProps) {
     colorClasses = 'bg-neutral-100 text-neutral-600 border-neutral-300';
   }
 
-  // Payment Statuses
   if (normalized === 'paid') {
     colorClasses = 'bg-emerald-50 text-emerald-800 border-emerald-300 font-semibold';
   } else if (normalized === 'unpaid') {
     colorClasses = 'bg-amber-50 text-amber-800 border-amber-200';
   }
 
-  // Approval Statuses
   if (normalized === 'approved') {
     colorClasses = 'bg-emerald-50 text-emerald-800 border-emerald-200';
   } else if (normalized === 'pending') {

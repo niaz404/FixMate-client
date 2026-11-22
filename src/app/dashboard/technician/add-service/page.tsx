@@ -117,7 +117,7 @@ export default function AddServicePage() {
           onSubmit={handleSubmit}
           className="rounded-2xl border border-white/80 bg-white/90 p-6 md:p-8 space-y-5 shadow-sm"
         >
-          {/* Read-Only Technician Info */}
+          
           <div className="grid grid-cols-2 gap-4 pb-4 border-b border-[#bfc7d1]/40">
             <div>
               <label className="block text-[10px] uppercase font-semibold text-[#383838] mb-1">
@@ -143,7 +143,7 @@ export default function AddServicePage() {
             </div>
           </div>
 
-          {/* Service Title */}
+          
           <div>
             <label className="block text-[11px] uppercase font-semibold text-[#383838] mb-1.5">
               Service Title *
@@ -158,7 +158,7 @@ export default function AddServicePage() {
             />
           </div>
 
-          {/* Category & Mode Grid */}
+          
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <div>
               <label className="block text-[11px] uppercase font-semibold text-[#383838] mb-1.5">Category *</label>
@@ -190,7 +190,7 @@ export default function AddServicePage() {
             </div>
           </div>
 
-          {/* Price, Duration, Area */}
+          
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
               <label className="block text-[11px] uppercase font-semibold text-[#383838] mb-1.5">
@@ -236,7 +236,7 @@ export default function AddServicePage() {
             </div>
           </div>
 
-          {/* Detailed Description */}
+          
           <div>
             <label className="block text-[11px] uppercase font-semibold text-[#383838] mb-1.5">
               Detailed Scope & Inclusions *
@@ -251,7 +251,7 @@ export default function AddServicePage() {
             />
           </div>
 
-          {/* Service Banner Image URL */}
+          
           <div>
             <label className="block text-[11px] uppercase font-semibold text-[#383838] mb-1.5">
               Service Banner Image URL *
@@ -271,7 +271,7 @@ export default function AddServicePage() {
             )}
           </div>
 
-          {/* Submission Action */}
+          
           <div className="pt-2">
             <button
               type="submit"

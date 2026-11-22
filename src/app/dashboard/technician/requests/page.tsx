@@ -31,12 +31,10 @@ export default function TechnicianRequestsPage() {
   const [selectedFilter, setSelectedFilter] = useState('All');
   const [loading, setLoading] = useState(true);
 
-  // Complete Job Modal State
   const [completeModalOpen, setCompleteModalOpen] = useState(false);
   const [bookingToComplete, setBookingToComplete] = useState<TechBooking | null>(null);
   const [finalAmountInput, setFinalAmountInput] = useState<number>(0);
 
-  // Reject Confirmation Modal State
   const [rejectModalOpen, setRejectModalOpen] = useState(false);
   const [bookingToReject, setBookingToReject] = useState<string | null>(null);
 
@@ -59,7 +57,6 @@ export default function TechnicianRequestsPage() {
     }
   }
 
-  // State Transition Actions
   const handleUpdateStatus = async (
     bookingId: string,
     nextStatus: string,
@@ -123,7 +120,7 @@ export default function TechnicianRequestsPage() {
           </p>
         </div>
 
-        {/* Filter Bar */}
+        
         <div className="flex flex-wrap items-center gap-2 p-3 glossy-card rounded-xl">
           <span className="text-xs uppercase tracking-wider text-slate-500 font-semibold mr-2">
             Filter Status:
@@ -143,7 +140,7 @@ export default function TechnicianRequestsPage() {
           ))}
         </div>
 
-        {/* Request Listings */}
+        
         {loading ? (
           <div className="space-y-3">
             {[...Array(3)].map((_, i) => (
@@ -162,7 +159,7 @@ export default function TechnicianRequestsPage() {
                 key={r._id}
                 className="p-5 flex flex-col lg:flex-row lg:items-center justify-between gap-6 hover:bg-slate-50/60 transition-colors"
               >
-                {/* Left: Customer & Job Info */}
+                
                 <div className="space-y-2 max-w-2xl">
                   <div className="flex items-center space-x-2">
                     <StatusBadge status={r.status} type="job" />
@@ -198,7 +195,7 @@ export default function TechnicianRequestsPage() {
                   </div>
                 </div>
 
-                {/* Right: Price & Context-Aware Actions */}
+                
                 <div className="flex flex-row lg:flex-col items-center lg:items-end justify-between border-t lg:border-t-0 border-slate-100 pt-4 lg:pt-0 shrink-0 space-y-3">
                   <div className="text-left lg:text-right">
                     <span className="text-[11px] uppercase tracking-wider text-slate-500 block font-medium">
@@ -209,7 +206,7 @@ export default function TechnicianRequestsPage() {
                     </span>
                   </div>
 
-                  {/* Actions for 'requested' */}
+                  
                   {r.status === 'requested' && (
                     <div className="flex items-center space-x-2">
                       <button
@@ -229,7 +226,7 @@ export default function TechnicianRequestsPage() {
                     </div>
                   )}
 
-                  {/* Actions for 'accepted' */}
+                  
                   {r.status === 'accepted' && (
                     <button
                       onClick={() => handleUpdateStatus(r._id, 'in-progress')}
@@ -240,7 +237,7 @@ export default function TechnicianRequestsPage() {
                     </button>
                   )}
 
-                  {/* Actions for 'in-progress' */}
+                  
                   {r.status === 'in-progress' && (
                     <button
                       onClick={() => handleOpenCompleteModal(r)}
@@ -251,7 +248,7 @@ export default function TechnicianRequestsPage() {
                     </button>
                   )}
 
-                  {/* Terminal state badges */}
+                  
                   {['completed', 'rejected', 'cancelled'].includes(r.status) && (
                     <span className="text-xs text-slate-500 uppercase font-medium">
                       Job {r.status}
@@ -263,7 +260,7 @@ export default function TechnicianRequestsPage() {
           </div>
         )}
 
-        {/* Mark Completed Modal to Enter Final Amount */}
+        
         {completeModalOpen && bookingToComplete && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4 backdrop-blur-xs">
             <div className="glossy-card max-w-md w-full p-6 text-slate-800 rounded-2xl shadow-2xl relative">
@@ -320,7 +317,7 @@ export default function TechnicianRequestsPage() {
           </div>
         )}
 
-        {/* Reject Confirmation Modal */}
+        
         <ConfirmationModal
           isOpen={rejectModalOpen}
           title="Reject Repair Request?"

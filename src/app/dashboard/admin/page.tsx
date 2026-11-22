@@ -52,7 +52,7 @@ export default function AdminDashboardPage() {
           </p>
         </div>
 
-        {/* 4 Stats Cards */}
+        
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           <StatsCard
             title="Total Users"
@@ -80,7 +80,7 @@ export default function AdminDashboardPage() {
           />
         </div>
 
-        {/* Action Shortcuts */}
+        
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="rounded-2xl border border-white/80 bg-white/90 p-6 space-y-3 shadow-sm">
             <h3 className="font-serif font-semibold text-base text-[#000000]">

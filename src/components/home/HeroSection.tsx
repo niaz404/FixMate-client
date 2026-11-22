@@ -7,25 +7,25 @@ export function HeroSection() {
     <section className="w-full bg-[#d5dde7] text-[#000000] pt-16 pb-14 md:pt-20 md:pb-16 relative overflow-hidden">
       <div className="max-w-[960px] mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
-          {/* Left Column: Heading, Actions, Trust Caption, Key Numbers */}
+          
           <div className="lg:col-span-7 space-y-6">
-            {/* Trust Caption Pill */}
+            
             <div className="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-white/85 border border-white text-xs font-medium text-[#1e3a8a] shadow-xs">
               <ShieldCheck className="w-4 h-4 text-[#1e3a8a]" />
               <span>100% Pay-After-Service Guarantee &bull; Verified Pros</span>
             </div>
 
-            {/* Display Headline in EB Garamond */}
+            
             <h1 className="text-4xl md:text-5xl lg:text-[52px] font-serif font-medium tracking-tight leading-[1.12] text-[#000000]">
               Broken device? Restored to perfection by certified masters.
             </h1>
 
-            {/* Subtitle */}
+            
             <p className="text-base text-[#383838] leading-relaxed max-w-xl">
               From precision iPhone logic boards to inverter cooling systems, book verified local specialists. Follow your repair pipeline live and pay only once satisfied.
             </p>
 
-            {/* Dual Actions */}
+            
             <div className="flex flex-wrap items-center gap-3.5 pt-1">
               <Link
                 href="/services"
@@ -42,7 +42,7 @@ export function HeroSection() {
               </Link>
             </div>
 
-            {/* Key Numbers Grid below text */}
+            
             <div className="grid grid-cols-3 gap-4 pt-6 border-t border-[#bfc7d1]/80">
               <div>
                 <div className="text-2xl md:text-3xl font-serif font-semibold text-[#1e3a8a]">
@@ -65,10 +65,10 @@ export function HeroSection() {
             </div>
           </div>
 
-          {/* Right Column: Browser Framed UI Mockup */}
+          
           <div className="lg:col-span-5">
             <div className="rounded-xl border border-white/80 bg-white/90 shadow-[0_12px_40px_rgba(30,58,138,0.08)] overflow-hidden">
-              {/* Browser Header Bar */}
+              
               <div className="px-4 py-2.5 bg-[#d5dde7]/60 border-b border-[#bfc7d1]/50 flex items-center justify-between">
                 <div className="flex items-center space-x-1.5">
                   <span className="w-2.5 h-2.5 rounded-full bg-rose-400" />
@@ -81,9 +81,9 @@ export function HeroSection() {
                 <div className="w-3" />
               </div>
 
-              {/* Browser Body / Live Product Interface */}
+              
               <div className="p-5 space-y-4 text-xs">
-                {/* Live Tracking Header */}
+                
                 <div className="flex items-center justify-between pb-3 border-b border-[#bfc7d1]/40">
                   <div>
                     <span className="text-[10px] uppercase font-semibold text-[#1e3a8a] tracking-wider block">
@@ -98,7 +98,7 @@ export function HeroSection() {
                   </span>
                 </div>
 
-                {/* Technician Card Inset */}
+                
                 <div className="p-3 rounded-lg bg-[#dde6f0]/50 border border-[#bfc7d1]/40 flex items-center space-x-3">
                   <div className="w-9 h-9 rounded-full bg-[#1e3a8a] text-white flex items-center justify-center font-serif font-bold text-xs">
                     RM
@@ -113,7 +113,7 @@ export function HeroSection() {
                   </div>
                 </div>
 
-                {/* Progress Steps */}
+                
                 <div className="space-y-2 pt-1">
                   <div className="flex items-center justify-between text-[11px]">
                     <span className="text-[#383838]">Repair Progress</span>
@@ -124,7 +124,7 @@ export function HeroSection() {
                   </div>
                 </div>
 
-                {/* Verified Specs Checklist */}
+                
                 <div className="pt-2 border-t border-[#bfc7d1]/40 space-y-1.5 text-[11px] text-[#383838]">
                   <div className="flex items-center space-x-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
@@ -136,7 +136,7 @@ export function HeroSection() {
                   </div>
                 </div>
 
-                {/* Guarantee Footnote */}
+                
                 <div className="pt-2 flex items-center justify-between text-[10px] text-[#383838]">
                   <span>Payment Status: <strong className="text-[#000000]">Unpaid (Pay on completion)</strong></span>
                   <span className="font-semibold text-[#1e3a8a]">$65.00</span>

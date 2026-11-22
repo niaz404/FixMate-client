@@ -27,11 +27,9 @@ export default function MyServicesPage() {
   const [services, setServices] = useState<ServiceItem[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Edit Modal State
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [editingService, setEditingService] = useState<ServiceItem | null>(null);
 
-  // Delete Modal State
   const [deleteModalOpen, setDeleteModalOpen] = useState(false);
   const [serviceToDelete, setServiceToDelete] = useState<string | null>(null);
 
@@ -250,7 +248,7 @@ export default function MyServicesPage() {
           </div>
         )}
 
-        {/* Edit Pre-filled Modal */}
+        
         {editModalOpen && editingService && (
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4 backdrop-blur-xs">
             <div className="glossy-card max-w-lg w-full p-6 text-slate-800 rounded-2xl shadow-2xl relative">
@@ -371,7 +369,7 @@ export default function MyServicesPage() {
           </div>
         )}
 
-        {/* Delete Confirmation Modal */}
+        
         <ConfirmationModal
           isOpen={deleteModalOpen}
           title="Delete Service Listing?"

@@ -41,7 +41,6 @@ export default function ServiceDetailPage() {
   const [loading, setLoading] = useState(true);
   const [modalOpen, setModalOpen] = useState(false);
 
-  // Request Form States
   const [phone, setPhone] = useState(user?.phone || '');
   const [address, setAddress] = useState(user?.area || '');
   const [preferredDate, setPreferredDate] = useState('');
@@ -167,7 +166,7 @@ export default function ServiceDetailPage() {
   return (
     <div className="w-full bg-[#dde6f0] text-[#000000] py-12 md:py-16">
       <div className="max-w-[960px] mx-auto px-6">
-        {/* Back Link */}
+        
         <Link
           href="/services"
           className="inline-flex items-center space-x-1.5 text-xs font-medium text-[#1e3a8a] hover:underline mb-8"
@@ -176,9 +175,9 @@ export default function ServiceDetailPage() {
           <span>Back to Browse Services</span>
         </Link>
 
-        {/* Main Details Grid */}
+        
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Left Column: Image & Details */}
+          
           <div className="lg:col-span-7 space-y-6">
             <div className="rounded-2xl border border-white/80 bg-white/90 shadow-sm overflow-hidden">
               <div className="relative h-64 md:h-80 w-full bg-slate-100">
@@ -235,7 +234,7 @@ export default function ServiceDetailPage() {
             </div>
           </div>
 
-          {/* Right Column: Pricing & Booking Action */}
+          
           <div className="lg:col-span-5 space-y-6">
             <div className="rounded-2xl border border-white/80 bg-white/90 p-6 md:p-7 space-y-5 shadow-sm">
               <div className="pb-5 border-b border-[#bfc7d1]/40 flex items-end justify-between">
@@ -252,7 +251,7 @@ export default function ServiceDetailPage() {
                 </span>
               </div>
 
-              {/* Technician Info */}
+              
               <div className="space-y-2">
                 <span className="text-[10px] uppercase text-[#383838] block font-semibold">
                   Assigned Specialist
@@ -271,7 +270,7 @@ export default function ServiceDetailPage() {
                 </div>
               </div>
 
-              {/* Request Action */}
+              
               <div className="pt-2">
                 {user && (user.role === 'technician' || user.role === 'admin') ? (
                   <div className="p-3 rounded-lg bg-amber-50 border border-amber-200 text-amber-800 text-xs">
@@ -294,7 +293,7 @@ export default function ServiceDetailPage() {
         </div>
       </div>
 
-      {/* Repair Request Modal */}
+      
       {modalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 p-4 backdrop-blur-xs">
           <div className="rounded-2xl border border-white bg-white max-w-lg w-full p-6 md:p-8 text-[#000000] shadow-2xl relative">

@@ -79,7 +79,7 @@ export default function AdminServicesPage() {
           </p>
         </div>
 
-        {/* Filter Bar */}
+        
         <div className="flex flex-wrap items-center gap-2 p-3 glossy-card rounded-xl">
           <span className="text-xs uppercase tracking-wider text-slate-500 font-semibold mr-2">
             Filter By Status:

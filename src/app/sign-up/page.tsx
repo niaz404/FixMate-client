@@ -21,7 +21,6 @@ export default function SignUpPage() {
   const [bio, setBio] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
-  // Password Validation Rules
   const hasMinLength = password.length >= 6;
   const hasUpperCase = /[A-Z]/.test(password);
   const hasLowerCase = /[a-z]/.test(password);
@@ -67,7 +66,7 @@ export default function SignUpPage() {
   return (
     <div className="min-h-[85vh] bg-[#dde6f0] text-[#000000] py-12 md:py-16 flex items-center justify-center px-4">
       <div className="max-w-lg w-full rounded-2xl border border-white/80 bg-white/90 p-8 shadow-md space-y-6">
-        {/* Header */}
+        
         <div className="text-center space-y-2">
           <Link href="/" className="inline-block mb-1">
             <FixuraLogo size="md" />
@@ -81,7 +80,7 @@ export default function SignUpPage() {
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4 text-xs">
-          {/* Role Selection Cards */}
+          
           <div>
             <label className="block text-[11px] uppercase font-semibold text-[#383838] mb-2">
               Select Your Role *
@@ -121,7 +120,7 @@ export default function SignUpPage() {
             </div>
           </div>
 
-          {/* Full Name */}
+          
           <div>
             <label className="block text-[11px] uppercase font-semibold text-[#383838] mb-1.5">
               Full Name *
@@ -136,7 +135,7 @@ export default function SignUpPage() {
             />
           </div>
 
-          {/* Email Address */}
+          
           <div>
             <label className="block text-[11px] uppercase font-semibold text-[#383838] mb-1.5">
               Email Address *
@@ -151,7 +150,7 @@ export default function SignUpPage() {
             />
           </div>
 
-          {/* Password with Inline Criteria Checkers */}
+          
           <div>
             <label className="block text-[11px] uppercase font-semibold text-[#383838] mb-1.5">
               Password *
@@ -165,7 +164,7 @@ export default function SignUpPage() {
               className="w-full bg-white border border-[#bfc7d1] rounded-lg px-3.5 py-2.5 text-[#000000] focus:border-[#1e3a8a] focus:outline-hidden"
             />
 
-            {/* Password Validation Requirements */}
+            
             <div className="mt-2.5 p-3 rounded-lg bg-[#dde6f0]/50 border border-[#bfc7d1]/50 space-y-1.5 text-[11px]">
               <div className="flex items-center space-x-2">
                 {hasMinLength ? (
@@ -200,7 +199,7 @@ export default function SignUpPage() {
             </div>
           </div>
 
-          {/* Optional Details: Phone & City Area */}
+          
           <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-[11px] uppercase font-semibold text-[#383838] mb-1.5">Phone</label>
@@ -224,7 +223,7 @@ export default function SignUpPage() {
             </div>
           </div>
 
-          {/* Optional Bio (useful for Technicians) */}
+          
           {role === 'technician' && (
             <div>
               <label className="block text-[11px] uppercase font-semibold text-[#383838] mb-1.5">
@@ -240,7 +239,7 @@ export default function SignUpPage() {
             </div>
           )}
 
-          {/* Submit Action */}
+          
           <button
             type="submit"
             disabled={submitting || !isPasswordValid}
@@ -250,7 +249,7 @@ export default function SignUpPage() {
           </button>
         </form>
 
-        {/* Footer Navigation */}
+        
         <div className="text-center pt-2 border-t border-[#bfc7d1]/40 text-xs text-[#383838]">
           Already have an account?{' '}
           <Link href="/sign-in" className="text-[#1e3a8a] hover:underline font-semibold">

@@ -12,31 +12,31 @@ import { ClosingBannerSection } from '@/components/home/ClosingBannerSection';
 export default function HomePage() {
   return (
     <main className="w-full">
-      {/* 2. Hero Section */}
+      
       <HeroSection />
 
-      {/* 3. Logo Cloud Section */}
+      
       <LogoCloudSection />
 
-      {/* 4. Features Section (3 alternating rows) */}
+      
       <FeaturesSection />
 
-      {/* Dynamic Featured Services (6 latest approved services) */}
+      
       <FeaturedServicesSection />
 
-      {/* 5. Process Section (3 connected steps) */}
+      
       <ProcessSection />
 
-      {/* 6. Testimonials Section */}
+      
       <TestimonialsSection />
 
-      {/* 7. Pricing Section */}
+      
       <PricingSection />
 
-      {/* 8. FAQ Section */}
+      
       <FaqSection />
 
-      {/* 9. Closing Banner Section */}
+      
       <ClosingBannerSection />
     </main>
   );

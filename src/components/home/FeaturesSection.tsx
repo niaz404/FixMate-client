@@ -6,7 +6,7 @@ export function FeaturesSection() {
   return (
     <section className="w-full bg-[#d5dde7] text-[#000000] py-16 md:py-20 border-b border-[#bfc7d1]/50">
       <div className="max-w-[960px] mx-auto px-6 space-y-16">
-        {/* Section Header */}
+        
         <div className="max-w-xl">
           <span className="text-xs uppercase tracking-widest text-[#1e3a8a] font-semibold block mb-2">
             Engineered For Trust
@@ -16,7 +16,7 @@ export function FeaturesSection() {
           </h2>
         </div>
 
-        {/* Feature Row 1: Vetted Technicians (Text Left, Mockup Right) */}
+        
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-6 space-y-4">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#1e3a8a] to-[#2563eb] text-white flex items-center justify-center shadow-sm">
@@ -75,7 +75,7 @@ export function FeaturesSection() {
           </div>
         </div>
 
-        {/* Feature Row 2: Status Pipeline (Mockup Left, Text Right) */}
+        
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-6 order-2 lg:order-1">
             <div className="rounded-xl border border-white/80 bg-white/85 p-6 shadow-sm text-xs space-y-4">
@@ -134,7 +134,7 @@ export function FeaturesSection() {
           </div>
         </div>
 
-        {/* Feature Row 3: Stripe Pay-After-Service (Text Left, Mockup Right) */}
+        
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-6 space-y-4">
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#1e3a8a] to-[#2563eb] text-white flex items-center justify-center shadow-sm">

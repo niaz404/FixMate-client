@@ -30,11 +30,9 @@ export default function CustomerBookingsPage() {
   const [bookings, setBookings] = useState<Booking[]>([]);
   const [loading, setLoading] = useState(true);
 
-  // Cancellation modal state
   const [cancelModalOpen, setCancelModalOpen] = useState(false);
   const [selectedBookingId, setSelectedBookingId] = useState<string | null>(null);
 
-  // Stripe processing state
   const [payingBookingId, setPayingBookingId] = useState<string | null>(null);
 
   useEffect(() => {
@@ -84,7 +82,6 @@ export default function CustomerBookingsPage() {
     try {
       let checkoutUrl = '';
 
-      // 1. Call Next.js /api/checkout_sessions per Stripe Next.js Quickstart
       try {
         const nextRes = await fetch('/api/checkout_sessions', {
           method: 'POST',
@@ -99,7 +96,6 @@ export default function CustomerBookingsPage() {
         console.warn('Notice from /api/checkout_sessions, falling back to Express API:', e);
       }
 
-      // 2. Fallback to Express backend /payments/create-checkout-session
       if (!checkoutUrl) {
         const res = await fetchApi('/payments/create-checkout-session', {
           method: 'POST',
@@ -173,7 +169,7 @@ export default function CustomerBookingsPage() {
                   key={booking._id}
                   className="p-5 md:p-6 flex flex-col lg:flex-row lg:items-center justify-between gap-6 hover:bg-slate-50/60 transition-colors"
                 >
-                  {/* Left: Image & Info */}
+                  
                   <div className="flex items-start space-x-4">
                     <div className="w-20 h-20 md:w-24 md:h-24 rounded-xl bg-slate-100 border border-slate-200 shrink-0 overflow-hidden shadow-xs">
                       <img
@@ -222,7 +218,7 @@ export default function CustomerBookingsPage() {
                     </div>
                   </div>
 
-                  {/* Right: Pricing & Context-Aware Actions */}
+                  
                   <div className="flex flex-row lg:flex-col items-center lg:items-end justify-between border-t lg:border-t-0 border-slate-100 pt-4 lg:pt-0 shrink-0 space-y-2">
                     <div className="text-left lg:text-right">
                       <span className="text-[11px] uppercase tracking-wider text-slate-500 block font-medium">
@@ -234,7 +230,7 @@ export default function CustomerBookingsPage() {
                     </div>
 
                     <div className="flex items-center space-x-3">
-                      {/* Cancel action (only when requested) */}
+                      
                       {canCancel && (
                         <button
                           onClick={() => handleCancelClick(booking._id)}
@@ -245,7 +241,7 @@ export default function CustomerBookingsPage() {
                         </button>
                       )}
 
-                      {/* Pay Now button (only when completed & unpaid) */}
+                      
                       {canPay && (
                         <button
                           onClick={() => handlePayNow(booking._id)}
@@ -259,7 +255,7 @@ export default function CustomerBookingsPage() {
                         </button>
                       )}
 
-                      {/* Paid badge when paid */}
+                      
                       {isPaid && (
                         <span className="px-3 py-1 bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs font-semibold rounded-lg uppercase tracking-wider">
                           Receipt Issued
@@ -273,7 +269,7 @@ export default function CustomerBookingsPage() {
           </div>
         )}
 
-        {/* Cancellation Confirmation Modal */}
+        
         <ConfirmationModal
           isOpen={cancelModalOpen}
           title="Cancel Repair Booking?"

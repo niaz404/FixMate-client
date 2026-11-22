@@ -8,7 +8,7 @@ export function Footer() {
     <footer className="w-full bg-[#d5dde7] border-t border-[#bfc7d1]/50 text-[#090909] text-xs">
       <div className="max-w-[960px] mx-auto px-6 py-12 md:py-16">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Brand Column */}
+          
           <div className="space-y-3.5">
             <Link href="/" className="inline-block">
               <FixuraLogo size="md" showTagline />
@@ -22,7 +22,7 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Quick Navigation Links */}
+          
           <div className="space-y-3">
             <h4 className="text-xs font-semibold uppercase tracking-wider text-[#000000] border-b border-[#bfc7d1]/40 pb-1.5">
               Platform
@@ -51,7 +51,7 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Popular Categories */}
+          
           <div className="space-y-3">
             <h4 className="text-xs font-semibold uppercase tracking-wider text-[#000000] border-b border-[#bfc7d1]/40 pb-1.5">
               Categories
@@ -80,7 +80,7 @@ export function Footer() {
             </ul>
           </div>
 
-          {/* Support & Contact */}
+          
           <div className="space-y-3">
             <h4 className="text-xs font-semibold uppercase tracking-wider text-[#000000] border-b border-[#bfc7d1]/40 pb-1.5">
               Direct Contact
@@ -105,7 +105,7 @@ export function Footer() {
           </div>
         </div>
 
-        {/* Bottom Bar with Socials & Copyright */}
+        
         <div className="mt-10 pt-6 border-t border-[#bfc7d1]/40 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-[#383838]">
           <p>&copy; {new Date().getFullYear()} Fixura Platform Inc. All rights reserved.</p>
 

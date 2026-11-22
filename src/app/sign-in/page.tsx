@@ -43,7 +43,7 @@ function SignInContent() {
   return (
     <div className="min-h-[85vh] bg-[#dde6f0] text-[#000000] py-12 md:py-16 flex items-center justify-center px-4">
       <div className="max-w-md w-full rounded-2xl border border-white/80 bg-white/90 p-8 shadow-md space-y-6">
-        {/* Header */}
+        
         <div className="text-center space-y-2">
           <Link href="/" className="inline-block mb-1">
             <FixuraLogo size="md" />
@@ -56,7 +56,7 @@ function SignInContent() {
           </p>
         </div>
 
-        {/* Credentials Form */}
+        
         <form onSubmit={handleSubmit} className="space-y-4 text-xs">
           <div>
             <label className="block text-[11px] uppercase font-semibold text-[#383838] mb-1.5">
@@ -101,7 +101,7 @@ function SignInContent() {
           </button>
         </form>
 
-        {/* Quick Credentials for Evaluators */}
+        
         <div className="pt-4 border-t border-[#bfc7d1]/40 space-y-2 text-xs">
           <span className="text-[10px] uppercase tracking-wider text-[#1e3a8a] font-semibold block">
             Quick Test Accounts (Click to Fill):
@@ -134,7 +134,7 @@ function SignInContent() {
           </div>
         </div>
 
-        {/* Footer Navigation */}
+        
         <div className="text-center pt-2 border-t border-[#bfc7d1]/40 text-xs text-[#383838]">
           Don&apos;t have an account?{' '}
           <Link href="/sign-up" className="text-[#1e3a8a] hover:underline font-semibold">

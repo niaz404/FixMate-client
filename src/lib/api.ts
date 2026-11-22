@@ -2,10 +2,6 @@ import { authClient } from '@/lib/auth-client';
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000';
 
-/**
- * Standard fetch helper calling Express backend on port 5000
- * Automatically attaches BetterAuth session token as Bearer token
- */
 export async function fetchApi<T = any>(
   endpoint: string,
   options: RequestInit = {}
@@ -15,7 +11,6 @@ export async function fetchApi<T = any>(
     ...(options.headers as Record<string, string>),
   };
 
-  // Get session token from BetterAuth
   if (typeof window !== 'undefined') {
     try {
       const sessionRes = await authClient.getSession();
@@ -24,11 +19,9 @@ export async function fetchApi<T = any>(
         headers['Authorization'] = `Bearer ${token}`;
       }
     } catch (e) {
-      // In case session check fails or unauthenticated
     }
   }
 
-  // Ensure leading slash
   const cleanEndpoint = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
 
   try {

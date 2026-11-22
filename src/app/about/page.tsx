@@ -6,7 +6,7 @@ export function AboutPage() {
   return (
     <div className="w-full bg-[#dde6f0] text-[#000000] py-14 md:py-20">
       <div className="max-w-[960px] mx-auto px-6 space-y-14">
-        {/* Page Hero */}
+        
         <div className="max-w-2xl">
           <span className="text-xs uppercase tracking-widest text-[#1e3a8a] font-semibold block mb-2">
             The Fixura Standard
@@ -19,7 +19,7 @@ export function AboutPage() {
           </p>
         </div>
 
-        {/* 4 Pillars of Operation */}
+        
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
           <div className="rounded-xl border border-white/80 bg-white/85 p-5 space-y-2.5 shadow-xs">
             <div className="w-9 h-9 rounded-lg bg-[#dde6f0] flex items-center justify-center text-[#1e3a8a]">
@@ -70,7 +70,7 @@ export function AboutPage() {
           </div>
         </div>
 
-        {/* Deep Dive: How the Protocol Works */}
+        
         <div className="rounded-2xl border border-white/90 bg-[#d5dde7] p-8 md:p-10 space-y-6 shadow-sm">
           <div className="max-w-xl">
             <span className="text-xs uppercase tracking-widest text-[#1e3a8a] font-semibold block mb-2">
@@ -112,7 +112,7 @@ export function AboutPage() {
           </div>
         </div>
 
-        {/* CTA Card */}
+        
         <div className="p-8 md:p-10 rounded-2xl bg-white/90 border border-white flex flex-col md:flex-row items-center justify-between gap-6 shadow-sm">
           <div className="space-y-1.5 text-center md:text-left">
             <h3 className="text-2xl font-serif font-medium text-[#000000]">

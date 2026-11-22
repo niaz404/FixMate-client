@@ -81,7 +81,7 @@ export function FeaturedServicesSection() {
                 className="rounded-xl border border-white/80 bg-white/85 shadow-sm hover:shadow-md transition-all flex flex-col justify-between overflow-hidden group hover:-translate-y-1"
               >
                 <div>
-                  {/* Image Banner */}
+                  
                   <div className="relative h-44 w-full overflow-hidden bg-slate-100">
                     <img
                       src={service.image}
@@ -96,7 +96,7 @@ export function FeaturedServicesSection() {
                     </div>
                   </div>
 
-                  {/* Card Content */}
+                  
                   <div className="p-4 space-y-2.5">
                     <h3 className="font-serif font-medium text-base text-[#000000] line-clamp-1 group-hover:text-[#1e3a8a] transition-colors">
                       {service.title}
@@ -118,7 +118,7 @@ export function FeaturedServicesSection() {
                   </div>
                 </div>
 
-                {/* Card Footer */}
+                
                 <div className="p-4 pt-0 mt-2 flex items-center justify-between border-t border-[#bfc7d1]/20">
                   <div>
                     <span className="text-[10px] uppercase text-[#383838] block font-medium">

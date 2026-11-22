@@ -35,12 +35,12 @@ export function Navbar() {
   return (
     <header className="sticky top-0 z-40 w-full bg-[#dde6f0]/90 border-b border-[#bfc7d1] backdrop-blur-md">
       <div className="max-w-[960px] mx-auto px-6 h-18 flex items-center justify-between">
-        {/* Wordmark */}
+        
         <Link href="/" className="group">
           <FixuraLogo size="md" showTagline />
         </Link>
 
-        {/* 4 Navigation Links */}
+        
         <nav className="hidden md:flex items-center space-x-7">
           {navLinks.map((link) => (
             <Link
@@ -57,7 +57,7 @@ export function Navbar() {
           ))}
         </nav>
 
-        {/* Right Actions */}
+        
         <div className="hidden md:flex items-center space-x-3">
           {user ? (
             <div className="relative">
@@ -142,7 +142,7 @@ export function Navbar() {
           )}
         </div>
 
-        {/* Mobile Toggle */}
+        
         <div className="flex md:hidden">
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
@@ -153,7 +153,7 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Drawer */}
+      
       {mobileMenuOpen && (
         <div className="md:hidden border-t border-[#bfc7d1] bg-[#dde6f0] px-6 py-4 space-y-3">
           {navLinks.map((link) => (

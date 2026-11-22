@@ -60,7 +60,7 @@ export default function CustomerDashboardPage() {
           </p>
         </div>
 
-        {/* 3 Metric Cards */}
+        
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <StatsCard
             title="Total Bookings"
@@ -82,7 +82,7 @@ export default function CustomerDashboardPage() {
           />
         </div>
 
-        {/* Quick CTA Box */}
+        
         <div className="rounded-2xl border border-white/80 bg-white/90 p-6 flex flex-col sm:flex-row items-center justify-between gap-4 shadow-sm">
           <div className="space-y-1 text-center sm:text-left">
             <h3 className="font-serif font-semibold text-base text-[#000000]">
@@ -100,7 +100,7 @@ export default function CustomerDashboardPage() {
           </Link>
         </div>
 
-        {/* Recent Activity Section */}
+        
         <div className="space-y-4">
           <div className="flex items-center justify-between">
             <h3 className="text-xs font-semibold uppercase tracking-wider text-[#000000]">

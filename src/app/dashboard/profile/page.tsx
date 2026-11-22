@@ -80,7 +80,7 @@ export default function ProfilePage() {
           onSubmit={handleProfileSubmit}
           className="rounded-2xl border border-white/80 bg-white/90 p-6 md:p-8 space-y-5 shadow-sm text-xs"
         >
-          {/* Avatar Section */}
+          
           <div>
             <label className="block text-[11px] uppercase font-semibold text-[#383838] mb-2">
               Profile Photo URL
@@ -103,7 +103,7 @@ export default function ProfilePage() {
             </div>
           </div>
 
-          {/* Read-Only Account Identity */}
+          
           <div className="grid grid-cols-2 gap-4 pb-4 border-b border-[#bfc7d1]/40">
             <div>
               <label className="block text-[10px] uppercase font-semibold text-[#383838] mb-1">
@@ -129,7 +129,7 @@ export default function ProfilePage() {
             </div>
           </div>
 
-          {/* Editable Fields */}
+          
           <div>
             <label className="block text-[11px] uppercase font-semibold text-[#383838] mb-1.5">Full Name *</label>
             <input

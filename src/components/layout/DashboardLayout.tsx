@@ -53,7 +53,6 @@ export function DashboardLayout({ children, allowedRoles }: DashboardLayoutProps
     return null;
   }
 
-  // Role validation check
   if (allowedRoles && !allowedRoles.includes(user.role)) {
     return (
       <div className="min-h-[80vh] bg-[#dde6f0] flex items-center justify-center p-6 text-center">
@@ -90,7 +89,6 @@ export function DashboardLayout({ children, allowedRoles }: DashboardLayoutProps
     );
   }
 
-  // Menu items configured per role
   const customerLinks = [
     { label: 'Overview', href: '/dashboard/customer', icon: <LayoutDashboard className="w-4 h-4" /> },
     { label: 'My Bookings', href: '/dashboard/customer/bookings', icon: <CalendarCheck className="w-4 h-4" /> },
@@ -123,14 +121,14 @@ export function DashboardLayout({ children, allowedRoles }: DashboardLayoutProps
 
   return (
     <div className="min-h-screen bg-[#dde6f0] flex flex-col md:flex-row text-[#000000]">
-      {/* Sidebar */}
+      
       <aside
         className={`fixed md:sticky top-0 z-40 h-screen w-64 bg-white/85 border-r border-[#bfc7d1]/80 backdrop-blur-md flex flex-col justify-between transition-transform duration-200 md:translate-x-0 ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
         <div>
-          {/* Brand Header */}
+          
           <div className="p-5 border-b border-[#bfc7d1]/50 flex items-center justify-between">
             <Link href="/" className="inline-block">
               <FixuraLogo size="sm" showTagline />
@@ -144,7 +142,7 @@ export function DashboardLayout({ children, allowedRoles }: DashboardLayoutProps
             </button>
           </div>
 
-          {/* Navigation Links */}
+          
           <nav className="p-3.5 space-y-1 text-xs">
             <div className="px-3 py-2 text-[10px] uppercase tracking-wider text-[#383838] font-semibold">
               {user.role} Navigation
@@ -183,7 +181,7 @@ export function DashboardLayout({ children, allowedRoles }: DashboardLayoutProps
           </nav>
         </div>
 
-        {/* Sidebar Footer Controls */}
+        
         <div className="p-4 border-t border-[#bfc7d1]/50 space-y-1 text-xs">
           <Link
             href="/"
@@ -202,9 +200,9 @@ export function DashboardLayout({ children, allowedRoles }: DashboardLayoutProps
         </div>
       </aside>
 
-      {/* Main Content Area */}
+      
       <div className="flex-1 flex flex-col min-w-0">
-        {/* Top Bar */}
+        
         <header className="sticky top-0 z-30 h-16 bg-[#dde6f0]/90 border-b border-[#bfc7d1]/70 px-6 flex items-center justify-between backdrop-blur-md">
           <div className="flex items-center space-x-3">
             <button
@@ -248,7 +246,7 @@ export function DashboardLayout({ children, allowedRoles }: DashboardLayoutProps
           </div>
         </header>
 
-        {/* Dynamic Route Body */}
+        
         <main className="flex-1 p-6 md:p-8 max-w-[960px] w-full mx-auto">{children}</main>
       </div>
     </div>
