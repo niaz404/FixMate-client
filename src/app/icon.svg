@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <defs>
+    <linearGradient id="fixura-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1e3a8a" />
+      <stop offset="50%" stop-color="#1d4ed8" />
+      <stop offset="100%" stop-color="#0ea5e9" />
+    </linearGradient>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="1" stdDeviation="1.5" flood-color="#000" flood-opacity="0.3" />
+    </filter>
+  </defs>
+  <!-- Squircle Base with Royal to Electric Gradient -->
+  <rect width="32" height="32" rx="8" fill="url(#fixura-grad)" filter="url(#glow)" />
+  
+  <!-- Subtle specular sheen overlay -->
+  <rect width="32" height="16" rx="8" fill="white" fill-opacity="0.12" />
+
+  <!-- Hexagonal Restoration Shield -->
+  <path
+    d="M16 4.5L26 9.8V22.2L16 27.5L6 22.2V9.8L16 4.5Z"
+    stroke="rgba(255, 255, 255, 0.45)"
+    stroke-width="1.6"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    fill="rgba(30, 58, 138, 0.3)"
+  />
+
+  <!-- Restoration Spark / Precision Core -->
+  <path
+    d="M16 8L13 15H19L16 24"
+    stroke="#67e8f9"
+    stroke-width="2.2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    fill="none"
+  />
+
+  <!-- Calibration Nodes -->
+  <circle cx="16" cy="8" r="1.5" fill="#ffffff" />
+  <circle cx="16" cy="24" r="1.5" fill="#ffffff" />
+</svg>

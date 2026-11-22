@@ -9,6 +9,13 @@ export const metadata: Metadata = {
   title: 'Fixura | Smart Device & Home Appliance Restoration Platform',
   description:
     'On-demand device and home appliance repair booking platform. Verified technicians, transparent status tracking, and 100% pay-after-service guarantee.',
+  icons: {
+    icon: [
+      { url: '/icon.svg', type: 'image/svg+xml' },
+      { url: '/favicon.ico', sizes: 'any' },
+    ],
+    apple: '/icon.svg',
+  },
 };
 
 export default function RootLayout({
