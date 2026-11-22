@@ -82,16 +82,40 @@ export default function CustomerBookingsPage() {
   const handlePayNow = async (bookingId: string) => {
     setPayingBookingId(bookingId);
     try {
-      const res = await fetchApi('/payments/create-checkout-session', {
-        method: 'POST',
-        body: JSON.stringify({ bookingId }),
-      });
+      let checkoutUrl = '';
 
-      if (res.success && res.url) {
+      // 1. Call Next.js /api/checkout_sessions per Stripe Next.js Quickstart
+      try {
+        const nextRes = await fetch('/api/checkout_sessions', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ bookingId }),
+        });
+        const nextData = await nextRes.json();
+        if (nextData && nextData.url) {
+          checkoutUrl = nextData.url;
+        }
+      } catch (e) {
+        console.warn('Notice from /api/checkout_sessions, falling back to Express API:', e);
+      }
+
+      // 2. Fallback to Express backend /payments/create-checkout-session
+      if (!checkoutUrl) {
+        const res = await fetchApi('/payments/create-checkout-session', {
+          method: 'POST',
+          body: JSON.stringify({ bookingId }),
+        });
+        if (res && res.url) {
+          checkoutUrl = res.url;
+        } else {
+          toast.error(res?.message || 'Unable to initialize Stripe Checkout session.');
+          return;
+        }
+      }
+
+      if (checkoutUrl) {
         toast.info('Redirecting to secure Stripe Checkout...');
-        window.location.href = res.url;
-      } else {
-        toast.error(res.message || 'Unable to initialize Stripe Checkout session.');
+        window.location.href = checkoutUrl;
       }
     } catch (err: any) {
       toast.error('Payment checkout failed.');
