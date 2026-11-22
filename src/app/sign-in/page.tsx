@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { Wrench, Lock, Mail } from 'lucide-react';
+import { FixuraLogo } from '@/components/ui/FixuraLogo';
 import { toast } from 'sonner';
 
 function SignInContent() {
@@ -48,14 +49,11 @@ function SignInContent() {
       <div className="max-w-md w-full rounded-2xl border border-white/80 bg-white/90 p-8 shadow-md space-y-6">
         {/* Header */}
         <div className="text-center space-y-2">
-          <Link href="/" className="inline-flex items-center space-x-2 text-[#1e3a8a] mb-1">
-            <div className="w-8 h-8 rounded-lg bg-[#1e3a8a] text-white flex items-center justify-center shadow-xs">
-              <Wrench className="w-4 h-4" />
-            </div>
-            <span className="font-serif font-semibold text-xl text-[#000000]">FixMate</span>
+          <Link href="/" className="inline-block mb-1">
+            <FixuraLogo size="md" />
           </Link>
           <h1 className="text-2xl font-serif font-medium text-[#000000]">
-            Sign In to FixMate
+            Sign In to Fixura
           </h1>
           <p className="text-xs text-[#383838]">
             Access your repair dashboard, track bookings, or manage services.
@@ -115,7 +113,7 @@ function SignInContent() {
           <div className="grid grid-cols-3 gap-2 text-[10px]">
             <button
               type="button"
-              onClick={() => handleQuickFill('admin@fixmate.com', 'Admin123!')}
+              onClick={() => handleQuickFill('admin@fixura.com', 'Admin123!')}
               className="p-2 rounded-lg border border-[#bfc7d1] bg-white/70 hover:bg-white text-center transition-all"
             >
               <div className="font-semibold text-[#000000]">Admin</div>
@@ -123,7 +121,7 @@ function SignInContent() {
             </button>
             <button
               type="button"
-              onClick={() => handleQuickFill('rashed@fixmate.com', 'Tech123!')}
+              onClick={() => handleQuickFill('rashed@fixura.com', 'Tech123!')}
               className="p-2 rounded-lg border border-[#bfc7d1] bg-white/70 hover:bg-white text-center transition-all"
             >
               <div className="font-semibold text-[#000000]">Technician</div>

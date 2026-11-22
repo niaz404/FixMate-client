@@ -38,7 +38,7 @@ export function HeroSection() {
                 href="/about"
                 className="glossy-btn-secondary px-5 py-3 rounded-lg text-xs md:text-sm font-medium tracking-wide inline-flex items-center space-x-2"
               >
-                <span>How FixMate Works</span>
+                <span>How Fixura Works</span>
               </Link>
             </div>
 
@@ -76,7 +76,7 @@ export function HeroSection() {
                   <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
                 </div>
                 <div className="text-[11px] text-[#383838] font-mono truncate max-w-[170px] bg-white/70 px-2 py-0.5 rounded-md border border-[#bfc7d1]/40">
-                  fixmate.com/track/BK-8941
+                  fixura.com/track/BK-8941
                 </div>
                 <div className="w-3" />
               </div>

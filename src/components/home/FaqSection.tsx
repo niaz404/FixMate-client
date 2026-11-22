@@ -17,10 +17,10 @@ export function FaqSection() {
   const faqs = [
     {
       q: 'When do I actually pay for the repair service?',
-      a: 'You never pay in advance on FixMate. Payment is only initiated after the technician finishes the job, marks it "Completed" in their dashboard, and you inspect the device. A secure "Pay Now" button then unlocks on your booking card powered by Stripe Checkout.',
+      a: 'You never pay in advance on Fixura. Payment is only initiated after the technician finishes the job, marks it "Completed" in their dashboard, and you inspect the device. A secure "Pay Now" button then unlocks on your booking card powered by Stripe Checkout.',
     },
     {
-      q: 'How does FixMate verify its repair technicians?',
+      q: 'How does Fixura verify its repair technicians?',
       a: 'All technicians undergo a multi-step background check, national identification verification, and hands-on skill evaluation. Furthermore, any repair service added by a technician stays in "pending" status until thoroughly reviewed and approved by our platform administrators.',
     },
     {
@@ -33,10 +33,10 @@ export function FaqSection() {
     },
     {
       q: 'Do you offer a warranty on replaced components?',
-      a: 'All repairs completed through FixMate come with a minimum 30-day workmanship and parts warranty. If the exact same issue reoccurs within the warranty period, the technician is dispatched to resolve it free of charge.',
+      a: 'All repairs completed through Fixura come with a minimum 30-day workmanship and parts warranty. If the exact same issue reoccurs within the warranty period, the technician is dispatched to resolve it free of charge.',
     },
     {
-      q: 'What payment methods does FixMate accept?',
+      q: 'What payment methods does Fixura accept?',
       a: 'We accept all major credit and debit cards (Visa, Mastercard, American Express) processed through our encrypted Stripe gateway. For testing purposes, you can use standard Stripe test cards.',
     },
   ];
@@ -49,7 +49,7 @@ export function FaqSection() {
             Frequently Asked Questions
           </span>
           <h2 className="text-3xl md:text-4xl font-serif font-medium tracking-tight text-[#000000]">
-            Everything you need to know about the FixMate guarantee.
+            Everything you need to know about the Fixura guarantee.
           </h2>
         </div>
 

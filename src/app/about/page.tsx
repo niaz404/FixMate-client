@@ -9,13 +9,13 @@ export function AboutPage() {
         {/* Page Hero */}
         <div className="max-w-2xl">
           <span className="text-xs uppercase tracking-widest text-[#1e3a8a] font-semibold block mb-2">
-            The FixMate Standard
+            The Fixura Standard
           </span>
           <h1 className="text-4xl md:text-5xl font-serif font-medium text-[#000000] tracking-tight leading-tight">
             Fixing device & appliance repair with accountability and code.
           </h1>
           <p className="text-sm text-[#383838] mt-3 leading-relaxed">
-            Getting a personal device or home appliance repaired is too often filled with friction and risk. You hand over expensive hardware, have little transparency, and are pressured to pay before verifying results. FixMate eliminates that risk through verified technicians, milestone tracking, and a strict pay-after-service model.
+            Getting a personal device or home appliance repaired is too often filled with friction and risk. You hand over expensive hardware, have little transparency, and are pressured to pay before verifying results. Fixura eliminates that risk through verified technicians, milestone tracking, and a strict pay-after-service model.
           </p>
         </div>
 
@@ -77,7 +77,7 @@ export function AboutPage() {
               Protocol Pipeline
             </span>
             <h2 className="text-2xl md:text-3xl font-serif font-medium text-[#000000]">
-              How the FixMate booking pipeline operates.
+              How the Fixura booking pipeline operates.
             </h2>
           </div>
 

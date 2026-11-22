@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { Wrench, Menu, X, ChevronDown, User as UserIcon, LogOut, LayoutDashboard } from 'lucide-react';
+import { FixuraLogo } from '@/components/ui/FixuraLogo';
 
 export function Navbar() {
   const pathname = usePathname();
@@ -35,15 +36,8 @@ export function Navbar() {
     <header className="sticky top-0 z-40 w-full bg-[#dde6f0]/90 border-b border-[#bfc7d1] backdrop-blur-md">
       <div className="max-w-[960px] mx-auto px-6 h-18 flex items-center justify-between">
         {/* Wordmark */}
-        <Link href="/" className="flex items-center space-x-2.5 group">
-          <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#1e3a8a] to-[#2563eb] shadow-sm flex items-center justify-center text-white transition-transform group-hover:scale-105">
-            <Wrench className="w-4 h-4" />
-          </div>
-          <div>
-            <span className="text-2xl font-serif font-medium tracking-tight text-[#000000]">
-              Fix<span className="text-[#1e3a8a] italic font-semibold">Mate</span>
-            </span>
-          </div>
+        <Link href="/" className="group">
+          <FixuraLogo size="md" showTagline />
         </Link>
 
         {/* 4 Navigation Links */}

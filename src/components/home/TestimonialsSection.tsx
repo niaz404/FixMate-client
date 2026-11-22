@@ -6,7 +6,7 @@ export function TestimonialsSection() {
     {
       id: 'main',
       quote:
-        '“FixMate completely revolutionized appliance repair for my family. When our inverter AC stopped cooling mid-summer, Tariq arrived within 40 minutes, diagnosed the coil leak with nitrogen, and I only paid the agreed invoice through Stripe after verifying the bedroom reached 18°C. Utterly smooth and reliable.”',
+        '“Fixura completely revolutionized appliance repair for my family. When our inverter AC stopped cooling mid-summer, Tariq arrived within 40 minutes, diagnosed the coil leak with nitrogen, and I only paid the agreed invoice through Stripe after verifying the bedroom reached 18°C. Utterly smooth and reliable.”',
       author: 'Tanvir Hossain',
       role: 'Verified Customer & Engineering Lead',
       device: 'Gree 1.5T Inverter AC Servicing',
@@ -26,7 +26,7 @@ export function TestimonialsSection() {
     {
       id: 'sub-2',
       quote:
-        '“As a certified technician, FixMate connects me with quality clients without price haggling. The platform approval keeps low-quality competitors out, and payout protection is guaranteed.”',
+        '“As a certified technician, Fixura connects me with quality clients without price haggling. The platform approval keeps low-quality competitors out, and payout protection is guaranteed.”',
       author: 'Rashed Al-Mamun',
       role: 'Certified Technician, Dhanmondi',
       device: 'Verified Hardware Specialist',

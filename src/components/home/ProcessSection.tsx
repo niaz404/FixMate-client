@@ -28,7 +28,7 @@ export function ProcessSection() {
       <div className="max-w-[960px] mx-auto px-6">
         <div className="max-w-xl mb-12">
           <span className="text-xs uppercase tracking-widest text-[#1e3a8a] font-semibold block mb-2">
-            The FixMate Protocol
+            The Fixura Protocol
           </span>
           <h2 className="text-3xl md:text-4xl font-serif font-medium tracking-tight text-[#000000]">
             How repair booking works from request to final sign-off.

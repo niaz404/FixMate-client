@@ -96,7 +96,7 @@ function ServicesContent() {
         {/* Header */}
         <div className="max-w-xl mb-10">
           <span className="text-xs uppercase tracking-widest text-[#1e3a8a] font-semibold block mb-2">
-            Explore FixMate Services
+            Explore Fixura Services
           </span>
           <h1 className="text-3xl md:text-5xl font-serif font-medium text-[#000000] tracking-tight">
             Browse verified repair solutions.

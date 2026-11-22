@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/context/AuthContext';
 import { Wrench, User, CheckCircle2, AlertCircle } from 'lucide-react';
+import { FixuraLogo } from '@/components/ui/FixuraLogo';
 import { toast } from 'sonner';
 
 export default function SignUpPage() {
@@ -68,11 +69,8 @@ export default function SignUpPage() {
       <div className="max-w-lg w-full rounded-2xl border border-white/80 bg-white/90 p-8 shadow-md space-y-6">
         {/* Header */}
         <div className="text-center space-y-2">
-          <Link href="/" className="inline-flex items-center space-x-2 text-[#1e3a8a] mb-1">
-            <div className="w-8 h-8 rounded-lg bg-[#1e3a8a] text-white flex items-center justify-center shadow-xs">
-              <Wrench className="w-4 h-4" />
-            </div>
-            <span className="font-serif font-semibold text-xl text-[#000000]">FixMate</span>
+          <Link href="/" className="inline-block mb-1">
+            <FixuraLogo size="md" />
           </Link>
           <h1 className="text-2xl font-serif font-medium text-[#000000]">
             Create Your Account

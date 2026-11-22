@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Wrench, Mail, Phone, MapPin, ShieldCheck } from 'lucide-react';
+import { FixuraLogo } from '@/components/ui/FixuraLogo';
 
 export function Footer() {
   return (
@@ -9,13 +10,8 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Brand Column */}
           <div className="space-y-3.5">
-            <Link href="/" className="flex items-center space-x-2.5">
-              <div className="w-8 h-8 rounded-lg bg-[#1e3a8a] text-white flex items-center justify-center shadow-xs">
-                <Wrench className="w-4 h-4" />
-              </div>
-              <span className="text-2xl font-serif font-medium text-[#000000]">
-                Fix<span className="text-[#1e3a8a] italic font-semibold">Mate</span>
-              </span>
+            <Link href="/" className="inline-block">
+              <FixuraLogo size="md" showTagline />
             </Link>
             <p className="text-xs text-[#383838] leading-relaxed">
               On-demand smart device & appliance repair platform. Verified technicians, live pipeline tracking, and 100% pay-after-service guarantee.
@@ -44,7 +40,7 @@ export function Footer() {
               </li>
               <li>
                 <Link href="/about" className="hover:text-[#1e3a8a] transition-colors">
-                  How FixMate Works
+                  How Fixura Works
                 </Link>
               </li>
               <li>
@@ -100,7 +96,7 @@ export function Footer() {
               </li>
               <li className="flex items-center space-x-2">
                 <Mail className="w-3.5 h-3.5 text-[#1e3a8a] shrink-0" />
-                <span>support@fixmate.com</span>
+                <span>support@fixura.com</span>
               </li>
               <li className="pt-2 text-[10px] text-[#383838]">
                 Stripe Encrypted &bull; 256-Bit SSL
@@ -111,7 +107,7 @@ export function Footer() {
 
         {/* Bottom Bar with Socials & Copyright */}
         <div className="mt-10 pt-6 border-t border-[#bfc7d1]/40 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] text-[#383838]">
-          <p>&copy; {new Date().getFullYear()} FixMate Platform Inc. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Fixura Platform Inc. All rights reserved.</p>
 
           <div className="flex items-center space-x-4">
             <a

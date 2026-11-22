@@ -225,7 +225,7 @@ export default function ServiceDetailPage() {
                 <div className="p-4 rounded-xl bg-blue-50/70 border border-blue-200/60 space-y-1.5 text-xs text-[#383838]">
                   <div className="flex items-center space-x-1.5 text-[#1e3a8a] font-semibold">
                     <ShieldCheck className="w-4 h-4" />
-                    <span>FixMate Quality Protection Guarantee</span>
+                    <span>Fixura Quality Protection Guarantee</span>
                   </div>
                   <p className="text-[11px] leading-relaxed">
                     Every repair is tracked step-by-step. You only pay the verified amount via Stripe Checkout after physically confirming the hardware works.
